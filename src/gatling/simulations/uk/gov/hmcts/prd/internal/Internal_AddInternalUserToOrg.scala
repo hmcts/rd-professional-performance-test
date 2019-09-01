@@ -27,7 +27,7 @@ object Internal_AddInternalUserToOrg {
 
   val AddIntUsrMax = config.getString("internal.addIntUsrMax").toInt
 
-  val AddInternalUserToOrg =  repeat(8){
+  val AddInternalUserToOrg =  repeat(1){
 
       exec(_.setAll(
           ("InternalUser_FirstName",internalUser_firstName()),

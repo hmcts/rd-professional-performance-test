@@ -19,7 +19,7 @@ object External_SearchPbas {
 
   val GetSearchPbasMax = config.getString("external.getSearchPbasMax").toInt
 
-  val SearchPbas = repeat(2){
+  val SearchPbas = repeat(1){
     exec(http("RD17_External_SearchPBAsByEmailAddress")
       .get("/search/pba/tpalzz3balrmkbr0fa@email.co.uk")
       .header("ServiceAuthorization", s2sToken)
