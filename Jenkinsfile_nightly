@@ -33,3 +33,7 @@ withNightlyPipeline("java", product, component) {
     enableSlackNotifications('#prd-nightly-builds')
 
 }
+
+withPipeline(type, product, component) {
+    enablePerformanceTest()
+}
