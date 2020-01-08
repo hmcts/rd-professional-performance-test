@@ -33,9 +33,14 @@ class PRDPTSimulation extends Simulation{
 
  val Int_Scn = scenario("Professional Reference Data - Internal")
                   .exec(
+                    Internal_CreateOrganisation.createOrganisation,
+                    Internal_UpdateOrganisation.updateOrganisation,
                   Internal_GETOrganisationByID.GETOrganisationByID,
                   Internal_AddInternalUserToOrg.AddInternalUserToOrg,
                   Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+                    Internal_EditPbas.EditPbas,
+                    Internal_EditUserRole.EditInternalUserRole,
+                    Internal_UpdateUserStatus.internal_UpdateUserStatus
                 )
                   .pause(IntPaceMin seconds, IntPaceMax seconds)
 
@@ -59,18 +64,17 @@ class PRDPTSimulation extends Simulation{
                     )
                       .pause(Int_Ext_SCNPaceMin seconds, Int_Ext_SCNPaceMax seconds)
 
-
   val Legacy_strategic_SCN = scenario("Professional Reference Data - Legacy + Strategic")
                             .exec(
                                 Internal_GETPbas.GETPbas,
                                 External_SearchPbas.SearchPbas,
                                 External_GETPbas.GETPbas
                               )
-                            .pause(Legacy_strategic_SCNPaceMin seconds, Legacy_strategic_SCNPaceMax seconds)
+    .pause(Legacy_strategic_SCNPaceMin seconds, Legacy_strategic_SCNPaceMax seconds)
 
   setUp(
     Int_Scn.inject(atOnceUsers(1)),
-  Ext_Scn.inject(atOnceUsers(1)),
+    Ext_Scn.inject(atOnceUsers(1)),
     Int_Ext_SCN.inject(atOnceUsers(1)),
     Legacy_strategic_SCN.inject(atOnceUsers(1))
   ).protocols(httpProtocol)

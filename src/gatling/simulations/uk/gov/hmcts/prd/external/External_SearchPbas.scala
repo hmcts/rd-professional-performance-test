@@ -21,7 +21,7 @@ object External_SearchPbas {
 
   val SearchPbas = repeat(1){
     exec(http("RD17_External_SearchPBAsByEmailAddress")
-      .get("/search/pba/tpalzz3balrmkbr0fa@email.co.uk")
+      .get("/search/pba/shree_lomte@gmail.com")
       .header("ServiceAuthorization", s2sToken)
       .header("Authorization", IdAMToken)
       .header("Content-Type", "application/json")

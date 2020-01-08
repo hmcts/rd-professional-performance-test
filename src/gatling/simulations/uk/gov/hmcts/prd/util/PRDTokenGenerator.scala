@@ -40,8 +40,6 @@ package object PRDTokenGenerator {
 
     val token = s2sRequest.asString()
 
-    System.out.println(token)
-
     token
 
   }
@@ -49,11 +47,9 @@ package object PRDTokenGenerator {
   //=======================================
 
   def generateSIDAMUserTokenInternal() : String = {
-    return generateSIDAMUserTokenInternal("kapilPRD.jain@hmcts.net")
+    return generateSIDAMUserTokenInternal("perftestInt@gmail.com")
   }
 
-  //perftest- kapilPRDADMIN.jain@hmcts.net
-  //kapilPRD.jain@hmcts.net
 
   def generateSIDAMUserTokenInternal(userName : String) : String = {
 
@@ -64,7 +60,7 @@ package object PRDTokenGenerator {
       .contentType("application/x-www-form-urlencoded; charset=UTF-8")
       .proxy("proxyout.reform.hmcts.net", 8080)
       .formParam("username", userName)
-      .formParam("password", "Password12")
+      .formParam("password", "Hmcts1234")
       .formParam("client_id", "rd-professional-api")
       .formParam("client_secret", "cc5f2a6-9690-11e9-bc42-526af7764f64")
       .formParam("redirect_uri", RD_URL + "/oauth2redirect")
@@ -85,17 +81,15 @@ package object PRDTokenGenerator {
 
     val token =  tokenStr.substring(tokenIndexStart+2,tokenIndexEnd -1 )
 
-    System.out.println(token)
 
     "Bearer " + token
   }
 
 
   def generateSIDAMUserTokenExternal() : String = {
-    return generateSIDAMUserTokenExternal("tpALzz3BalrmKBR0Fa@email.co.uk")
+    return generateSIDAMUserTokenExternal("perftestExt@gmail.com")
   }
 
-  //kapilPRDExt.jain@hmcts.net
 
   def generateSIDAMUserTokenExternal(userName : String) : String = {
 
@@ -107,7 +101,7 @@ package object PRDTokenGenerator {
       .contentType("application/x-www-form-urlencoded; charset=UTF-8")
       .proxy("proxyout.reform.hmcts.net", 8080)
       .formParam("username", userName)
-      .formParam("password", "Password12")
+      .formParam("password", "Hmcts1234")
       .formParam("client_id", "rd-professional-api")
       .formParam("client_secret", "cc5f2a6-9690-11e9-bc42-526af7764f64")
       .formParam("redirect_uri", RD_URL + "/oauth2redirect")
@@ -127,8 +121,6 @@ package object PRDTokenGenerator {
     val tokenIndexEnd = tokenStr.indexOf(",")
 
     val token =  tokenStr.substring(tokenIndexStart+2,tokenIndexEnd -1 )
-
-    System.out.println(token)
 
     "Bearer " + token
   }

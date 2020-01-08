@@ -18,7 +18,7 @@ object External_GETPbas {
   val GetPbasMax = config.getString("external.getPbasMax").toInt
 
   val GETPbas = exec(http("RD13_External_RetrievesOrganisationsPaymentAccounts")
-   .get("/refdata/external/v1/organisations/pbas?email=kapil.z5h9ry8yzxi2tdw@gmail.com")
+   .get("/refdata/external/v1/organisations/pbas?email=shree_lomte@gmail.com")
     .header("ServiceAuthorization", s2sToken)
     .header("Authorization", IdAMToken)
     .header("Content-Type", "application/json")
