@@ -23,7 +23,7 @@ object Internal_EditPbas {
   val EditPbasMax = config.getString("internal.editPbasMax").toInt
 
   val EditPbas = exec(http("R3_Internal_EditPBA")
-    .put("/refdata/internal/v1/organisations/J3666GW/pbas")
+    .put("/refdata/internal/v1/organisations/013FFP6/pbas")
     .header("ServiceAuthorization", s2sToken)
     .header("Authorization", IdAMToken)
     .header("Content-Type", "application/json")

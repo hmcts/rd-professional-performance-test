@@ -23,9 +23,9 @@ package object PRDTokenGenerator {
 
      val authenticator: GoogleAuthenticator = new GoogleAuthenticator()
 
-    val password = authenticator.getTotpPassword(config.getString("perftest_service.pass"))
+    val password = authenticator.getTotpPassword(config.getString("aat_service.pass"))
 
-    val jsonPayload: String = """{"microservice":"""" + config.getString("perftest_service.name") + """","oneTimePassword":"""" + password + """"}"""
+    val jsonPayload: String = """{"microservice":"""" + config.getString("aat_service.name") + """","oneTimePassword":"""" + password + """"}"""
 
     val s2sRequest = RestAssured.given
                     .contentType("application/json")
@@ -47,9 +47,11 @@ package object PRDTokenGenerator {
   //=======================================
 
   def generateSIDAMUserTokenInternal() : String = {
-    return generateSIDAMUserTokenInternal("perftestInt@gmail.com")
+    return generateSIDAMUserTokenInternal("mallikarjun.puttana@hmcts.net")
   }
 
+  //perftest  - perftestInt@gmail.com, Hmcts1234
+  //aat - mallikarjun.puttana@hmcts.net, Testing1234
 
   def generateSIDAMUserTokenInternal(userName : String) : String = {
 
@@ -60,7 +62,7 @@ package object PRDTokenGenerator {
       .contentType("application/x-www-form-urlencoded; charset=UTF-8")
       .proxy("proxyout.reform.hmcts.net", 8080)
       .formParam("username", userName)
-      .formParam("password", "Hmcts1234")
+      .formParam("password", "Testing1234")
       .formParam("client_id", "rd-professional-api")
       .formParam("client_secret", "cc5f2a6-9690-11e9-bc42-526af7764f64")
       .formParam("redirect_uri", RD_URL + "/oauth2redirect")
@@ -87,8 +89,11 @@ package object PRDTokenGenerator {
 
 
   def generateSIDAMUserTokenExternal() : String = {
-    return generateSIDAMUserTokenExternal("perftestExt@gmail.com")
+    return generateSIDAMUserTokenExternal("kapil.jain@hmcts.net")
   }
+
+//AAT - kapil.jain@hmcts.net, Password12, ORG - 5WE4CZ5
+  // perftest - perftestExt@gmail.com, Hmcts1234
 
 
   def generateSIDAMUserTokenExternal(userName : String) : String = {
@@ -101,7 +106,7 @@ package object PRDTokenGenerator {
       .contentType("application/x-www-form-urlencoded; charset=UTF-8")
       .proxy("proxyout.reform.hmcts.net", 8080)
       .formParam("username", userName)
-      .formParam("password", "Hmcts1234")
+      .formParam("password", "Password12")
       .formParam("client_id", "rd-professional-api")
       .formParam("client_secret", "cc5f2a6-9690-11e9-bc42-526af7764f64")
       .formParam("redirect_uri", RD_URL + "/oauth2redirect")

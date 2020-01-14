@@ -38,9 +38,6 @@ class PRDPTSimulation extends Simulation{
                   Internal_GETOrganisationByID.GETOrganisationByID,
                   Internal_AddInternalUserToOrg.AddInternalUserToOrg,
                   Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-                    Internal_EditPbas.EditPbas,
-                    Internal_EditUserRole.EditInternalUserRole,
-                    Internal_UpdateUserStatus.internal_UpdateUserStatus
                 )
                   .pause(IntPaceMin seconds, IntPaceMax seconds)
 
@@ -78,4 +75,7 @@ class PRDPTSimulation extends Simulation{
     Int_Ext_SCN.inject(atOnceUsers(1)),
     Legacy_strategic_SCN.inject(atOnceUsers(1))
   ).protocols(httpProtocol)
+    .assertions(forAll.responseTime.percentile3.lte(500))
+    .assertions(global.failedRequests.percent.lte(5))
+
 }

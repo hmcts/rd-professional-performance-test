@@ -40,7 +40,7 @@ object Internal_UpdateUserStatus {
       .feed(OrgIdData)
 
       .exec(http("R3_Internal_UpdateUserStatus")
-          .put("/refdata/internal/v1/organisations/J3666GW/users/706646f7-098a-4572-a439-8d441c5c6b2d?origin=EXUI")
+          .put("/refdata/internal/v1/organisations/013FFP6/users/706646f7-098a-4572-a439-8d441c5c6b2d?origin=EXUI")
         .header("ServiceAuthorization", s2sToken)
         .header("Authorization", IdAMToken)
         .body(StringBody(UpdateUserStatusString))
