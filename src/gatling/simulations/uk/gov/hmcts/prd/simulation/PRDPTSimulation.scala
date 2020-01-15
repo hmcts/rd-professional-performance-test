@@ -75,7 +75,7 @@ class PRDPTSimulation extends Simulation{
     Int_Ext_SCN.inject(atOnceUsers(1)),
     Legacy_strategic_SCN.inject(atOnceUsers(1))
   ).protocols(httpProtocol)
-    .assertions(forAll.responseTime.percentile3.lte(500))
-    .assertions(global.failedRequests.percent.lte(5))
+   // .assertions(forAll.responseTime.percentile3.lte(500))
+   // .assertions(global.failedRequests.percent.lte(5))
 
 }
