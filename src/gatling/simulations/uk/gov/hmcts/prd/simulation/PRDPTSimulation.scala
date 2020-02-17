@@ -42,38 +42,8 @@ class PRDPTSimulation extends Simulation{
                   .pause(IntPaceMin seconds, IntPaceMax seconds)
 
 
-  val Ext_Scn = scenario("Professional Reference Data - External")
-                .exec(
-                 External_CreateOrganisation.createOrganisation,
-                  Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
-                  External_UpdateOrganisation.updateOrganisation,
-                  External_GETOrganisationByID.GETOrganisationByID,
-                  External_AddInternalUserToOrg.AddInternalUserToOrg
-                )
-               .pause(ExtPaceMin seconds, ExtPaceMax seconds)
-
-
-  val Int_Ext_SCN = scenario("Professional Reference Data - Internal + External")
-                    .exec(
-                      External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
-                      Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail
-
-                    )
-                      .pause(Int_Ext_SCNPaceMin seconds, Int_Ext_SCNPaceMax seconds)
-
-  val Legacy_strategic_SCN = scenario("Professional Reference Data - Legacy + Strategic")
-                            .exec(
-                                Internal_GETPbas.GETPbas,
-                                External_SearchPbas.SearchPbas,
-                                External_GETPbas.GETPbas
-                              )
-    .pause(Legacy_strategic_SCNPaceMin seconds, Legacy_strategic_SCNPaceMax seconds)
-
   setUp(
-    Int_Scn.inject(atOnceUsers(1)),
-    Ext_Scn.inject(atOnceUsers(1)),
-    Int_Ext_SCN.inject(atOnceUsers(1)),
-    Legacy_strategic_SCN.inject(atOnceUsers(1))
+    Int_Scn.inject(atOnceUsers(1))
   ).protocols(httpProtocol)
    // .assertions(forAll.responseTime.percentile3.lte(500))
    // .assertions(global.failedRequests.percent.lte(5))

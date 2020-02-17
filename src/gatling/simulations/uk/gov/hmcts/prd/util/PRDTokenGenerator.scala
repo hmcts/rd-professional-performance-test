@@ -50,9 +50,6 @@ package object PRDTokenGenerator {
     return generateSIDAMUserTokenInternal("mallikarjun.puttana@hmcts.net")
   }
 
-  //perftest  - perftestInt@gmail.com, Hmcts1234
-  //aat - mallikarjun.puttana@hmcts.net, Testing1234
-
   def generateSIDAMUserTokenInternal(userName : String) : String = {
 
     val authCodeRequest = RestAssured.given().config(RestAssured.config()
@@ -89,11 +86,8 @@ package object PRDTokenGenerator {
 
 
   def generateSIDAMUserTokenExternal() : String = {
-    return generateSIDAMUserTokenExternal("kapil.jain@hmcts.net")
+    return generateSIDAMUserTokenExternal("")
   }
-
-//AAT - kapil.jain@hmcts.net, Password12, ORG - 5WE4CZ5
-  // perftest - perftestExt@gmail.com, Hmcts1234
 
 
   def generateSIDAMUserTokenExternal(userName : String) : String = {
@@ -127,7 +121,7 @@ package object PRDTokenGenerator {
 
     val token =  tokenStr.substring(tokenIndexStart+2,tokenIndexEnd -1 )
 
-    "Bearer " + token
+    "Bearer " + "Bearer" + token
   }
 
 }
