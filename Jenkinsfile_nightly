@@ -15,8 +15,8 @@ properties([
 @Library("Infrastructure") 
 
 
-def product = "prd"
-def component = "internal-external-api"
+def product = "rd"
+def component = "professional-api"
 
 withNightlyPipeline("java", product, component) {
     env.TEST_URL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'
