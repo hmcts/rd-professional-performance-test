@@ -16,4 +16,12 @@
    <cve>CVE-2020-15824</cve>
 </suppress>
 
+<suppress>
+   <notes><![CDATA[
+   file name: kotlin-reflect-1.3.72.jar
+   ]]></notes>
+   <sha1>86613e1a669a701b0c660bfd2af4f82a7ae11fca</sha1>
+   <cve>CVE-2020-15824</cve>
+</suppress>
+
 </suppressions>
