@@ -20,26 +20,42 @@ repositories {
     jcenter()
 }
 
-ScalaCompileOptions.metaClass.daemonServer = true
-ScalaCompileOptions.metaClass.fork = true
-ScalaCompileOptions.metaClass.useAnt = false
-ScalaCompileOptions.metaClass.useCompileDaemon = false
-
-dependencies {
-    compile 'org.scala-lang:scala-library:2.12.8'
-    gatlingCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
-    gatlingCompile 'com.warrenstrange:googleauth:1.1.5'
-    compile group: 'io.gatling', name: 'gatling-app', version: '3.2.0'
-    compile group: 'io.gatling', name: 'gatling-recorder', version: '3.2.0'
-    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '3.2.0'
-}
-
 jar {
     manifest {
-        attributes 'Implementation-Title': 'PRD Performance Pipeline Tests',
-                'Implementation-Version': 1.0
+        attributes 'Main-Class': 'io.gatling.app.Gatling'
     }
+    from {
+        configurations.testCompile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    from sourceSets.test.output
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
 }
+
+// ScalaCompileOptions.metaClass.daemonServer = true
+// ScalaCompileOptions.metaClass.fork = true
+// ScalaCompileOptions.metaClass.useAnt = false
+// ScalaCompileOptions.metaClass.useCompileDaemon = false
+
+ext {
+    gatlingVersion = '3.2.0'
+    scalaVersion = '2.12.8'
+}
+
+dependencies {
+    testCompile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
+    compileOnly group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
+    testCompile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
+    gatlingCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
+    gatlingCompile 'com.warrenstrange:googleauth:1.1.5'
+    gatlingRuntime group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
+}
+
+// jar {
+//     manifest {
+//         attributes 'Implementation-Title': 'PRD Performance Pipeline Tests',
+//                 'Implementation-Version': 1.0
+//     }
+// }
 
 gatling {
     toolVersion = '3.2.0'
@@ -49,19 +65,19 @@ gatling {
     ]
 }
 
-test {
-    testLogging {
-        showStandardStreams = true
-    }
-    dependsOn("publishToMavenLocal")
-    systemProperty "com.github.lkishalmi.gatling.version", project.version
-}
+// test {
+//     testLogging {
+//         showStandardStreams = true
+//     }
+//     dependsOn("publishToMavenLocal")
+//     systemProperty "com.github.lkishalmi.gatling.version", project.version
+// }
 
-pluginBundle {
-    website = 'https://github.com/lkishalmi/gradle-gatling-plugin'
-    vcsUrl = 'https://github.com/lkishalmi/gradle-gatling-plugin'
-    description = 'Gatling Simulation Execution'
-    tags = ['gatling', 'load test', 'stress test', 'performance test', 'scala']
-}
+// pluginBundle {
+//     website = 'https://github.com/lkishalmi/gradle-gatling-plugin'
+//     vcsUrl = 'https://github.com/lkishalmi/gradle-gatling-plugin'
+//     description = 'Gatling Simulation Execution'
+//     tags = ['gatling', 'load test', 'stress test', 'performance test', 'scala']
+// }
 
-ext ['netty.version'] = '4.0.51.Final'
+// ext ['netty.version'] = '4.0.51.Final'
