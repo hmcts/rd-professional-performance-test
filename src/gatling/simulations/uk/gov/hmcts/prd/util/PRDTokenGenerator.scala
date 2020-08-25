@@ -5,6 +5,16 @@ import com.warrenstrange.googleauth.GoogleAuthenticator
 import io.restassured.RestAssured
 import io.restassured.config.EncoderConfig
 import io.restassured.http.ContentType
+import io.restassured.parsing.Parser;
+import java.util.Map;
+import io.gatling.core.Predef._
+import io.gatling.http.Predef._
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 package object PRDTokenGenerator {
 
@@ -32,7 +42,7 @@ package object PRDTokenGenerator {
                     .accept("application/json")
                     .proxy("proxyout.reform.hmcts.net", 8080)
                     .body(jsonPayload)
-                    .post(TOKEN_LEASE_URL +"/lease")
+                    .post(TOKEN_LEASE_URL +"/testing-support/lease")
                     .then()
                     .statusCode(200)
                     .extract()

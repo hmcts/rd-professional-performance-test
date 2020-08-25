@@ -22,7 +22,7 @@ object Internal_GETInternalUserForGivenOrganisations {
   val GETInternalUserForGivenOrganisations = feed(OrgIdData)
 
     .exec(http("RD09_Internal_GetInternalUserForGivenOrganisation")
-      .get("/refdata/internal/v1/organisations/${PRD_Org_ID}/users?showdeleted=True")
+      .get("/refdata/internal/v1/organisations/${PRD_Org_ID}/users?showdeleted=false&rolesRequired=false")
       .header("ServiceAuthorization", s2sToken)
       .header("Authorization", IdAMToken)
       .header("Content-Type", "application/json")

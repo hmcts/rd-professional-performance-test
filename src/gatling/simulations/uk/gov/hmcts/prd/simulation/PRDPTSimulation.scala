@@ -12,19 +12,12 @@ class PRDPTSimulation extends Simulation{
   val config: Config = ConfigFactory.load()
 
   val IntPaceMin = config.getString("internal.intPaceMin").toInt
-
   val IntPaceMax = config.getString("internal.intPaceMax").toInt
-
   val ExtPaceMin = config.getString("external.intPaceMin").toInt
-
   val ExtPaceMax = config.getString("external.intPaceMax").toInt
-
   val Int_Ext_SCNPaceMin = config.getString("internal.Int_Ext_SCN_PaceMin").toInt
-
   val Int_Ext_SCNPaceMax = config.getString("internal.Int_Ext_SCN_PaceMax").toInt
-
   val Legacy_strategic_SCNPaceMin = config.getString("internal.Legacy_strategic_SCN_PaceMin").toInt
-
   val Legacy_strategic_SCNPaceMax = config.getString("internal.Legacy_strategic_SCN_PaceMax").toInt
 
   val httpProtocol = http
