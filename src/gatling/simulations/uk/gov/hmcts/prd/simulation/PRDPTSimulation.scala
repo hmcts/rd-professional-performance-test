@@ -24,15 +24,15 @@ class PRDPTSimulation extends Simulation{
     .baseUrl(config.getString("baseUrl"))
     .proxy(Proxy("proxyout.reform.hmcts.net", 8080))
 
- val Int_Scn = scenario("Professional Reference Data - Internal")
-                  .exec(
-                    Internal_CreateOrganisation.createOrganisation,
-                    Internal_UpdateOrganisation.updateOrganisation,
-                  Internal_GETOrganisationByID.GETOrganisationByID,
-                  Internal_AddInternalUserToOrg.AddInternalUserToOrg,
-                  Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-                )
-                  .pause(IntPaceMin seconds, IntPaceMax seconds)
+  val Int_Scn = scenario("Professional Reference Data - Internal")
+    .exec(
+      Internal_CreateOrganisation.createOrganisation,
+      Internal_UpdateOrganisation.updateOrganisation,
+      Internal_GETOrganisationByID.GETOrganisationByID,
+      Internal_AddInternalUserToOrg.AddInternalUserToOrg,
+      Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+    )
+    .pause(IntPaceMin seconds, IntPaceMax seconds)
 
 
   setUp(

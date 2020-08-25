@@ -5,6 +5,7 @@ import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
 import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
+
 object Internal_GETInternalUserForGivenOrganisations {
 
   val config: Config = ConfigFactory.load()
@@ -17,7 +18,6 @@ object Internal_GETInternalUserForGivenOrganisations {
 
   val GetIntUsrByOrgMin = config.getString("internal.getIntUsrByOrgMin").toInt
   val GetIntUsrByOrgMax = config.getString("internal.getIntUsrByOrgMax").toInt
-
 
   val GETInternalUserForGivenOrganisations = feed(OrgIdData)
 
