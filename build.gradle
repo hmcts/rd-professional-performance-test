@@ -43,7 +43,7 @@ ext {
 
 dependencies {
     testCompile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
-    compileOnly group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
+    testCompile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
     testCompile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
     gatlingCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
     gatlingCompile 'com.warrenstrange:googleauth:1.1.5'
