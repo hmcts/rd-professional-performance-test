@@ -1,30 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?><suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
     <suppress>
-        <notes><![CDATA[
-   file name: kotlin-stdlib-1.3.72.jar
-   ]]></notes>
-        <sha1>8032138f12c0180bc4e51fe139d4c52b46db6109</sha1>
-        <cpe>cpe:/a:jetbrains:kotlin</cpe>
+        <notes>According to Gatling: "There's no security issue here: the generated reports are only
+            meant to be loaded locally from the filesystem, not from a remote server."
+            https://github.com/gatling/gatling/issues/3903
+        </notes>
+        <packageUrl regex="true">^pkg:javascript/jquery@.*$</packageUrl>
+        <cve>CVE-2012-6708</cve>
+        <cve>CVE-2015-9251</cve>
+        <cve>CVE-2020-11022</cve>
+        <cve>CVE-2020-11023</cve>
+        <cve>CVE-2019-11358</cve>
     </suppress>
     <suppress>
-        <notes><![CDATA[
-   file name: kotlin-stdlib-1.3.72.jar
-   ]]></notes>
-        <sha1>8032138f12c0180bc4e51fe139d4c52b46db6109</sha1>
+        <notes>According to Gatling: "There's no security issue here: the generated reports are only
+            meant to be loaded locally from the filesystem, not from a remote server."
+            https://github.com/gatling/gatling/issues/3903
+        </notes>
+        <packageUrl regex="true">^pkg:javascript/jquery@.*$</packageUrl>
+        <cve>CVE-2012-6708</cve>
+        <cve>CVE-2015-9251</cve>
+        <cve>CVE-2020-11022</cve>
+    </suppress>
+    <suppress>
+        <notes>Low confidence issue: kotlin-reflect-1.3.72.jar</notes>
+        <filePath regex="true">.*\bkotlin-reflect-1\.3\.72\.jar</filePath>
         <cve>CVE-2020-15824</cve>
     </suppress>
     <suppress>
-        <notes><![CDATA[
-   file name: kotlin-reflect-1.3.72.jar
-   ]]></notes>
-        <sha1>86613e1a669a701b0c660bfd2af4f82a7ae11fca</sha1>
-        <cpe>cpe:/a:jetbrains:kotlin</cpe>
+        <notes>Low confidence issue: kotlin-stdlib-1.3.72.jar</notes>
+        <filePath regex="true">.*\bkotlin-stdlib-1\.3\.72\.jar</filePath>
+        <cve>CVE-2020-15824</cve>
     </suppress>
     <suppress>
-        <notes><![CDATA[
-   file name: kotlin-reflect-1.3.72.jar
-   ]]></notes>
-        <sha1>86613e1a669a701b0c660bfd2af4f82a7ae11fca</sha1>
+        <notes>Low confidence issue: kotlin-stdlib-.*-1.3.72.jar</notes>
+        <filePath regex="true">.*\bkotlin-stdlib-.*-1\.3\.72\.jar</filePath>
         <cve>CVE-2020-15824</cve>
     </suppress>
 </suppressions>
