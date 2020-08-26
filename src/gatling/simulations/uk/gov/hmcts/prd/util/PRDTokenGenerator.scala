@@ -22,7 +22,7 @@ package object PRDTokenGenerator {
 
   val TOKEN_LEASE_URL = config.getString("s2sUrl")
   val USERTOKEN_SidAM_URL = config.getString("idam_api_url")
-  private val clientsecret = config.getString("auth.clientSecret")
+  val clientsecret = config.getString("auth.clientSecret")
 
   /**
     * Kapil Jain: Helper function to optionally apply a proxy if set in the config - ToDo
@@ -35,7 +35,7 @@ package object PRDTokenGenerator {
      val authenticator: GoogleAuthenticator = new GoogleAuthenticator()
 
     //val password = authenticator.getTotpPassword(config.getString("aat_service.pass"))
-    private val password = config.getString("aat_service.pass")
+    val password = config.getString("aat_service.pass")
 
     val jsonPayload: String = """{"microservice":"""" + config.getString("aat_service.name") + """","oneTimePassword":"""" + password + """"}"""
 
