@@ -50,9 +50,9 @@ dependencies {
     gatlingRuntime group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
 }
 
-// dependencyCheck {
-//     suppressionFile = 'config/owasp/suppressions.xml'
-// }
+dependencyCheck {
+    suppressionFile = 'config/owasp/suppressions.xml'
+}
 
 // jar {
 //     manifest {
