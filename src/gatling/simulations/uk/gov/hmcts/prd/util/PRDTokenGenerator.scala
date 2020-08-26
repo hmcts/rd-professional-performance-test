@@ -22,8 +22,7 @@ package object PRDTokenGenerator {
 
   val TOKEN_LEASE_URL = config.getString("s2sUrl")
   val USERTOKEN_SidAM_URL = config.getString("idam_api_url")
-  private val clientsecret = ConfigFactory.load().getString("auth.clientSecret")
-
+  private val clientsecret = config.getString("clientSecret")
 
   /**
     * Kapil Jain: Helper function to optionally apply a proxy if set in the config - ToDo
