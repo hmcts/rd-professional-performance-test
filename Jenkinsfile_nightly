@@ -19,7 +19,7 @@ def product = "rd"
 def component = "professional-api"
 
 def secrets = [
-  'rd-professional-aat':
+  'rd-aat':
     [
       secret('OAUTH2-CLIENT-SECRET', 'PRD_CLIENT_SECRET_FOR_TESTS')
     ]
