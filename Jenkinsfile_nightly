@@ -21,7 +21,7 @@ def component = "professional-api"
 def secrets = [
   'rd-aat':
     [
-      secret('OAUTH2-CLIENT-SECRET', 'OAUTH2_CLIENT_SECRET')
+      secret('OAUTH2-CLIENT-SECRET', 'OAUTH2_CLIENT_SECRET'),
       secret('s2s-secret', 'S2S_SECRET')
     ]
 ]
