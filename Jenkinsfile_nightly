@@ -18,6 +18,13 @@ properties([
 def product = "rd"
 def component = "professional-api"
 
+def secrets = [
+  'rd-professional-aat':
+    [
+      secret('OAUTH2-CLIENT-SECRET', 'PRD_CLIENT_SECRET_FOR_TESTS')
+    ]
+]
+
 withNightlyPipeline("java", product, component) {
     env.TEST_URL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'
     env.BaseURL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'

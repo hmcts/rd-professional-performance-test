@@ -22,6 +22,8 @@ package object PRDTokenGenerator {
 
   val TOKEN_LEASE_URL = config.getString("s2sUrl")
   val USERTOKEN_SidAM_URL = config.getString("idam_api_url")
+  private val clientsecret = ConfigFactory.load().getString("auth.clientSecret")
+
 
   /**
     * Kapil Jain: Helper function to optionally apply a proxy if set in the config - ToDo
@@ -71,7 +73,7 @@ package object PRDTokenGenerator {
       .formParam("username", userName)
       .formParam("password", "Testing1234")
       .formParam("client_id", "rd-professional-api")
-      .formParam("client_secret", "cc5f2a6-9690-11e9-bc42-526af7764f64")
+      .formParam("client_secret", clientsecret) //cc5f2a6-9690-11e9-bc42-526af7764f64
       .formParam("redirect_uri", RD_URL + "/oauth2redirect")
       .formParam("grant_type", "password")
        .formParam("scope", "openid profile roles create-user manage-user search-user")
@@ -112,7 +114,7 @@ package object PRDTokenGenerator {
       .formParam("username", userName)
       .formParam("password", "Password12")
       .formParam("client_id", "rd-professional-api")
-      .formParam("client_secret", "cc5f2a6-9690-11e9-bc42-526af7764f64")
+      .formParam("client_secret", clientsecret) //cc5f2a6-9690-11e9-bc42-526af7764f64
       .formParam("redirect_uri", RD_URL + "/oauth2redirect")
       .formParam("grant_type", "password")
       .formParam("scope", "openid profile roles create-user manage-user search-user")
