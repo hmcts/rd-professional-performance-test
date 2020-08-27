@@ -1,4 +1,10 @@
 #!groovy
+@Library("Infrastructure")
+import uk.gov.hmcts.contino.AppPipelineDsl
+
+def type = "java"
+def product = "rd"
+def component = "professional-api"
 
 properties([
         pipelineTriggers([cron('00 22 * * *')]),
@@ -10,46 +16,35 @@ properties([
                 string(name: 'OAUTH2_CLIENT_SECRET', defaultValue: '*****', description: 'OAUTH2 client secret')
         ])
 ])
-
-
-
-@Library("Infrastructure") 
-
-
-def product = "rd"
-def component = "professional-api"
-
 def secrets = [
-  'rd-${env}':
-    [
-      secret('OAUTH2-CLIENT-SECRET', 'OAUTH2_CLIENT_SECRET'),
-      secret('s2s-secret', 'S2S_SECRET')
-    ]
+        's2s-${env}': [
+                secret('microservicekey-rd-professional-api', 'S2S_SECRET')
+        ],
+        'rd-${env}':
+                [
+                secret('OAUTH2-CLIENT-SECRET', 'OAUTH2_CLIENT_SECRET'),
+                secret('s2s-secret', 'S2S_SECRET')
+                ]
 ]
-
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
-  [$class     : 'AzureKeyVaultSecret',
-   secretType : 'Secret',
-   name       : secretName,
-   version    : '',
-   envVariable: envVar
-  ]
+    [$class     : 'AzureKeyVaultSecret',
+     secretType : 'Secret',
+     name       : secretName,
+     version    : '',
+     envVariable: envVar
+    ]
 }
-
 withNightlyPipeline("java", product, component) {
+    overrideVaultEnvironments(vaultOverrides)
+    loadVaultSecrets(secrets)
     env.TEST_URL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'
     env.BaseURL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'
     env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
     env.OAUTH2_CLIENT_SECRET = params.OAUTH2_CLIENT_SECRET
-
+    
     enablePerformanceTest()
-
-    //enableSlackNotifications('#prd-nightly-builds')
-
+    
     after('performanceTest') {
         steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/**/*'
     }
-
-
-
 }
