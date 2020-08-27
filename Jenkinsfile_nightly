@@ -41,6 +41,7 @@ def vaultOverrides = [
 
 withNightlyPipeline("java", product, component) {
     overrideVaultEnvironments(vaultOverrides)
+    setVaultName('rd')
     loadVaultSecrets(secrets)
     env.TEST_URL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'
     env.BaseURL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'
