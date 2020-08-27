@@ -38,6 +38,8 @@ package object PRDTokenGenerator {
     //val password = authenticator.getTotpPassword(config.getString("aat_service.pass"))
     val password = config.getString("aat_service.pass")
 
+    System.out.println("password::" + password);
+
     val jsonPayload: String = """{"microservice":"""" + config.getString("aat_service.name") + """","oneTimePassword":"""" + password + """"}"""
 
     val s2sRequest = RestAssured.given
@@ -85,7 +87,6 @@ package object PRDTokenGenerator {
 
 
     System.out.println("clientSecret::" + clientsecret);
-    System.out.println("password::" + password);
 
     val response = authCodeRequest.post(USERTOKEN_SidAM_URL + ":443/o/token")
 
