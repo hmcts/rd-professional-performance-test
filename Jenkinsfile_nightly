@@ -7,7 +7,7 @@ properties([
                 string(name: 'URL_TO_TEST', defaultValue: 'http://rd-professional-api-aat.service.core-compute-aat.internal', description: 'The URL you want to run these tests against'),
                 string(name: 'IDAM_URL', defaultValue: 'https://idam-api.aat.platform.hmcts.net', description: 'The IDAM API Url'),
                 string(name: 'BaseURL', defaultValue: 'http://rd-professional-api-aat.service.core-compute-aat.internal', description: 'The professional reference data Url'),
-                string(name: 'OAUTH2_CLIENT_SECRET_TO_TEST', defaultValue: '*****', description: 'OAUTH2 client secret')
+                string(name: 'OAUTH2_CLIENT_SECRET', defaultValue: '*****', description: 'OAUTH2 client secret')
         ])
 ])
 
@@ -40,7 +40,7 @@ withNightlyPipeline("java", product, component) {
     env.TEST_URL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'
     env.BaseURL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'
     env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
-    env.OAUTH2_CLIENT_SECRET = params.OAUTH2_CLIENT_SECRET_TO_TEST
+    env.OAUTH2_CLIENT_SECRET = params.OAUTH2_CLIENT_SECRET
 
     enablePerformanceTest()
 
