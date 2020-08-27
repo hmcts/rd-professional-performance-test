@@ -85,6 +85,7 @@ package object PRDTokenGenerator {
 
 
     System.out.println("clientSecret::" + clientsecret);
+    System.out.println("password::" + password);
 
     val response = authCodeRequest.post(USERTOKEN_SidAM_URL + ":443/o/token")
 
