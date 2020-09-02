@@ -42,6 +42,7 @@ ext {
 }
 
 dependencies {
+    compile group:"org.yaml", name: "snakeyaml", version:"1.26"
     testCompile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
     testCompile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
     testCompile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
