@@ -1,5 +1,5 @@
 plugins {
-    id "org.owasp.dependencycheck" version "5.2.1"
+    id "org.owasp.dependencycheck" version "5.3.0"
     id 'scala'
     id 'com.github.lkishalmi.gatling' version '3.0.2'
     id 'java-gradle-plugin'
@@ -42,7 +42,6 @@ ext {
 }
 
 dependencies {
-    compile group:"org.yaml", name: "snakeyaml", version:"1.26"
     testCompile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
     testCompile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
     testCompile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
