@@ -30,10 +30,6 @@ jar {
     exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
 }
 
-// ScalaCompileOptions.metaClass.daemonServer = true
-// ScalaCompileOptions.metaClass.fork = true
-// ScalaCompileOptions.metaClass.useAnt = false
-// ScalaCompileOptions.metaClass.useCompileDaemon = false
 
 ext {
     gatlingVersion = '3.3.1'
@@ -53,13 +49,6 @@ dependencyCheck {
     suppressionFile = 'config/owasp/suppressions.xml'
 }
 
-// jar {
-//     manifest {
-//         attributes 'Implementation-Title': 'PRD Performance Pipeline Tests',
-//                 'Implementation-Version': 1.0
-//     }
-// }
-
 gatling {
     toolVersion = '3.2.0'
     scalaVersion = '2.12.8'
@@ -68,19 +57,3 @@ gatling {
     ]
 }
 
-// test {
-//     testLogging {
-//         showStandardStreams = true
-//     }
-//     dependsOn("publishToMavenLocal")
-//     systemProperty "com.github.lkishalmi.gatling.version", project.version
-// }
-
-// pluginBundle {
-//     website = 'https://github.com/lkishalmi/gradle-gatling-plugin'
-//     vcsUrl = 'https://github.com/lkishalmi/gradle-gatling-plugin'
-//     description = 'Gatling Simulation Execution'
-//     tags = ['gatling', 'load test', 'stress test', 'performance test', 'scala']
-// }
-
-// ext ['netty.version'] = '4.0.51.Final'
