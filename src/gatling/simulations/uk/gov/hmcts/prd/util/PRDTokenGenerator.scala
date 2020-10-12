@@ -40,7 +40,7 @@ package object PRDTokenGenerator {
 
     val token = s2sRequest.asString()
 
-    System.out.println(token)
+    //System.out.println(token)
 
     token
 
@@ -85,7 +85,7 @@ package object PRDTokenGenerator {
 
     val token =  tokenStr.substring(tokenIndexStart+2,tokenIndexEnd -1 )
 
-    System.out.println(token)
+    //System.out.println(token)
 
     "Bearer " + token
   }
@@ -128,7 +128,7 @@ package object PRDTokenGenerator {
 
     val token =  tokenStr.substring(tokenIndexStart+2,tokenIndexEnd -1 )
 
-    System.out.println(token)
+   // System.out.println(token)
 
     "Bearer " + token
   }

@@ -14,7 +14,10 @@ targetCompatibility = "1.8"
 
 repositories {
     mavenCentral()
+    jcenter()
+
 }
+
 
 ext {
     gatlingVersion = '3.1.1'
@@ -27,9 +30,13 @@ dependencies {
     testCompile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
     gatlingCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
     gatlingCompile 'com.warrenstrange:googleauth:1.1.5'
-
+    gatlingCompile group: 'uk.gov.service.notify', name: 'notifications-java-client', version: '3.14.1-RELEASE'
     gatlingRuntime group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
 }
+
+
+
+
 
 jar {
     manifest {

@@ -19,7 +19,7 @@ object Internal_GETInternalUserForActiveOrganisationByEmail {
   val GetIntUsrByEmailMax = config.getString("internal.getIntUsrByEmailMax").toInt
 
   val GETInternalUserForActiveOrganisationByEmail = exec(http("RD10_Internal_GetInternalUserForActiveOrganisationByEmailAddress")
-    .get("/refdata/internal/v1/organisations/73O40OH/users?email=" + "tpabsya3pt3o8w0qtg@email.co.uk" + "")
+    .get("/refdata/internal/v1/organisations/M3SMFBI/users?email=testuserabc@mailnesia.com")
     .header("ServiceAuthorization", s2sToken)
     .header("Authorization", IdAMToken)
     .header("Content-Type", "application/json")
