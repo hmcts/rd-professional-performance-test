@@ -7,7 +7,7 @@ import uk.gov.hmcts.prd.util._
 
 import scala.concurrent.duration._
 
-object Internal_SearchPbas {
+object Internal_EditPbas {
 
   val config: Config = ConfigFactory.load()
 
@@ -15,15 +15,19 @@ object Internal_SearchPbas {
 
   val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
 
-  val GetSearchPbasMin = config.getString("external.getSearchPbasMin").toInt
+  val editPbasString = "{ \"paymentAccounts\": [ \"PBA0000004\",\"PBA0000005\" ]}"
 
-  val GetSearchPbasMax = config.getString("external.getSearchPbasMax").toInt
 
-  val SearchPbas = exec(http("RD11_Internal_SearchPBAsByEmailAddress")
-    .get("/search/pba/tpallhilf76xdso6ea@email.co.uk")
+  val EditPbasMin = config.getString("internal.editPbasMin").toInt
+
+  val EditPbasMax = config.getString("internal.editPbasMax").toInt
+
+  val EditPbas = exec(http("R3_Internal_EditPBA")
+    .put("/refdata/internal/v1/organisations/013FFP6/pbas")
     .header("ServiceAuthorization", s2sToken)
     .header("Authorization", IdAMToken)
     .header("Content-Type", "application/json")
+    .body(StringBody(editPbasString))
     .check(status is 200))
-    .pause(GetSearchPbasMin seconds, GetSearchPbasMax seconds)
+    .pause(EditPbasMin seconds, EditPbasMax seconds)
 }
