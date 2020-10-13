@@ -1,37 +1,49 @@
 #!groovy
 
 properties([
-        pipelineTriggers([cron('00 22 * * *')]),
-        parameters([
-                string(name: 'ENVIRONMENT', defaultValue: 'aat', description: 'Environment to test'),
-                string(name: 'URL_TO_TEST', defaultValue: 'http://rd-professional-api-aat.service.core-compute-aat.internal', description: 'The URL you want to run these tests against'),
-                string(name: 'IDAM_URL', defaultValue: 'https://idam-api.aat.platform.hmcts.net', description: 'The IDAM API Url'),
-                string(name: 'BaseURL', defaultValue: 'http://rd-professional-api-aat.service.core-compute-aat.internal', description: 'The professional reference data Url')
-        ])
+    pipelineTriggers([cron('00 22 * * *')]),
+    parameters([
+        string(name: 'ENVIRONMENT', defaultValue: 'aat', description: 'Environment to test'),
+        string(name: 'URL_TO_TEST', defaultValue: 'http://rd-professional-api-aat.service.core-compute-aat.internal', description: 'The URL you want to run these tests against'),
+        string(name: 'IDAM_URL', defaultValue: 'https://idam-api.aat.platform.hmcts.net', description: 'The IDAM API Url'),
+        string(name: 'BaseURL', defaultValue: 'http://rd-professional-api-aat.service.core-compute-aat.internal', description: 'The professional reference data Url')
+    ])
 ])
 
+@Library("Infrastructure")
 
+def type = "java"
+def product = "rd"
+def component = "professional-api"
 
-@Library("Infrastructure") 
+def secrets = [
+    's2s-aat': [
+        secret('microservicekey-rd-professional-api', 'S2S_SECRET')
+    ],
+    'rd-aat': [
+        secret('OAUTH2-CLIENT-SECRET', 'OAUTH2_CLIENT_SECRET')
+    ]
+]
 
-
-def product = "prd"
-def component = "internal-external-api"
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+    [$class     : 'AzureKeyVaultSecret',
+     secretType : 'Secret',
+     name       : secretName,
+     version    : '',
+     envVariable: envVar
+    ]
+}
 
 withNightlyPipeline("java", product, component) {
+    loadVaultSecrets(secrets)
+
     env.TEST_URL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'
     env.BaseURL = 'http://rd-professional-api-aat.service.core-compute-aat.internal'
     env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
 
-
     enablePerformanceTest()
-
-    enableSlackNotifications('#prd-nightly-builds')
 
     after('performanceTest') {
         steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/**/*'
     }
-
-
-
 }
