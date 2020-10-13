@@ -5,6 +5,16 @@ import com.warrenstrange.googleauth.GoogleAuthenticator
 import io.restassured.RestAssured
 import io.restassured.config.EncoderConfig
 import io.restassured.http.ContentType
+import io.restassured.parsing.Parser;
+import java.util.Map;
+import io.gatling.core.Predef._
+import io.gatling.http.Predef._
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 package object PRDTokenGenerator {
 
@@ -12,6 +22,8 @@ package object PRDTokenGenerator {
 
   val TOKEN_LEASE_URL = config.getString("s2sUrl")
   val USERTOKEN_SidAM_URL = config.getString("idam_api_url")
+  val clientsecret = config.getString("auth.clientSecret")
+
 
   /**
     * Kapil Jain: Helper function to optionally apply a proxy if set in the config - ToDo
@@ -23,16 +35,19 @@ package object PRDTokenGenerator {
 
      val authenticator: GoogleAuthenticator = new GoogleAuthenticator()
 
-    val password = authenticator.getTotpPassword(config.getString("perftest_service.pass"))
+    //val password = authenticator.getTotpPassword(config.getString("aat_service.pass"))
+    val password = config.getString("aat_service.pass")
 
-    val jsonPayload: String = """{"microservice":"""" + config.getString("perftest_service.name") + """","oneTimePassword":"""" + password + """"}"""
+    System.out.println("password::" + password);
+
+    val jsonPayload: String = """{"microservice":"""" + config.getString("aat_service.name") + """","oneTimePassword":"""" + password + """"}"""
 
     val s2sRequest = RestAssured.given
                     .contentType("application/json")
                     .accept("application/json")
                     .proxy("proxyout.reform.hmcts.net", 8080)
                     .body(jsonPayload)
-                    .post(TOKEN_LEASE_URL +"/lease")
+                    .post(TOKEN_LEASE_URL +"/testing-support/lease")
                     .then()
                     .statusCode(200)
                     .extract()
@@ -40,20 +55,18 @@ package object PRDTokenGenerator {
 
     val token = s2sRequest.asString()
 
-    //System.out.println(token)
-
     token
 
   }
 
+    
+  
+
   //=======================================
 
   def generateSIDAMUserTokenInternal() : String = {
-    return generateSIDAMUserTokenInternal("kapilPRD.jain@hmcts.net")
+    return generateSIDAMUserTokenInternal("mallikarjun.puttana@hmcts.net")
   }
-
-  //perftest- kapilPRDADMIN.jain@hmcts.net
-  //kapilPRD.jain@hmcts.net
 
   def generateSIDAMUserTokenInternal(userName : String) : String = {
 
@@ -64,14 +77,16 @@ package object PRDTokenGenerator {
       .contentType("application/x-www-form-urlencoded; charset=UTF-8")
       .proxy("proxyout.reform.hmcts.net", 8080)
       .formParam("username", userName)
-      .formParam("password", "Password12")
+      .formParam("password", "Testing1234")
       .formParam("client_id", "rd-professional-api")
-      .formParam("client_secret", "cc5f2a6-9690-11e9-bc42-526af7764f64")
+      .formParam("client_secret", clientsecret)
       .formParam("redirect_uri", RD_URL + "/oauth2redirect")
       .formParam("grant_type", "password")
        .formParam("scope", "openid profile roles create-user manage-user search-user")
       .request()
 
+
+    System.out.println("clientSecret::" + clientsecret);
 
     val response = authCodeRequest.post(USERTOKEN_SidAM_URL + ":443/o/token")
 
@@ -85,17 +100,15 @@ package object PRDTokenGenerator {
 
     val token =  tokenStr.substring(tokenIndexStart+2,tokenIndexEnd -1 )
 
-    //System.out.println(token)
 
     "Bearer " + token
   }
 
 
   def generateSIDAMUserTokenExternal() : String = {
-    return generateSIDAMUserTokenExternal("tpALzz3BalrmKBR0Fa@email.co.uk")
+    return generateSIDAMUserTokenExternal("")
   }
 
-  //kapilPRDExt.jain@hmcts.net
 
   def generateSIDAMUserTokenExternal(userName : String) : String = {
 
@@ -109,7 +122,7 @@ package object PRDTokenGenerator {
       .formParam("username", userName)
       .formParam("password", "Password12")
       .formParam("client_id", "rd-professional-api")
-      .formParam("client_secret", "cc5f2a6-9690-11e9-bc42-526af7764f64")
+      .formParam("client_secret", clientsecret)
       .formParam("redirect_uri", RD_URL + "/oauth2redirect")
       .formParam("grant_type", "password")
       .formParam("scope", "openid profile roles create-user manage-user search-user")
@@ -128,9 +141,7 @@ package object PRDTokenGenerator {
 
     val token =  tokenStr.substring(tokenIndexStart+2,tokenIndexEnd -1 )
 
-   // System.out.println(token)
-
-    "Bearer " + token
+    "Bearer " + "Bearer" + token
   }
 
 }
