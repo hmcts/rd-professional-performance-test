@@ -16,7 +16,7 @@ object External_CreateOrganisation {
   private def companyURL(): String = rng.alphanumeric.take(15).mkString
   private def firstName(): String = rng.alphanumeric.take(20).mkString
   private def lastName(): String = rng.alphanumeric.take(20).mkString
-  private def companyEmail(): String = "exui"+rng.alphanumeric.take(10).mkString + "@mailtest.gov.uk"
+  private def companyEmail(): String = "exui"+rng.alphanumeric.take(10).mkString
   private def paymentAccount1(): String = rng.alphanumeric.take(7).mkString
   private def paymentAccount2(): String = rng.alphanumeric.take(7).mkString
   private def addressLine1(): Int = rng.nextInt(999)

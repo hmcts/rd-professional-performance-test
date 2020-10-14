@@ -3,6 +3,7 @@ package uk.gov.hmcts.prd.simulation
 import com.typesafe.config.{Config, ConfigFactory}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
+import uk.gov.hmcts.prd.external
 import uk.gov.hmcts.prd.external._
 import uk.gov.hmcts.prd.internal._
 import uk.gov.hmcts.prd.util.{IDAMHelper, S2SHelper}
@@ -30,7 +31,7 @@ class PRDPTSimulation extends Simulation{
     .exec(
       IDAMHelper.getIdamTokenLatest,
       S2SHelper.S2SAuthToken,
-      Internal_CreateOrganisation.createOrganisation,
+      /*Internal_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
       Internal_GETOrganisationByID.GETOrganisationByID,
       Internal_AddInternalUserToOrg.AddInternalUserToOrg,
@@ -43,14 +44,16 @@ class PRDPTSimulation extends Simulation{
       Internal_EditPbas.EditPbas,
       Internal_UpdateUserStatus.internal_UpdateUserStatus,
       Internal_EditUserRole.EditInternalUserRole,
-      DeleteOrganisation.DeleteOrganisation,
+      DeleteOrganisation.DeleteOrganisation,*/
       External_CreateOrganisation.createOrganisation,
-      External_UpdateOrganisation.updateOrganisation,
-      External_GETOrganisationByID.GETOrganisationByID,
+      External_GETOrganisation.GETOrganisation,
       External_AddInternalUserToOrg.AddInternalUserToOrg,
       External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
       External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
-      External_GETPbas.GETPbas
+      External_GETPbas.GETPbas,
+      External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+      External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
+      External_UpdateUserStatus.UpdateUserStatusString
     )
     .pause(IntPaceMin seconds, IntPaceMax seconds)
 
