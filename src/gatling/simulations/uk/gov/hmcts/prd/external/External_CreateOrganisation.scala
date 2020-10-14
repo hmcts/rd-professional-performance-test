@@ -50,10 +50,10 @@ object External_CreateOrganisation {
 
     .exec(http("RD01_External_CreateOrganization")
       .post("/refdata/external/v1/organisations")
-      .header("ServiceAuthorization", s2sToken)
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .body(StringBody(createExtOrgString))
       .header("Content-Type", "application/json")
-      .check(jsonPath("$.organisationIdentifier").saveAs("NewPendingOrg_Id"))
+      .check(jsonPath("$.organisationIdentifier").saveAs("NewPendingOrg_Id2"))
       .check(status in (200,201)))
     .pause(CreateOrgMin seconds, CreateOrgMax seconds)
 

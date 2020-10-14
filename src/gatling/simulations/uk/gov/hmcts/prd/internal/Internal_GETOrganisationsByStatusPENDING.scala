@@ -18,8 +18,8 @@ object Internal_GETOrganisationsByStatusPENDING {
 
   val GETOrganisationsByStatusPENDING = exec(http("RD06_Internal_GetOrganizationsByStatusPENDING")
     .get("/refdata/internal/v1/organisations?status=PENDING")
-    .header("ServiceAuthorization", s2sToken)
-    .header("Authorization", IdAMToken)
+    .header("Authorization", "Bearer ${accessToken}")
+    .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")
     .check(status is 200))
     .pause(GetPendingOrgMin seconds, GetPendingOrgMax seconds)

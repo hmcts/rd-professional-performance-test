@@ -38,12 +38,13 @@ object Internal_AddInternalUserToOrg {
       .feed(OrgIdData)
 
       .exec(http("RD08_Internal_AddInternalUserToOrganisation")
-        .post("/refdata/internal/v1/organisations/${PRD_Org_ID}/users/")
-        .header("ServiceAuthorization", s2sToken)
-        .header("Authorization", IdAMToken)
+        .post("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users/")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .body(StringBody(addInternalUserString))
         .header("Content-Type", "application/json")
-        .check(status is 201))
+        .check(status is 201)
+        .check(jsonPath("$.userIdentifier").saveAs("userId")))
       .pause(AddIntUsrMin seconds, AddIntUsrMax seconds)
   }
 }

@@ -40,9 +40,9 @@ object Internal_EditUserRole {
       .feed(OrgIdData)
 
       .exec(http("R3_Internal_EditUserRole")
-          .put("/refdata/internal/v1/organisations/013FFP6/users/706646f7-098a-4572-a439-8d441c5c6b2d?origin=EXUI")
-        .header("ServiceAuthorization", s2sToken)
-        .header("Authorization", IdAMToken)
+          .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users/${userId}?origin=EXUI")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .body(StringBody(editInternalUserRoleString))
         .header("Content-Type", "application/json")
         .check(status is 200))

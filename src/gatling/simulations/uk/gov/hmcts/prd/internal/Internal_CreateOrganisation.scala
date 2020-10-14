@@ -47,7 +47,7 @@ object Internal_CreateOrganisation {
 
     .exec(http("RD01_Internal_CreateOrganization")
       .post("/refdata/internal/v1/organisations")
-      .header("ServiceAuthorization", s2sToken)
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .body(StringBody(createOrgString))
       .header("Content-Type", "application/json")
       .check(jsonPath("$.organisationIdentifier").saveAs("NewPendingOrg_Id"))

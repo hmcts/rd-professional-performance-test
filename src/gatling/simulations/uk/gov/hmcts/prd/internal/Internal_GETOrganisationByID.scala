@@ -22,10 +22,11 @@ object Internal_GETOrganisationByID {
   val GETOrganisationByID = feed(OrgIdData)
 
     .exec(http("RD04_Internal_GetOrganizationsByID")
-      .get("/refdata/internal/v1/organisations?id=${PRD_Org_ID}")
-      .header("ServiceAuthorization", s2sToken)
-      .header("Authorization", IdAMToken)
+      .get("/refdata/internal/v1/organisations?id=${NewPendingOrg_Id}")
+      .header("Authorization", "Bearer ${accessToken}")
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .header("Content-Type", "application/json")
-      .check(status is 200))
-    .pause(GetOrgByOrgIdMin seconds, GetOrgByOrgIdMax seconds)
+      .check(status is 200)
+      .check(jsonPath("$..email").saveAs("email")))
+      .pause(GetOrgByOrgIdMin seconds, GetOrgByOrgIdMax seconds)
 }

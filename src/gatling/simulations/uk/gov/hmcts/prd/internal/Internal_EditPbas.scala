@@ -15,7 +15,7 @@ object Internal_EditPbas {
 
   val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
 
-  val editPbasString = "{ \"paymentAccounts\": [ \"PBA0000004\",\"PBA0000005\" ]}"
+  val editPbasString = "{ \"paymentAccounts\": [ \"PBA0000014\",\"PBA0000015\" ]}"
 
 
   val EditPbasMin = config.getString("internal.editPbasMin").toInt
@@ -23,9 +23,9 @@ object Internal_EditPbas {
   val EditPbasMax = config.getString("internal.editPbasMax").toInt
 
   val EditPbas = exec(http("R3_Internal_EditPBA")
-    .put("/refdata/internal/v1/organisations/013FFP6/pbas")
-    .header("ServiceAuthorization", s2sToken)
-    .header("Authorization", IdAMToken)
+    .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/pbas")
+    .header("Authorization", "Bearer ${accessToken}")
+    .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")
     .body(StringBody(editPbasString))
     .check(status is 200))

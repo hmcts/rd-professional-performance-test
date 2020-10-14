@@ -18,8 +18,8 @@ object Internal_GETAllOrganisation {
 
   val GETAllOrganisation = exec(http("RD03_Internal_GetAllOrganizations")
     .get("/refdata/internal/v1/organisations")
-    .header("ServiceAuthorization", s2sToken)
-    .header("Authorization", IdAMToken)
+    .header("Authorization", "Bearer ${accessToken}")
+    .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")
     .check(status is 200))
     .pause(GetAllOrgMin seconds, GetAllOrgMax seconds)

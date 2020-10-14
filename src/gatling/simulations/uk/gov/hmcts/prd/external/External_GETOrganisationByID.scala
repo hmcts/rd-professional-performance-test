@@ -18,10 +18,11 @@ object External_GETOrganisationByID {
   val GetOrgByOrgIdMax = config.getString("external.getOrgByOrgIdMax").toInt
 
   val GETOrganisationByID = exec(http("RD12_External_GetOrganizationsByID")
-    .get("/refdata/external/v1/organisations")
-    .header("ServiceAuthorization", s2sToken)
-    .header("Authorization", IdAMToken)
+    .get("/refdata/external/v1/organisations/${NewPendingOrg_Id2}")
+    .header("Authorization", "Bearer ${accessToken}")
+    .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")
-    .check(status is 200))
+    .check(status is 200)
+    .check(jsonPath("$..email").saveAs("email2")))
     .pause(GetOrgByOrgIdMin seconds, GetOrgByOrgIdMax seconds)
 }
