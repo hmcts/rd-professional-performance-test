@@ -40,7 +40,7 @@ object External_UpdateUserStatus {
       .feed(OrgIdData)
 
       .exec(http("R3_External_UpdateUserStatus")
-          .put("/refdata/external/v1/organisations/${NewPendingOrg_Id}/users/${userId}?origin=EXUI")
+          .put("/refdata/external/v1/organisations/${NewPendingOrg_Id2}/users/${userId2}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .body(StringBody(UpdateUserStatusString))

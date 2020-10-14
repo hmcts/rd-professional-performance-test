@@ -4,7 +4,7 @@ import com.typesafe.config.{Config, ConfigFactory}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-object DeleteOrganisation {
+object Internal_DeleteOrganisation {
 
   val config: Config = ConfigFactory.load()
 

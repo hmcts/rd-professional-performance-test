@@ -1,12 +1,12 @@
 package uk.gov.hmcts.prd.simulation
 
 import com.typesafe.config.{Config, ConfigFactory}
-import io.gatling.core.Predef._
+import io.gatling.core.Predef.{exec, _}
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.external
 import uk.gov.hmcts.prd.external._
 import uk.gov.hmcts.prd.internal._
-import uk.gov.hmcts.prd.util.{IDAMHelper, S2SHelper}
+import uk.gov.hmcts.prd.util.{External_IDAMHelper, IDAMHelper, S2SHelper}
 
 import scala.concurrent.duration._
 
@@ -29,32 +29,36 @@ class PRDPTSimulation extends Simulation{
 
   val Scn = scenario("Professional Reference Data")
     .exec(
-      IDAMHelper.getIdamTokenLatest,
-      S2SHelper.S2SAuthToken,
-      /*Internal_CreateOrganisation.createOrganisation,
-      Internal_UpdateOrganisation.updateOrganisation,
-      Internal_GETOrganisationByID.GETOrganisationByID,
-      Internal_AddInternalUserToOrg.AddInternalUserToOrg,
-      Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-      Internal_GETAllOrganisation.GETAllOrganisation,
-      Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
-      Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
-      Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
-      Internal_GETPbas.GETPbas,
-      Internal_EditPbas.EditPbas,
-      Internal_UpdateUserStatus.internal_UpdateUserStatus,
-      Internal_EditUserRole.EditInternalUserRole,
-      DeleteOrganisation.DeleteOrganisation,*/
-      External_CreateOrganisation.createOrganisation,
-      External_GETOrganisation.GETOrganisation,
-      External_AddInternalUserToOrg.AddInternalUserToOrg,
-      External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-      External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
-      External_GETPbas.GETPbas,
-      External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
-      External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
-      External_UpdateUserStatus.UpdateUserStatusString
-    )
+    IDAMHelper.getIdamTokenLatest,
+    S2SHelper.S2SAuthToken,
+    /*Internal_CreateOrganisation.createOrganisation,
+    Internal_UpdateOrganisation.updateOrganisation,
+    Internal_GETOrganisationByID.GETOrganisationByID,
+    Internal_AddInternalUserToOrg.AddInternalUserToOrg,
+    Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+    Internal_GETAllOrganisation.GETAllOrganisation,
+    Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+    Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+    Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
+    Internal_GETPbas.GETPbas,
+    Internal_EditPbas.EditPbas,
+    Internal_UpdateUserStatus.internal_UpdateUserStatus,
+    Internal_EditUserRole.EditInternalUserRole,
+    Internal_DeleteOrganisation.DeleteOrganisation,*/
+
+    External_CreateOrganisation.createOrganisation,
+      External_UpdateOrganisation.updateOrganisation,
+      External_GETOrganisationByID.GETOrganisationByID,
+      External_IDAMHelper.getIdamTokenLatest,
+    External_GETOrganisation.GETOrganisation,
+    /*External_AddInternalUserToOrg.AddInternalUserToOrg,
+    External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+    External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+    External_GETPbas.GETPbas,
+    External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+    External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
+    External_UpdateUserStatus.internal_UpdateUserStatus,*/
+  )
     .pause(IntPaceMin seconds, IntPaceMax seconds)
 
   setUp(

@@ -36,8 +36,9 @@ object External_AddInternalUserToOrg {
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .body(StringBody(addInternalUserString))
         .header("Content-Type", "application/json")
-        .check(status is 201))
-      .pause(AddUsrMin seconds, AddUsrMax seconds)
+        .check(status is 201)
+        .check(jsonPath("$.userIdentifier").saveAs("userId2")))
+    .pause(AddUsrMin seconds, AddUsrMax seconds)
   }
 }
 
