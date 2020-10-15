@@ -6,17 +6,25 @@ import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
 
 import scala.concurrent.duration._
+import scala.util.Random
 
 object Internal_EditPbas {
 
   val config: Config = ConfigFactory.load()
+  private val rng: Random = new Random()
+  private def paymentAccount1(): String = rng.alphanumeric.take(7).mkString
+  private def paymentAccount2(): String = rng.alphanumeric.take(7).mkString
 
   val s2sToken = PRDTokenGenerator.generateS2SToken()
 
   val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
 
-  val editPbasString = "{ \"paymentAccounts\": [ \"PBA0000014\",\"PBA0000015\" ]}"
+  val editPbasString = "{ \"paymentAccounts\": [ \"PBA${PaymentAccount1}\",\"PBA${PaymentAccount2}\" ]}"
 
+  val createAccounts = exec(_.setAll(
+    ("PaymentAccount1",paymentAccount1()),
+    ("PaymentAccount2",paymentAccount2())
+  ))
 
   val EditPbasMin = config.getString("internal.editPbasMin").toInt
 

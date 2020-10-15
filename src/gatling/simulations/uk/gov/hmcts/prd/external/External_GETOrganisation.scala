@@ -22,6 +22,7 @@ object External_GETOrganisation {
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")
-    .check(status is 200))
+    .check(status is 200)
+    .check(jsonPath("$..email").saveAs("email")))
     .pause(GetOrgByOrgIdMin seconds, GetOrgByOrgIdMax seconds)
 }

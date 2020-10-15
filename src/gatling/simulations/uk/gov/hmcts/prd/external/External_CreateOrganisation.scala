@@ -53,7 +53,7 @@ object External_CreateOrganisation {
       .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .body(StringBody(createExtOrgString))
       .header("Content-Type", "application/json")
-      .check(jsonPath("$.organisationIdentifier").saveAs("NewPendingOrg_Id2"))
+      .check(jsonPath("$.organisationIdentifier").saveAs("NewPendingOrg_Id"))
       .check(status in (200,201)))
     .pause(CreateOrgMin seconds, CreateOrgMax seconds)
 

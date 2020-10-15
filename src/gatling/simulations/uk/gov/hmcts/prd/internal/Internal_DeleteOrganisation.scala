@@ -14,6 +14,6 @@ object Internal_DeleteOrganisation {
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")
-    .check(status is 200))
+    .check(status is 204))
     .pause(10)
 }

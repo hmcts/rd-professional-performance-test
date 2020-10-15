@@ -7,7 +7,7 @@ import io.gatling.http.Predef._
 object  S2SHelper {
   val thinktime = 5
 
-  val getOTP =
+  /*val getOTP =
   exec(
     session => {
       val otp: String = String.valueOf(new GoogleAuthenticator().getTotpPassword(Env.getS2sSecret))
@@ -15,7 +15,7 @@ object  S2SHelper {
 
     })
 
-  val otpp="${OTP}"
+  val otpp="${OTP}"*/
 
   val S2SAuthToken =
 
