@@ -29,7 +29,7 @@ object Internal_UpdateUserStatus {
 
   val EditUsrStatusMax = config.getString("internal.editUsrStatusMax").toInt
 
-  val internal_UpdateUserStatus =  repeat(1){
+  val UpdateInternalUserStatus =  repeat(1){
 
       exec(_.setAll(
           ("InternalUser_FirstName",internalUser_firstName()),
@@ -39,7 +39,7 @@ object Internal_UpdateUserStatus {
 
       .feed(OrgIdData)
 
-      .exec(http("R3_Internal_UpdateUserStatus")
+      .exec(http("RD12_Internal_UpdateUserStatus")
           .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users/${userId}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")

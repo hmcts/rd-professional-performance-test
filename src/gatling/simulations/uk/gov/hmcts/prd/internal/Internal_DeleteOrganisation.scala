@@ -9,8 +9,8 @@ object Internal_DeleteOrganisation {
   val config: Config = ConfigFactory.load()
 
 
-  val DeleteOrganisation = exec(http("RD03_Internal_DeleteOrganizations")
-    .delete("http://rd-professional-api-perftest.service.core-compute-perftest.internal/refdata/internal/v1/organisations/${NewPendingOrg_Id}")
+  val DeleteOrganisation = exec(http("RD14_Internal_DeleteOrganizations")
+    .delete("/refdata/internal/v1/organisations/${NewPendingOrg_Id}")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")

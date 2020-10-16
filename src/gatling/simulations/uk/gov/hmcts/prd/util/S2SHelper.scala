@@ -8,6 +8,7 @@ object  S2SHelper {
   val thinktime = 5
 
   /*val getOTP =
+   */
   exec(
     session => {
       val otp: String = String.valueOf(new GoogleAuthenticator().getTotpPassword(Env.getS2sSecret))
@@ -15,11 +16,11 @@ object  S2SHelper {
 
     })
 
-  val otpp="${OTP}"*/
+  val otpp="${OTP}"
 
   val S2SAuthToken =
 
-    exec(http("PaymentAPI_020_GetServiceToken")
+    exec(http("Token_020_GetServiceToken")
       .post(Env.getS2sUrl+"/lease")
       .header("Content-Type", "application/json")
       .body(StringBody(

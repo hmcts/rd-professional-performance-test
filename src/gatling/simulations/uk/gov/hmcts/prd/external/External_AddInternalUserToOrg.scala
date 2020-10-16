@@ -30,14 +30,14 @@ object External_AddInternalUserToOrg {
 
   val AddInternalUserToOrg = repeat(1) {
     exec(_.setAll(("InternalUser_FirstName", internalUser_firstName()), ("InternalUser_LastName", internalUser_lastName()), ("InternalUser_Email", internalUser_Email())))
-      .exec(http("RD14_External_AddInternalUserToOrganisation")
+      .exec(http("RD19_External_AddInternalUserToOrganisation")
         .post("/refdata/external/v1/organisations/users/")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .body(StringBody(addInternalUserString))
         .header("Content-Type", "application/json")
         .check(status is 201)
-        .check(jsonPath("$.userIdentifier").saveAs("userId2")))
+        .check(jsonPath("$.userIdentifier").saveAs("userId")))
     .pause(AddUsrMin seconds, AddUsrMax seconds)
   }
 }

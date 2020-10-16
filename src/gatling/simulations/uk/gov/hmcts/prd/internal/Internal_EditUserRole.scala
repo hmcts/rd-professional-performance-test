@@ -39,7 +39,7 @@ object Internal_EditUserRole {
 
       .feed(OrgIdData)
 
-      .exec(http("R3_Internal_EditUserRole")
+      .exec(http("RD13_Internal_EditUserRole")
           .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users/${userId}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")

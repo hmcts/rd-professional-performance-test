@@ -17,7 +17,7 @@ object External_GETOrganisation {
 
   val GetOrgByOrgIdMax = config.getString("external.getOrgByOrgIdMax").toInt
 
-  val GETOrganisation = exec(http("RD12_External_GetOrganizations")
+  val GETOrganisation = exec(http("RD16_External_GetOrganizations")
     .get("/refdata/external/v1/organisations")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")

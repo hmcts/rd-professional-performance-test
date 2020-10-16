@@ -48,7 +48,7 @@ object External_CreateOrganisation {
     ("AddressLine1",addressLine1())
   ))
 
-    .exec(http("RD01_External_CreateOrganization")
+    .exec(http("RD15_External_CreateOrganization")
       .post("/refdata/external/v1/organisations")
       .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .body(StringBody(createExtOrgString))

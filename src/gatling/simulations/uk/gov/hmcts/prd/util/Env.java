@@ -6,15 +6,14 @@ public class Env {
     private static String file = "CV-CMC-GOR-ENG-0004-UI-Test.docx";
     static Properties defaults = new Properties();
     static {
-        defaults.setProperty("IDAM_API_BASE_URI", "https://idam-api.perftest.platform.hmcts.net");
-        //defaults.setProperty("IDAM_API_BASE_URI", "https://idam-api.aat.platform.hmcts.net");
-        defaults.setProperty("IDAM_AUTH_REDIRECT", "https://paybubble.perftest.platform.hmcts.net/oauth2/callback");
-        defaults.setProperty("OAUTH_CLIENT", "paybubble");//am_role_assignment
+        //defaults.setProperty("IDAM_API_BASE_URI", "https://idam-api.perftest.platform.hmcts.net");
+        defaults.setProperty("IDAM_API_BASE_URI", "https://idam-api.aat.platform.hmcts.net");
+        //defaults.setProperty("IDAM_AUTH_REDIRECT", "https://paybubble.perftest.platform.hmcts.net/oauth2/callback");
+        //defaults.setProperty("OAUTH_CLIENT", "paybubble");//am_role_assignment
         defaults.setProperty("IDAM_OAUTH_SECRET", "");
-        //defaults.setProperty("IDAM_OAUTH_SECRET", "");
 
-        defaults.setProperty("S2S_BASE_URI", "http://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal/testing-support");
-        //defaults.setProperty("S2S_BASE_URI", "http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/testing-support");
+        //defaults.setProperty("S2S_BASE_URI", "http://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal/testing-support");
+        defaults.setProperty("S2S_BASE_URI", "http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/testing-support");
         defaults.setProperty("S2S_SERVICE_NAME", "rd_professional_api");//am_role_assignment_service
         defaults.setProperty("FUNCTIONAL_TEST_CLIENT_S2S_TOKEN", "");
 

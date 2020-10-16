@@ -31,7 +31,7 @@ class PRDPTSimulation extends Simulation{
     .exec(
     IDAMHelper.getIdamTokenLatest,
     S2SHelper.S2SAuthToken,
-    /*Internal_CreateOrganisation.createOrganisation,
+    Internal_CreateOrganisation.createOrganisation,
       Internal_DeleteOrganisation.DeleteOrganisation,
       Internal_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
@@ -44,21 +44,22 @@ class PRDPTSimulation extends Simulation{
     Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
     Internal_GETPbas.GETPbas,
     Internal_EditPbas.EditPbas,
-    Internal_UpdateUserStatus.internal_UpdateUserStatus,
-    Internal_EditUserRole.EditInternalUserRole,*/
+    Internal_UpdateUserStatus.UpdateInternalUserStatus,
+    Internal_EditUserRole.EditInternalUserRole,
 
     External_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
-      Internal_GETOrganisationByID.GETOrganisationByID,
-      External_IDAMHelper.getIdamTokenLatest,
+      //Internal_GETOrganisationByID.GETOrganisationByID,
+      //External_IDAMHelper.getIdamTokenLatest,
     External_GETOrganisation.GETOrganisation,
-    /*External_AddInternalUserToOrg.AddInternalUserToOrg,
+    External_AddInternalUserToOrg.AddInternalUserToOrg,
     External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
     External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
     External_GETPbas.GETPbas,
     External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
     External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
-    External_UpdateUserStatus.internal_UpdateUserStatus,*/
+    External_UpdateUserStatus.UpdateInternalUserStatus,
+      External_EditUserRole.EditInternalUserRole,
   )
     .pause(IntPaceMin seconds, IntPaceMax seconds)
 

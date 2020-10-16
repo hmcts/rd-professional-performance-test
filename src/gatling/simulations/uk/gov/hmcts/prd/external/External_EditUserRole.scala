@@ -8,7 +8,7 @@ import uk.gov.hmcts.prd.util._
 import scala.concurrent.duration._
 import scala.util.Random
 
-object External_UpdateUserStatus {
+object External_EditUserRole {
 
   private val rng: Random = new Random()
   private def internalUser_firstName(): String = rng.alphanumeric.take(20).mkString
@@ -23,13 +23,13 @@ object External_UpdateUserStatus {
 
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
-  val UpdateUserStatusString = "{ \"idamStatus\" : \"ACTIVE\"}"
+  val editInternalUserRoleString = "{\n \"rolesAdd\": [ { \"name\": \"pui-case-manager\" }, { \"name\": \"caseworker\" } ], \"rolesDelete\": [ { \"name\": \"pui-case-manager\" }, { \"name\": \"caseworker\" } ]}\n"
 
-  val EditUsrStatusMin = config.getString("internal.editUsrStatusMin").toInt
+  val EditUsrRoleMin = config.getString("internal.editUsrRoleMin").toInt
 
-  val EditUsrStatusMax = config.getString("internal.editUsrStatusMax").toInt
+  val EditUsrRoleMax = config.getString("internal.editUsrRoleMax").toInt
 
-  val UpdateInternalUserStatus =  repeat(1){
+  val EditInternalUserRole =  repeat(1){
 
       exec(_.setAll(
           ("InternalUser_FirstName",internalUser_firstName()),
@@ -39,13 +39,13 @@ object External_UpdateUserStatus {
 
       .feed(OrgIdData)
 
-      .exec(http("RD23_External_UpdateUserStatus")
+      .exec(http("RD24_External_EditUserRole")
           .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
-        .body(StringBody(UpdateUserStatusString))
+        .body(StringBody(editInternalUserRoleString))
         .header("Content-Type", "application/json")
         .check(status is 200))
-      .pause(EditUsrStatusMin seconds, EditUsrStatusMax seconds)
+      .pause(EditUsrRoleMin seconds, EditUsrRoleMax seconds)
   }
 }

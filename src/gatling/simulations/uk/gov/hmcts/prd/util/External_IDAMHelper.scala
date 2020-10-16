@@ -22,9 +22,9 @@ object External_IDAMHelper {
 
 
   val getIdamTokenLatest=
-    exec(http("PaymentAPI_010_015_GetAuthToken")
-         .post(Env.getIdamUrl  + "/o/token?grant_type=password&username=${email}&password=Pass19word&client_id=rd-professional-api&client_secret=" + Env.getOAuthSecret + "&redirect_uri=https://rd-professional-api-perftest.service.core-compute-perftest.internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
-         //.post(Env.getIdamUrl  + "/o/token?grant_type=password&username=${email}&password=Pass19word&client_id=rd-professional-api&client_secret=" + Env.getOAuthSecret + "&redirect_uri=https://rd-professional-api-aat.service.core-compute-aat.internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
+    exec(http("Token_010_015_GetAuthToken")
+         //.post(Env.getIdamUrl  + "/o/token?grant_type=password&username=${email}&password=Pass19word&client_id=rd-professional-api&client_secret=" + Env.getOAuthSecret + "&redirect_uri=https://rd-professional-api-perftest.service.core-compute-perftest.internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
+         .post(Env.getIdamUrl  + "/o/token?grant_type=password&username=${email}&password=Testing1234&client_id=rd-professional-api&client_secret=" + Env.getOAuthSecret + "&redirect_uri=https://rd-professional-api-aat.service.core-compute-aat.internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
          .header("Content-Type", "application/x-www-form-urlencoded")
          .header("Content-Length", "0")
          .check(status is 200)

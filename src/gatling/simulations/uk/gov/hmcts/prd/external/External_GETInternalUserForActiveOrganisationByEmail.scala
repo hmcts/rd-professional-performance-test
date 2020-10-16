@@ -17,8 +17,8 @@ object External_GETInternalUserForActiveOrganisationByEmail {
 
   val GetIntUsrByOrgEmailMax = config.getString("external.getIntUsrByOrgEmailMax").toInt
 
-  val GETInternalUserForActiveOrganisationByEmail = exec(http("RD16_External_GetInternalUserForActiveOrganisationByEmailAddress")
-    .get("/refdata/external/v1/organisations/users?email=${email2}")
+  val GETInternalUserForActiveOrganisationByEmail = exec(http("RD21_External_GetInternalUserForActiveOrganisationByEmailAddress")
+    .get("/refdata/external/v1/organisations/users?email=${email}")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")
