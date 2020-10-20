@@ -53,13 +53,14 @@ object Internal_UpdateOrganisation {
 
     .feed(OrgIdData)
 
-    .exec(http("RD02_Internal_ActivateOrganization")
+    .exec(http("RD10_Internal_ActivateOrganization")
       .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}")
       .header("ServiceAuthorization", s2sToken)
       .header("Authorization", IdAMToken)
       .body(StringBody(updateOrgString))
       .header("Content-Type", "application/json")
       .check(status in (200,201)))
+      
     .pause(UpdateOrgMin seconds, UpdateOrgMax seconds)
 
 }

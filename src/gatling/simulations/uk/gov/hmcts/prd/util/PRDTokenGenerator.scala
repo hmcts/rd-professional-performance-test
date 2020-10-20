@@ -23,12 +23,6 @@ package object PRDTokenGenerator {
   val TOKEN_LEASE_URL = config.getString("s2sUrl")
   val USERTOKEN_SidAM_URL = config.getString("idam_api_url")
   val clientsecret = config.getString("auth.clientSecret")
-
-
-  /**
-    * Kapil Jain: Helper function to optionally apply a proxy if set in the config - ToDo
-    */
-
   val RD_URL = config.getString("baseUrl")
 
   def generateS2SToken() : String = {
@@ -38,7 +32,7 @@ package object PRDTokenGenerator {
     //val password = authenticator.getTotpPassword(config.getString("aat_service.pass"))
     val password = config.getString("aat_service.pass")
 
-    System.out.println("password::" + password);
+    //System.out.println("password::" + password);
 
     val jsonPayload: String = """{"microservice":"""" + config.getString("aat_service.name") + """","oneTimePassword":"""" + password + """"}"""
 
@@ -59,9 +53,6 @@ package object PRDTokenGenerator {
 
   }
 
-    
-  
-
   //=======================================
 
   def generateSIDAMUserTokenInternal() : String = {
@@ -70,7 +61,7 @@ package object PRDTokenGenerator {
 
   def generateSIDAMUserTokenInternal(userName : String) : String = {
 
-    val authCodeRequest = RestAssured.given().config(RestAssured.config()
+  val authCodeRequest = RestAssured.given().config(RestAssured.config()
       .encoderConfig(EncoderConfig.encoderConfig()
         .encodeContentTypeAs("x-www-form-urlencoded",
           ContentType.URLENC)))
@@ -89,31 +80,22 @@ package object PRDTokenGenerator {
     System.out.println("clientSecret::" + clientsecret);
 
     val response = authCodeRequest.post(USERTOKEN_SidAM_URL + ":443/o/token")
-
     val statusCode = response.getStatusCode()
-
     val tokenStr = response.asString()
-
     val tokenIndexStart = tokenStr.indexOf(":")
-
     val tokenIndexEnd = tokenStr.indexOf(",")
-
     val token =  tokenStr.substring(tokenIndexStart+2,tokenIndexEnd -1 )
-
 
     "Bearer " + token
   }
-
 
   def generateSIDAMUserTokenExternal() : String = {
     return generateSIDAMUserTokenExternal("")
   }
 
-
   def generateSIDAMUserTokenExternal(userName : String) : String = {
 
-
-    val authCodeRequest = RestAssured.given().config(RestAssured.config()
+  val authCodeRequest = RestAssured.given().config(RestAssured.config()
       .encoderConfig(EncoderConfig.encoderConfig()
         .encodeContentTypeAs("x-www-form-urlencoded",
           ContentType.URLENC)))
@@ -130,15 +112,10 @@ package object PRDTokenGenerator {
 
 
     val response = authCodeRequest.post(USERTOKEN_SidAM_URL + ":443/o/token")
-
     val statusCode = response.getStatusCode()
-
     val tokenStr = response.asString()
-
     val tokenIndexStart = tokenStr.indexOf(":")
-
     val tokenIndexEnd = tokenStr.indexOf(",")
-
     val token =  tokenStr.substring(tokenIndexStart+2,tokenIndexEnd -1 )
 
     "Bearer " + "Bearer" + token
