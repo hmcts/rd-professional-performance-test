@@ -38,6 +38,7 @@ class PRDPTSimulation extends Simulation{
       Internal_GETOrganisationByID.GETOrganisationByID,
       Internal_AddInternalUserToOrg.AddInternalUserToOrg,
       Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+      DeleteOrganisation.DeleteOrganisation
     )
     .pause(IntPaceMin seconds, IntPaceMax seconds)
 
