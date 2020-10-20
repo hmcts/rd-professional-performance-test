@@ -37,7 +37,7 @@ object Internal_AddInternalUserToOrg {
 
       .feed(OrgIdData)
 
-      .exec(http("RD08_Internal_AddInternalUserToOrganisation")
+      .exec(http("RD04_Internal_AddInternalUserToOrganisation")
         .post("/refdata/internal/v1/organisations/${PRD_Org_ID}/users/")
         .header("ServiceAuthorization", s2sToken)
         .header("Authorization", IdAMToken)

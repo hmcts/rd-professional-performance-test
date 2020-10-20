@@ -21,7 +21,7 @@ object Internal_GETOrganisationByID {
 
   val GETOrganisationByID = feed(OrgIdData)
 
-    .exec(http("RD04_Internal_GetOrganizationsByID")
+    .exec(http("RD03_Internal_GetOrganizationsByID")
       .get("/refdata/internal/v1/organisations?id=${PRD_Org_ID}")
       .header("ServiceAuthorization", s2sToken)
       .header("Authorization", IdAMToken)

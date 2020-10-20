@@ -11,10 +11,10 @@ object DeleteOrganisation {
   val s2sToken = PRDTokenGenerator.generateS2SToken()
   val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
 
-  val DeleteOrganisation = exec(http("RD03_Internal_DeleteOrganizations")
+  val DeleteOrganisation = exec(http("RD06_Internal_DeleteOrganizations")
     .delete("/refdata/internal/v1/organisations/${NewPendingOrg_Id}")
     .header("ServiceAuthorization", s2sToken)
     .header("Authorization", IdAMToken)
     .header("Content-Type", "application/json")
-    .check(status is 200))
+    .check(status is 204))
 }

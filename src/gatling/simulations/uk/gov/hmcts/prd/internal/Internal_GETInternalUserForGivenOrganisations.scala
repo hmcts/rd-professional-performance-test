@@ -11,9 +11,7 @@ object Internal_GETInternalUserForGivenOrganisations {
   val config: Config = ConfigFactory.load()
 
   val s2sToken = PRDTokenGenerator.generateS2SToken()
-
   val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
   val GetIntUsrByOrgMin = config.getString("internal.getIntUsrByOrgMin").toInt
@@ -21,7 +19,7 @@ object Internal_GETInternalUserForGivenOrganisations {
 
   val GETInternalUserForGivenOrganisations = feed(OrgIdData)
 
-    .exec(http("RD09_Internal_GetInternalUserForGivenOrganisation")
+    .exec(http("RD05_Internal_GetInternalUserForGivenOrganisation")
       .get("/refdata/internal/v1/organisations/${PRD_Org_ID}/users?showdeleted=false&rolesRequired=false")
       .header("ServiceAuthorization", s2sToken)
       .header("Authorization", IdAMToken)
