@@ -1,12 +1,12 @@
 package uk.gov.hmcts.prd.internal
 
-
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
 import scala.util.Random
 import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
+
 object Internal_CreateOrganisation {
 
   val s2sToken = PRDTokenGenerator.generateS2SToken()
