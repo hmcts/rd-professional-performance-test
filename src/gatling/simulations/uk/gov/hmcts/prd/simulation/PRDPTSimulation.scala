@@ -31,8 +31,9 @@ class PRDPTSimulation extends Simulation{
     .exec(
     IDAMHelper.getIdamTokenLatest,
     S2SHelper.S2SAuthToken,
-    Internal_CreateOrganisation.createOrganisation,
-      Internal_DeleteOrganisation.DeleteOrganisation,
+    //Internal_CreateOrganisation.createOrganisation,
+      //Internal_DeleteOrganisation.DeleteOrganisation,
+      Internal_CreateUser.createUser,
       Internal_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
     Internal_GETOrganisationByID.GETOrganisationByID,
@@ -43,7 +44,9 @@ class PRDPTSimulation extends Simulation{
     Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
     Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
     Internal_GETPbas.GETPbas,
-    Internal_EditPbas.EditPbas,
+    Internal_EditPbas.EditPbas)
+    //.pause(1000)
+    .exec(
     Internal_UpdateUserStatus.UpdateInternalUserStatus,
     Internal_EditUserRole.EditInternalUserRole,
 
