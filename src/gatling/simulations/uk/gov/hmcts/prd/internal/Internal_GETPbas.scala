@@ -16,7 +16,7 @@ object Internal_GETPbas {
 
   val GetPbasMax = config.getString("internal.getPbasMax").toInt
 
-  val GETPbas = exec(http("RD07_Internal_RetrievesOrganisationsPaymentAccounts")
+  val GETPbas = exec(http("RD11_Internal_RetrievesOrganisationsPaymentAccounts")
     .get("/refdata/internal/v1/organisations/pbas?email=${email}")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")

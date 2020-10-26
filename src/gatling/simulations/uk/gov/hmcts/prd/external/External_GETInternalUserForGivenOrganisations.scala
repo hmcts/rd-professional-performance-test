@@ -17,7 +17,7 @@ object External_GETInternalUserForGivenOrganisations {
 
   val GetIntUsrByOrgIdMax = config.getString("external.getIntUsrByOrgIdMax").toInt
 
-  val GETInternalUserForGivenOrganisations = exec(http("RD20_External_GetInternalUserForGivenOrganisation")
+  val GETInternalUserForGivenOrganisations = exec(http("RD18_External_GetInternalUserForGivenOrganisation")
     .get("/refdata/external/v1/organisations/users?showdeleted=True")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")

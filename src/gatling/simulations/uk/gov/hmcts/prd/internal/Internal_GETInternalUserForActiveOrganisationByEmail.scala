@@ -18,7 +18,7 @@ object Internal_GETInternalUserForActiveOrganisationByEmail {
   val GetIntUsrByEmailMin = config.getString("internal.getIntUsrByEmailMin").toInt
   val GetIntUsrByEmailMax = config.getString("internal.getIntUsrByEmailMax").toInt
 
-  val GETInternalUserForActiveOrganisationByEmail = exec(http("RD10_Internal_GetInternalUserForActiveOrganisationByEmailAddress")
+  val GETInternalUserForActiveOrganisationByEmail = exec(http("RD08_Internal_GetInternalUserForActiveOrganisationByEmailAddress")
     .get("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users?email=${email}")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")

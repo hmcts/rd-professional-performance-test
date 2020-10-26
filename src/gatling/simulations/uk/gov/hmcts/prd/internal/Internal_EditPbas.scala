@@ -30,7 +30,7 @@ object Internal_EditPbas {
 
   val EditPbasMax = config.getString("internal.editPbasMax").toInt
 
-  val EditPbas = exec(http("RD11_Internal_EditPBA")
+  val EditPbas = exec(http("RD12_Internal_EditPBA")
     .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/pbas")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")

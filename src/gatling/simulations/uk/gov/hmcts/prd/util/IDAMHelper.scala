@@ -23,8 +23,8 @@ object IDAMHelper {
 
   val getIdamTokenLatest=
     exec(http("Token_010_015_GetAuthToken")
-         //.post(Env.getIdamUrl  + "/o/token?grant_type=password&username=vijay.idam.prd.user@hmcts.net&password=Pass19word&client_id=rd-professional-api&client_secret=" + Env.getOAuthSecret + "&redirect_uri=https://rd-professional-api-perftest.service.core-compute-perftest.internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
-         .post(Env.getIdamUrl  + "/o/token?grant_type=password&username=mallikarjun.puttana@hmcts.net&password=Testing1234&client_id=rd-professional-api&client_secret=" + Env.getOAuthSecret + "&redirect_uri=https://rd-professional-api-aat.service.core-compute-aat.internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
+         .post(Env.getIdamUrl  + "/o/token?grant_type=password&username=vijay.idam.prd.user@hmcts.net&password=Pass19word&client_id=rd-professional-api&client_secret=" + Env.getOAuthSecret + "&redirect_uri=https://rd-professional-api-perftest.service.core-compute-perftest.internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
+         //.post(Env.getIdamUrl  + "/o/token?grant_type=password&username=mallikarjun.puttana@hmcts.net&password=Testing1234&client_id=rd-professional-api&client_secret=" + Env.getOAuthSecret + "&redirect_uri=https://rd-professional-api-aat.service.core-compute-aat.internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
          .header("Content-Type", "application/x-www-form-urlencoded")
          .header("Content-Length", "0")
          .check(status is 200)

@@ -6,7 +6,7 @@ import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.external
 import uk.gov.hmcts.prd.external._
 import uk.gov.hmcts.prd.internal._
-import uk.gov.hmcts.prd.util.{External_IDAMHelper, IDAMHelper, S2SHelper}
+import uk.gov.hmcts.prd.util.{External_IDAMHelper, IDAMHelper, CreateUser, S2SHelper}
 
 import scala.concurrent.duration._
 
@@ -31,13 +31,13 @@ class PRDPTSimulation extends Simulation{
     .exec(
     IDAMHelper.getIdamTokenLatest,
     S2SHelper.S2SAuthToken,
-      Internal_CreateUser.createUser,
+      CreateUser.createUser,
       Internal_CreateOrganisation.createOrganisation,
       Internal_DeleteOrganisation.DeleteOrganisation,
       Internal_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
     Internal_GETOrganisationByID.GETOrganisationByID,
-      Internal_CreateUser.createUser2,
+      CreateUser.createUser,
       Internal_AddInternalUserToOrg.AddInternalUserToOrg,
       Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
     Internal_GETAllOrganisation.GETAllOrganisation,
@@ -49,11 +49,12 @@ class PRDPTSimulation extends Simulation{
     Internal_UpdateUserStatus.UpdateInternalUserStatus,
     Internal_EditUserRole.EditInternalUserRole,
 
-    External_CreateOrganisation.createOrganisation,
+    CreateUser.createUser,
+      External_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
-      //Internal_GETOrganisationByID.GETOrganisationByID,
-      //External_IDAMHelper.getIdamTokenLatest,
+      External_IDAMHelper.getIdamTokenLatest,
     External_GETOrganisation.GETOrganisation,
+      CreateUser.createUser,
     External_AddInternalUserToOrg.AddInternalUserToOrg,
     External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
     External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
@@ -61,7 +62,7 @@ class PRDPTSimulation extends Simulation{
     External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
     External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
     External_UpdateUserStatus.UpdateInternalUserStatus,
-      External_EditUserRole.EditInternalUserRole,
+      External_EditUserRole.EditInternalUserRole
   )
     .pause(IntPaceMin seconds, IntPaceMax seconds)
 

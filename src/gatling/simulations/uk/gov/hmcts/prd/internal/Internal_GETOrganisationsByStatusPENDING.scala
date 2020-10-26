@@ -16,7 +16,7 @@ object Internal_GETOrganisationsByStatusPENDING {
 
   val GetPendingOrgMax = config.getString("internal.getPendingOrgMax").toInt
 
-  val GETOrganisationsByStatusPENDING = exec(http("RD06_Internal_GetOrganizationsByStatusPENDING")
+  val GETOrganisationsByStatusPENDING = exec(http("RD10_Internal_GetOrganizationsByStatusPENDING")
     .get("/refdata/internal/v1/organisations?status=PENDING")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")
