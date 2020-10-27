@@ -6,7 +6,8 @@ import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.external
 import uk.gov.hmcts.prd.external._
 import uk.gov.hmcts.prd.internal._
-import uk.gov.hmcts.prd.util.{External_IDAMHelper, IDAMHelper, CreateUser, S2SHelper}
+import uk.gov.hmcts.prd.util.Environment._
+import uk.gov.hmcts.prd.util.{CreateUser, IDAMHelper, S2SHelper}
 
 import scala.concurrent.duration._
 
@@ -24,11 +25,12 @@ class PRDPTSimulation extends Simulation{
   val Legacy_strategic_SCNPaceMax = config.getString("internal.Legacy_strategic_SCN_PaceMax").toInt
 
   val httpProtocol = http
-    .baseUrl(config.getString("baseUrl"))
+    .baseUrl(BaseUrl)
     .proxy(Proxy("proxyout.reform.hmcts.net", 8080))
 
   val Scn = scenario("Professional Reference Data")
     .exec(
+      IDAMHelper.environment,
     IDAMHelper.getIdamTokenLatest,
     S2SHelper.S2SAuthToken,
       CreateUser.createUser,
@@ -46,13 +48,13 @@ class PRDPTSimulation extends Simulation{
     Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
     Internal_GETPbas.GETPbas,
     Internal_EditPbas.EditPbas,
-    Internal_UpdateUserStatus.UpdateInternalUserStatus,
     Internal_EditUserRole.EditInternalUserRole,
+      Internal_UpdateUserStatus.UpdateInternalUserStatus,
 
-    CreateUser.createUser,
+      CreateUser.createUser,
       External_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
-      External_IDAMHelper.getIdamTokenLatest,
+      IDAMHelper.getIdamTokenLatest2,
     External_GETOrganisation.GETOrganisation,
       CreateUser.createUser,
     External_AddInternalUserToOrg.AddInternalUserToOrg,
@@ -61,9 +63,9 @@ class PRDPTSimulation extends Simulation{
     External_GETPbas.GETPbas,
     External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
     External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
-    External_UpdateUserStatus.UpdateInternalUserStatus,
-      External_EditUserRole.EditInternalUserRole
-  )
+      External_EditUserRole.EditInternalUserRole,
+      External_UpdateUserStatus.UpdateInternalUserStatus,
+    )
     .pause(IntPaceMin seconds, IntPaceMax seconds)
 
   setUp(

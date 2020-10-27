@@ -3,9 +3,9 @@ package uk.gov.hmcts.prd.util
 import com.warrenstrange.googleauth.GoogleAuthenticator
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
+import uk.gov.hmcts.prd.util.Environment._
 
 object  S2SHelper {
-  val thinktime = 5
 
   /*val getOTP =
    */
@@ -21,7 +21,7 @@ object  S2SHelper {
   val S2SAuthToken =
 
     exec(http("Token_020_GetServiceToken")
-      .post(Env.getS2sUrl+"/lease")
+      .post(S2SUrl + "/lease")
       .header("Content-Type", "application/json")
       .body(StringBody(
         s"""{
@@ -30,7 +30,7 @@ object  S2SHelper {
       )).asJson
       .check(bodyString.saveAs("s2sToken"))
       .check(bodyString.saveAs("responseBody")))
-    .pause(10)
+    .pause(thinkTime)
       /*.exec( session => {
         println("the code of id is "+session("s2sToken").as[String])
         session

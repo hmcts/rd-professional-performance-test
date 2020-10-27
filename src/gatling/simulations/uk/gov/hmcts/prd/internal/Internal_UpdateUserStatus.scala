@@ -23,7 +23,7 @@ object Internal_UpdateUserStatus {
 
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
-  val UpdateUserStatusString = "{ \"idamStatus\" : \"ACTIVE\"}"
+  val UpdateUserStatusString = "{ \"idamStatus\" : \"SUSPENDED\"}"
 
   val EditUsrStatusMin = config.getString("internal.editUsrStatusMin").toInt
 

@@ -3,7 +3,11 @@ package uk.gov.hmcts.prd.util
 object Environment {
 
  val environment: String = System.getProperty("env")
+ var env = "perftest"
   val idamURL = "https://idam-web-public.perftest.platform.hmcts.net"
+ val IDAMUrl = "https://idam-api." + env + ".platform.hmcts.net"
+ val S2SUrl = "http://rpe-service-auth-provider-" + env + ".service.core-compute-" + env + ".internal/testing-support"
+ val BaseUrl = "http://rd-professional-api-" + env + ".service.core-compute-" + env + ".internal"
   val baseURL = "https://paybubble.perftest.platform.hmcts.net"
  val bulkScanURL="http://ccpay-bulkscanning-api-perftest.service.core-compute-perftest.internal"
  val paymentAPIURL="http://payment-api-perftest.service.core-compute-perftest.internal"
