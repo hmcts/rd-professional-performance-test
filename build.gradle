@@ -19,10 +19,6 @@ repositories {
     jcenter()
 }
 
-
-
-
-
 jar {
     manifest {
         attributes 'Main-Class': 'io.gatling.app.Gatling'
