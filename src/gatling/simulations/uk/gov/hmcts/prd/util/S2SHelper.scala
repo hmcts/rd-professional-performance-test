@@ -10,7 +10,7 @@ object  S2SHelper {
   val getOTP =
   exec(
     session => {
-      val otp: String = String.valueOf(new GoogleAuthenticator().getTotpPassword(Env.getS2sSecret))
+      val otp: String = String.valueOf(new GoogleAuthenticator().getTotpPassword(S2S_Secret))
       session.set("OTP", otp)
     })
 
@@ -22,7 +22,7 @@ object  S2SHelper {
       .header("Content-Type", "application/json")
       .body(StringBody(
         s"""{
-       "microservice": "${Env.getS2sMicroservice}"
+       "microservice": "${S2S_ServiceName}"
         }"""
       )).asJson
       .check(bodyString.saveAs("s2sToken"))
