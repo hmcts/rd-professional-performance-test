@@ -3,7 +3,7 @@ package uk.gov.hmcts.prd.util
 object Environment {
 
  val environment: String = System.getProperty("env")
- var env = "perftest"
+ var env = "aat"
   val idamURL = "https://idam-web-public.perftest.platform.hmcts.net"
  val IDAMUrl = "https://idam-api." + env + ".platform.hmcts.net"
  val S2SUrl = "http://rpe-service-auth-provider-" + env + ".service.core-compute-" + env + ".internal/testing-support"

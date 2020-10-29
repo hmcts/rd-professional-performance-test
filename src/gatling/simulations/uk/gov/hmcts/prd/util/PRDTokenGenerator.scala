@@ -34,9 +34,6 @@ package object PRDTokenGenerator {
     //val password = authenticator.getTotpPassword(config.getString("aat_service.pass"))
     val password = config.getString("aat_service.pass")
 
-    //val password = authenticator.getTotpPassword(config.getString("aat_service.pass"))
-    val password = config.getString("aat_service.pass")
-
     //System.out.println("password::" + password);
 
     val jsonPayload: String = """{"microservice":"""" + config.getString("aat_service.name") + """","oneTimePassword":"""" + password + """"}"""
