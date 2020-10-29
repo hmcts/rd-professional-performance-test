@@ -12,13 +12,11 @@ object  S2SHelper {
     session => {
       val otp: String = String.valueOf(new GoogleAuthenticator().getTotpPassword(Env.getS2sSecret))
       session.set("OTP", otp)
-
     })
 
   val otpp="${OTP}"
 
   val S2SAuthToken =
-
     exec(http("Token_020_GetServiceToken")
       .post(S2SUrl + "/lease")
       .header("Content-Type", "application/json")
@@ -34,9 +32,5 @@ object  S2SHelper {
         println("the code of id is "+session("s2sToken").as[String])
         session
       })*/
-
-
-
-
 
 }
