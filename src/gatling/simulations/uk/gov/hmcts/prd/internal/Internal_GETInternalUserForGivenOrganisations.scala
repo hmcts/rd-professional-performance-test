@@ -11,9 +11,7 @@ object Internal_GETInternalUserForGivenOrganisations {
   val config: Config = ConfigFactory.load()
 
   val s2sToken = PRDTokenGenerator.generateS2SToken()
-
   val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
   val GetIntUsrByOrgMin = config.getString("internal.getIntUsrByOrgMin").toInt

@@ -14,7 +14,6 @@ import scala.concurrent.duration._
 class PRDPTSimulation extends Simulation{
 
   val config: Config = ConfigFactory.load()
-
   val IntPaceMin = config.getString("internal.intPaceMin").toInt
   val IntPaceMax = config.getString("internal.intPaceMax").toInt
   val ExtPaceMin = config.getString("external.intPaceMin").toInt
@@ -71,7 +70,4 @@ class PRDPTSimulation extends Simulation{
   setUp(
     Scn.inject(atOnceUsers(1))
   ).protocols(httpProtocol)
-   // .assertions(forAll.responseTime.percentile3.lte(500))
-   // .assertions(global.failedRequests.percent.lte(5))
-
 }

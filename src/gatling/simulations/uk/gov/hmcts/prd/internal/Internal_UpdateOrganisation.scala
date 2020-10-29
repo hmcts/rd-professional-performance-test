@@ -58,6 +58,7 @@ object Internal_UpdateOrganisation {
       .body(StringBody(updateOrgString))
       .header("Content-Type", "application/json")
       .check(status in (200,201)))
+
     .pause(UpdateOrgMin seconds, UpdateOrgMax seconds)
 
 }
