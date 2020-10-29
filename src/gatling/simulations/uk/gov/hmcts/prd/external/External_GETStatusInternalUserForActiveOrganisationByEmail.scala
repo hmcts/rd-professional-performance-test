@@ -4,7 +4,6 @@ import com.typesafe.config.{Config, ConfigFactory}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
-
 import scala.concurrent.duration._
 
 object External_GETStatusInternalUserForActiveOrganisationByEmail {

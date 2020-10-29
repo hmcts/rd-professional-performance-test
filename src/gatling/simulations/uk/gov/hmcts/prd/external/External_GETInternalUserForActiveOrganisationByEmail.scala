@@ -5,6 +5,7 @@ import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
 import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
+
 object External_GETInternalUserForActiveOrganisationByEmail {
 
   val config: Config = ConfigFactory.load()

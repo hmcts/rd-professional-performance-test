@@ -7,8 +7,7 @@ import uk.gov.hmcts.prd.util.Environment._
 
 object  S2SHelper {
 
-  /*val getOTP =
-   */
+  val getOTP =
   exec(
     session => {
       val otp: String = String.valueOf(new GoogleAuthenticator().getTotpPassword(Env.getS2sSecret))

@@ -4,7 +4,6 @@ import com.typesafe.config.ConfigFactory
 import com.warrenstrange.googleauth.GoogleAuthenticator
 import io.restassured.RestAssured
 import io.restassured.config.EncoderConfig
-
 import io.restassured.http.ContentType
 import io.restassured.parsing.Parser;
 import java.util.Map;
@@ -24,7 +23,6 @@ package object PRDTokenGenerator {
   val TOKEN_LEASE_URL = config.getString("s2sUrl")
   val USERTOKEN_SidAM_URL = config.getString("idam_api_url")
   val clientsecret = config.getString("auth.clientSecret")
-
   val RD_URL = config.getString("baseUrl")
 
   def generateS2SToken() : String = {
@@ -54,9 +52,6 @@ package object PRDTokenGenerator {
     token
 
   }
-
-
-
 
   //=======================================
 

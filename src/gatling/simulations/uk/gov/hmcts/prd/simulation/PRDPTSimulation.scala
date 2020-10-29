@@ -1,13 +1,12 @@
 package uk.gov.hmcts.prd.simulation
 
 import com.typesafe.config.{Config, ConfigFactory}
-import io.gatling.core.Predef.{exec, _}
+import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import uk.gov.hmcts.prd.external
 import uk.gov.hmcts.prd.external._
 import uk.gov.hmcts.prd.internal._
 import uk.gov.hmcts.prd.util.Environment._
-import uk.gov.hmcts.prd.util.{CreateUser, IDAMHelper, S2SHelper}
+import uk.gov.hmcts.prd.util._
 
 import scala.concurrent.duration._
 

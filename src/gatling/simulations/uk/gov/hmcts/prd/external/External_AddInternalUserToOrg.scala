@@ -1,20 +1,20 @@
 package uk.gov.hmcts.prd.external
+
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
-
 import scala.util.Random
 import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
 
 object External_AddInternalUserToOrg {
+
   private val rng: Random = new Random()
-
   private def internalUser_firstName(): String = rng.alphanumeric.take(20).mkString
-
   private def internalUser_lastName(): String = rng.alphanumeric.take(20).mkString
 
   val config: Config = ConfigFactory.load()
+
   val s2sToken = PRDTokenGenerator.generateS2SToken()
 
   val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenExternal()
@@ -39,5 +39,3 @@ object External_AddInternalUserToOrg {
     .pause(AddUsrMin seconds, AddUsrMax seconds)
   }
 }
-
-

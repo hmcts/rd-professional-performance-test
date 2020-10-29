@@ -4,10 +4,11 @@ import com.typesafe.config.{Config, ConfigFactory}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
-
 import scala.concurrent.duration._
 import scala.util.Random
+
 object External_CreateOrganisation {
+
   val s2sToken = PRDTokenGenerator.generateS2SToken()
 
   private val rng: Random = new Random()
