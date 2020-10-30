@@ -19,10 +19,10 @@ object Internal_GETInternalUserForGivenOrganisations {
 
   val GETInternalUserForGivenOrganisations = feed(OrgIdData)
 
-    .exec(http("RD05_Internal_GetInternalUserForGivenOrganisation")
-      .get("/refdata/internal/v1/organisations/${PRD_Org_ID}/users?showdeleted=false&rolesRequired=false")
-      .header("ServiceAuthorization", s2sToken)
-      .header("Authorization", IdAMToken)
+    .exec(http("RD06_Internal_GetInternalUserForGivenOrganisation")
+      .get("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users?showdeleted=false&rolesRequired=false")
+      .header("Authorization", "Bearer ${accessToken}")
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .header("Content-Type", "application/json")
       .check(status is 200))
     .pause(GetIntUsrByOrgMin seconds, GetIntUsrByOrgMax seconds)

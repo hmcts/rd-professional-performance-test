@@ -5,7 +5,8 @@ import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
 import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
-object External_GETOrganisationByID {
+
+object External_GETOrganisation {
 
   val config: Config = ConfigFactory.load()
 
@@ -17,10 +18,10 @@ object External_GETOrganisationByID {
 
   val GetOrgByOrgIdMax = config.getString("external.getOrgByOrgIdMax").toInt
 
-  val GETOrganisationByID = exec(http("RD12_External_GetOrganizationsByID")
+  val GETOrganisation = exec(http("RD16_External_GetOrganizations")
     .get("/refdata/external/v1/organisations")
-    .header("ServiceAuthorization", s2sToken)
-    .header("Authorization", IdAMToken)
+    .header("Authorization", "Bearer ${accessToken}")
+    .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")
     .check(status is 200))
     .pause(GetOrgByOrgIdMin seconds, GetOrgByOrgIdMax seconds)

@@ -1,10 +1,12 @@
-package uk.gov.hmcts.prd.internal
+package uk.gov.hmcts.prd.external
+
+import com.typesafe.config.{Config, ConfigFactory}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
-import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
-object Internal_GETOrganisationsByStatusACTIVE {
+
+object External_GETOrganisationsByStatusACTIVE {
 
   val config: Config = ConfigFactory.load()
 
@@ -16,8 +18,8 @@ object Internal_GETOrganisationsByStatusACTIVE {
 
   val GetActiveOrgMax = config.getString("internal.getActiveOrgMax").toInt
 
-  val GETOrganisationsByStatusACTIVE = exec(http("RD09_Internal_GetOrganizationsByStatusACTIVE")
-    .get("/refdata/internal/v1/organisations?status=ACTIVE")
+  val GETOrganisationsByStatusACTIVE = exec(http("RD21_External_GetOrganizationsByStatusACTIVE")
+    .get("/refdata/external/v1/organisations/status/ACTIVE")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")

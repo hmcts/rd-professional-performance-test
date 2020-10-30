@@ -6,26 +6,34 @@ import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
 
 import scala.concurrent.duration._
+import scala.util.Random
 
 object Internal_EditPbas {
 
   val config: Config = ConfigFactory.load()
+  private val rng: Random = new Random()
+  private def paymentAccount1(): String = rng.alphanumeric.take(7).mkString
+  private def paymentAccount2(): String = rng.alphanumeric.take(7).mkString
 
   val s2sToken = PRDTokenGenerator.generateS2SToken()
 
   val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
 
-  val editPbasString = "{ \"paymentAccounts\": [ \"PBA0000004\",\"PBA0000005\" ]}"
+  val editPbasString = "{ \"paymentAccounts\": [ \"PBA${PaymentAccount1}\",\"PBA${PaymentAccount2}\" ]}"
 
+  val createAccounts = exec(_.setAll(
+    ("PaymentAccount1",paymentAccount1()),
+    ("PaymentAccount2",paymentAccount2())
+  ))
 
   val EditPbasMin = config.getString("internal.editPbasMin").toInt
 
   val EditPbasMax = config.getString("internal.editPbasMax").toInt
 
-  val EditPbas = exec(http("R3_Internal_EditPBA")
-    .put("/refdata/internal/v1/organisations/013FFP6/pbas")
-    .header("ServiceAuthorization", s2sToken)
-    .header("Authorization", IdAMToken)
+  val EditPbas = exec(http("RD12_Internal_EditPBA")
+    .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/pbas")
+    .header("Authorization", "Bearer ${accessToken}")
+    .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")
     .body(StringBody(editPbasString))
     .check(status is 200))

@@ -3,8 +3,11 @@ package uk.gov.hmcts.prd.simulation
 import com.typesafe.config.{Config, ConfigFactory}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import uk.gov.hmcts.prd.internal._
 import uk.gov.hmcts.prd.external._
+import uk.gov.hmcts.prd.internal._
+import uk.gov.hmcts.prd.util.Environment._
+import uk.gov.hmcts.prd.util._
+
 import scala.concurrent.duration._
 
 class PRDPTSimulation extends Simulation{
@@ -20,30 +23,50 @@ class PRDPTSimulation extends Simulation{
   val Legacy_strategic_SCNPaceMax = config.getString("internal.Legacy_strategic_SCN_PaceMax").toInt
 
   val httpProtocol = http
-    .baseUrl(config.getString("baseUrl"))
+    .baseUrl(BaseUrl)
     .proxy(Proxy("proxyout.reform.hmcts.net", 8080))
 
-//  val Int_Scn = scenario("Professional Reference Data - Internal")
-//                   .exec(
-//                   Internal_GETOrganisationByID.GETOrganisationByID,
-//                   Internal_AddInternalUserToOrg.AddInternalUserToOrg,
-//                   Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-//                 )
-//                   .pause(IntPaceMin seconds, IntPaceMax seconds)
-
-  val Int_Scn = scenario("Professional Reference Data - Internal")
+  val Scn = scenario("Professional Reference Data")
     .exec(
+      IDAMHelper.environment,
+    IDAMHelper.getIdamTokenLatest,
+    S2SHelper.S2SAuthToken,
+      CreateUser.createUser,
+      Internal_CreateOrganisation.createOrganisation,
+      Internal_DeleteOrganisation.DeleteOrganisation,
       Internal_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
-      Internal_GETOrganisationByID.GETOrganisationByID,
+    Internal_GETOrganisationByID.GETOrganisationByID,
+      CreateUser.createUser,
       Internal_AddInternalUserToOrg.AddInternalUserToOrg,
       Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-      DeleteOrganisation.DeleteOrganisation
+    Internal_GETAllOrganisation.GETAllOrganisation,
+    Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+    Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+    Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
+    Internal_GETPbas.GETPbas,
+    Internal_EditPbas.EditPbas,
+    Internal_EditUserRole.EditInternalUserRole,
+      Internal_UpdateUserStatus.UpdateInternalUserStatus,
+
+      CreateUser.createUser,
+      External_CreateOrganisation.createOrganisation,
+      Internal_UpdateOrganisation.updateOrganisation,
+      IDAMHelper.getIdamTokenLatest2,
+    External_GETOrganisation.GETOrganisation,
+      CreateUser.createUser,
+    External_AddInternalUserToOrg.AddInternalUserToOrg,
+    External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+    External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+    External_GETPbas.GETPbas,
+    External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+    External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
+      External_EditUserRole.EditInternalUserRole,
+      External_UpdateUserStatus.UpdateInternalUserStatus,
     )
     .pause(IntPaceMin seconds, IntPaceMax seconds)
 
   setUp(
-    Int_Scn.inject(atOnceUsers(1)),
-  
+    Scn.inject(atOnceUsers(1))
   ).protocols(httpProtocol)
 }

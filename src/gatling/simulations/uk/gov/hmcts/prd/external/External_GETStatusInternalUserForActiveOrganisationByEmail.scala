@@ -1,12 +1,12 @@
 package uk.gov.hmcts.prd.external
 
+import com.typesafe.config.{Config, ConfigFactory}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
-import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
 
-object External_GETInternalUserForActiveOrganisationByEmail {
+object External_GETStatusInternalUserForActiveOrganisationByEmail {
 
   val config: Config = ConfigFactory.load()
 
@@ -18,8 +18,8 @@ object External_GETInternalUserForActiveOrganisationByEmail {
 
   val GetIntUsrByOrgEmailMax = config.getString("external.getIntUsrByOrgEmailMax").toInt
 
-  val GETInternalUserForActiveOrganisationByEmail = exec(http("RD19_External_GetInternalUserForActiveOrganisationByEmailAddress")
-    .get("/refdata/external/v1/organisations/users?email=${Email}")
+  val GETStatusInternalUserForActiveOrganisationByEmail = exec(http("RD22_External_GetStatusInternalUserForActiveOrganisationByEmailAddress")
+    .get("/refdata/external/v1/organisations/users/accountId?email=${Email}")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")

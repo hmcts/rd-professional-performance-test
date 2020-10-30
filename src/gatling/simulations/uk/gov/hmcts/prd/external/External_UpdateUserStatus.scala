@@ -1,4 +1,4 @@
-package uk.gov.hmcts.prd.internal
+package uk.gov.hmcts.prd.external
 
 import com.typesafe.config.{Config, ConfigFactory}
 import io.gatling.core.Predef._
@@ -6,7 +6,7 @@ import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
 import scala.concurrent.duration._
 
-object Internal_UpdateUserStatus {
+object External_UpdateUserStatus {
 
   val config: Config = ConfigFactory.load()
 
@@ -26,8 +26,8 @@ object Internal_UpdateUserStatus {
 
       feed(OrgIdData)
 
-      .exec(http("RD13_Internal_UpdateUserStatus")
-          .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users/${userId}?origin=EXUI")
+      .exec(http("RD23_External_UpdateUserStatus")
+          .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .body(StringBody(UpdateUserStatusString))

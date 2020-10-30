@@ -27,7 +27,7 @@ package object PRDTokenGenerator {
 
   def generateS2SToken() : String = {
 
-     val authenticator: GoogleAuthenticator = new GoogleAuthenticator()
+    val authenticator: GoogleAuthenticator = new GoogleAuthenticator()
 
     //val password = authenticator.getTotpPassword(config.getString("aat_service.pass"))
     val password = config.getString("aat_service.pass")
@@ -76,7 +76,6 @@ package object PRDTokenGenerator {
        .formParam("scope", "openid profile roles create-user manage-user search-user")
       .request()
 
-
     System.out.println("clientSecret::" + clientsecret);
 
     val response = authCodeRequest.post(USERTOKEN_SidAM_URL + ":443/o/token")
@@ -109,7 +108,6 @@ package object PRDTokenGenerator {
       .formParam("grant_type", "password")
       .formParam("scope", "openid profile roles create-user manage-user search-user")
       .request();
-
 
     val response = authCodeRequest.post(USERTOKEN_SidAM_URL + ":443/o/token")
     val statusCode = response.getStatusCode()

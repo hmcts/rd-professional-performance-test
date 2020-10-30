@@ -18,10 +18,10 @@ object Internal_GETInternalUserForActiveOrganisationByEmail {
   val GetIntUsrByEmailMin = config.getString("internal.getIntUsrByEmailMin").toInt
   val GetIntUsrByEmailMax = config.getString("internal.getIntUsrByEmailMax").toInt
 
-  val GETInternalUserForActiveOrganisationByEmail = exec(http("RD10_Internal_GetInternalUserForActiveOrganisationByEmailAddress")
-    .get("/refdata/internal/v1/organisations/73O40OH/users?email=" + "tpabsya3pt3o8w0qtg@email.co.uk" + "")
-    .header("ServiceAuthorization", s2sToken)
-    .header("Authorization", IdAMToken)
+  val GETInternalUserForActiveOrganisationByEmail = exec(http("RD08_Internal_GetInternalUserForActiveOrganisationByEmailAddress")
+    .get("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users?email=${Email}")
+    .header("Authorization", "Bearer ${accessToken}")
+    .header("ServiceAuthorization", "Bearer ${s2sToken}")
     .header("Content-Type", "application/json")
     .check(status is 200))
     .pause(GetIntUsrByEmailMin seconds, GetIntUsrByEmailMax seconds)
