@@ -76,7 +76,7 @@ package object PRDTokenGenerator {
        .formParam("scope", "openid profile roles create-user manage-user search-user")
       .request()
 
-    System.out.println("clientSecret::" + clientsecret);
+    //System.out.println("clientSecret::" + clientsecret);
 
     val response = authCodeRequest.post(USERTOKEN_SidAM_URL + ":443/o/token")
     val statusCode = response.getStatusCode()
