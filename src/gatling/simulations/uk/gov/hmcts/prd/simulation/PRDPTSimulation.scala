@@ -24,43 +24,43 @@ class PRDPTSimulation extends Simulation{
 
   val httpProtocol = http
     .baseUrl(BaseUrl)
-    .proxy(Proxy("proxyout.reform.hmcts.net", 8080))
+    // .proxy(Proxy("proxyout.reform.hmcts.net", 8080))
 
   val Scn = scenario("Professional Reference Data")
     .exec(
       IDAMHelper.environment,
-    IDAMHelper.getIdamTokenLatest,
-    S2SHelper.S2SAuthToken,
+      IDAMHelper.getIdamTokenLatest,
+      S2SHelper.S2SAuthToken,
       CreateUser.createUser,
       Internal_CreateOrganisation.createOrganisation,
       Internal_DeleteOrganisation.DeleteOrganisation,
       Internal_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
-    Internal_GETOrganisationByID.GETOrganisationByID,
+      Internal_GETOrganisationByID.GETOrganisationByID,
       CreateUser.createUser,
       Internal_AddInternalUserToOrg.AddInternalUserToOrg,
       Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-    Internal_GETAllOrganisation.GETAllOrganisation,
-    Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
-    Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
-    Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
-    Internal_GETPbas.GETPbas,
-    Internal_EditPbas.EditPbas,
-    Internal_EditUserRole.EditInternalUserRole,
+      Internal_GETAllOrganisation.GETAllOrganisation,
+      Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+      Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+      Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
+      Internal_GETPbas.GETPbas,
+      Internal_EditPbas.EditPbas,
+      Internal_EditUserRole.EditInternalUserRole,
       Internal_UpdateUserStatus.UpdateInternalUserStatus,
 
       CreateUser.createUser,
       External_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
       IDAMHelper.getIdamTokenLatest2,
-    External_GETOrganisation.GETOrganisation,
+      External_GETOrganisation.GETOrganisation,
       CreateUser.createUser,
-    External_AddInternalUserToOrg.AddInternalUserToOrg,
-    External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-    External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
-    External_GETPbas.GETPbas,
-    External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
-    External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
+      External_AddInternalUserToOrg.AddInternalUserToOrg,
+      External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+      External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+      External_GETPbas.GETPbas,
+      External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+      External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
       External_EditUserRole.EditInternalUserRole,
       External_UpdateUserStatus.UpdateInternalUserStatus,
     )
@@ -68,5 +68,7 @@ class PRDPTSimulation extends Simulation{
 
   setUp(
     Scn.inject(atOnceUsers(1))
-  ).protocols(httpProtocol)
+  )
+  .protocols(httpProtocol)
+  .assertions(global.successfulRequests.percent.is(100))
 }
