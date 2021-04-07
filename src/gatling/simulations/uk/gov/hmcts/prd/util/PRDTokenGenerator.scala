@@ -39,7 +39,7 @@ package object PRDTokenGenerator {
     val s2sRequest = RestAssured.given
                     .contentType("application/json")
                     .accept("application/json")
-                    .proxy("proxyout.reform.hmcts.net", 8080)
+                    //.proxy("proxyout.reform.hmcts.net", 8080)
                     .body(jsonPayload)
                     .post(TOKEN_LEASE_URL +"/testing-support/lease")
                     .then()
@@ -66,7 +66,7 @@ package object PRDTokenGenerator {
         .encodeContentTypeAs("x-www-form-urlencoded",
           ContentType.URLENC)))
       .contentType("application/x-www-form-urlencoded; charset=UTF-8")
-      .proxy("proxyout.reform.hmcts.net", 8080)
+      //.proxy("proxyout.reform.hmcts.net", 8080)
       .formParam("username", userName)
       .formParam("password", "Testing1234")
       .formParam("client_id", "rd-professional-api")
@@ -99,7 +99,7 @@ package object PRDTokenGenerator {
         .encodeContentTypeAs("x-www-form-urlencoded",
           ContentType.URLENC)))
       .contentType("application/x-www-form-urlencoded; charset=UTF-8")
-      .proxy("proxyout.reform.hmcts.net", 8080)
+      //.proxy("proxyout.reform.hmcts.net", 8080)
       .formParam("username", userName)
       .formParam("password", "Password12")
       .formParam("client_id", "rd-professional-api")
