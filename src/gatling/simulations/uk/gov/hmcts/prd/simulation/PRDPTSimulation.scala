@@ -62,7 +62,7 @@ class PRDPTSimulation extends Simulation{
       External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
       External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
       External_EditUserRole.EditInternalUserRole,
-      External_UpdateUserStatus.UpdateInternalUserStatus,
+      External_UpdateUserStatus.UpdateInternalUserStatus
     )
     .pause(IntPaceMin seconds, IntPaceMax seconds)
 
