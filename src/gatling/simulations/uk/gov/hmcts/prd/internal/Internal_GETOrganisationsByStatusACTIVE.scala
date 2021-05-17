@@ -8,10 +8,6 @@ object Internal_GETOrganisationsByStatusACTIVE {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val GetActiveOrgMin = config.getString("internal.getActiveOrgMin").toInt
 
   val GetActiveOrgMax = config.getString("internal.getActiveOrgMax").toInt

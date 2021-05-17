@@ -10,10 +10,6 @@ object External_SearchPbas {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenExternal()
-
   val GetSearchPbasMin = config.getString("external.getSearchPbasMin").toInt
 
   val GetSearchPbasMax = config.getString("external.getSearchPbasMax").toInt
@@ -21,8 +17,8 @@ object External_SearchPbas {
   val SearchPbas = repeat(1){
     exec(http("RD17_External_SearchPBAsByEmailAddress")
       .get("/search/pba/kapil.jain@hmcts.net")
-      .header("ServiceAuthorization", s2sToken)
-      .header("Authorization", IdAMToken)
+      .header("Authorization", "Bearer ${accessToken}")
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .header("Content-Type", "application/json")
       .check(status is 200))
       .pause(GetSearchPbasMin seconds, GetSearchPbasMax seconds)

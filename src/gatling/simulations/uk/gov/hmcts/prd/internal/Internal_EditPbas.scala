@@ -15,10 +15,6 @@ object Internal_EditPbas {
   private def paymentAccount1(): String = rng.alphanumeric.take(7).mkString
   private def paymentAccount2(): String = rng.alphanumeric.take(7).mkString
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val editPbasString = "{ \"paymentAccounts\": [ \"PBA${PaymentAccount1}\",\"PBA${PaymentAccount2}\" ]}"
 
   val createAccounts = exec(_.setAll(

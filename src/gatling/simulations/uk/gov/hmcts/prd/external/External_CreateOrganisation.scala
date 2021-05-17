@@ -9,8 +9,6 @@ import scala.util.Random
 
 object External_CreateOrganisation {
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
   private val rng: Random = new Random()
   private def sRAId(): String = rng.alphanumeric.take(15).mkString
   private def companyNumber(): String = rng.alphanumeric.take(8).mkString

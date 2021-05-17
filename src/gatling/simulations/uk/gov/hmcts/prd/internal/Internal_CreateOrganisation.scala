@@ -9,8 +9,6 @@ import scala.concurrent.duration._
 
 object Internal_CreateOrganisation {
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
   val config: Config = ConfigFactory.load()
   private val rng: Random = new Random()
   private def sRAId(): String = rng.alphanumeric.take(15).mkString

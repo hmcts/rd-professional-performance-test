@@ -10,10 +10,6 @@ object External_GETPbas {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenExternal()
-
   val GetPbasMin = config.getString("external.getPbasMin").toInt
 
   val GetPbasMax = config.getString("external.getPbasMax").toInt

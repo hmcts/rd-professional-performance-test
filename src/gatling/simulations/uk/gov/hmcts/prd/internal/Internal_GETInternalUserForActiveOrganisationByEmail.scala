@@ -9,10 +9,6 @@ object Internal_GETInternalUserForActiveOrganisationByEmail {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
   val GetIntUsrByEmailMin = config.getString("internal.getIntUsrByEmailMin").toInt

@@ -10,10 +10,6 @@ object Internal_EditUserRole {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
   val editInternalUserRoleString = "{\n \"rolesAdd\": [ { \"name\": \"pui-case-manager\" }, { \"name\": \"caseworker\" } ], \"rolesDelete\": [ { \"name\": \"pui-case-manager\" }, { \"name\": \"caseworker\" } ]}\n"

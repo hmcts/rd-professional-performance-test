@@ -15,10 +15,6 @@ object External_AddInternalUserToOrg {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenExternal()
-
   val AddUsrMin = config.getString("external.addUsrMin").toInt
 
   val AddUsrMax = config.getString("external.addUsrMax").toInt
