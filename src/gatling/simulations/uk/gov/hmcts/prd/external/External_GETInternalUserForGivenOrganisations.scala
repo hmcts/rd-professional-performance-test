@@ -10,10 +10,6 @@ object External_GETInternalUserForGivenOrganisations {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenExternal()
-
   val GetIntUsrByOrgIdMin = config.getString("external.getIntUsrByOrgIdMin").toInt
 
   val GetIntUsrByOrgIdMax = config.getString("external.getIntUsrByOrgIdMax").toInt

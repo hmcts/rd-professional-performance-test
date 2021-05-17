@@ -8,10 +8,6 @@ object Internal_GETPbas {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val GetPbasMin = config.getString("internal.getPbasMin").toInt
 
   val GetPbasMax = config.getString("internal.getPbasMax").toInt

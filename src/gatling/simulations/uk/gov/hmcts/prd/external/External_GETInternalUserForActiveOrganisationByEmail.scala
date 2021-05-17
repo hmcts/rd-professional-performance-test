@@ -10,10 +10,6 @@ object External_GETInternalUserForActiveOrganisationByEmail {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenExternal()
-
   val GetIntUsrByOrgEmailMin = config.getString("external.getIntUsrByOrgEmailMin").toInt
 
   val GetIntUsrByOrgEmailMax = config.getString("external.getIntUsrByOrgEmailMax").toInt

@@ -9,10 +9,6 @@ object Internal_GETOrganisationByID {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
   val GetOrgByOrgIdMin = config.getString("internal.getOrgByOrgIdMin").toInt
