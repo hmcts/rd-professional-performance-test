@@ -20,15 +20,16 @@ object External_UpdateUserStatus {
 
   val UpdateInternalUserStatus =  repeat(1){
 
-      feed(OrgIdData)
-
-      .exec(http("RD23_External_UpdateUserStatus")
+  feed(OrgIdData)
+    .tryMax(2){
+      exec(http("RD24_External_UpdateUserStatus")
           .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .body(StringBody(UpdateUserStatusString))
         .header("Content-Type", "application/json")
         .check(status is 200))
+        }
       .pause(EditUsrStatusMin seconds, EditUsrStatusMax seconds)
   }
 }

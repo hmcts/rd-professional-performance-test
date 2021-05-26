@@ -67,7 +67,7 @@ class PRDPTSimulation extends Simulation{
     .pause(IntPaceMin seconds, IntPaceMax seconds)
 
   setUp(
-    Scn.inject(atOnceUsers(1))
+    Scn.inject(rampUsers(10) during (300))
   )
   .protocols(httpProtocol)
   .assertions(global.successfulRequests.percent.is(100))
