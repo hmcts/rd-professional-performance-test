@@ -21,15 +21,13 @@ object External_EditUserRole {
   val EditInternalUserRole =  repeat(1){
 
   feed(OrgIdData)
-    .tryMax(2) {
-      exec(http("RD23_External_EditUserRole")
-        .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
-        .header("Authorization", "Bearer ${accessToken}")
-        .header("ServiceAuthorization", "Bearer ${s2sToken}")
-        .body(StringBody(editInternalUserRoleString))
-        .header("Content-Type", "application/json")
-        .check(status is 200))
-    }
-      .pause(EditUsrRoleMin seconds, EditUsrRoleMax seconds)
+  .exec(http("RD23_External_EditUserRole")
+    .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
+      .header("Authorization", "Bearer ${accessToken}")
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
+      .body(StringBody(editInternalUserRoleString))
+      .header("Content-Type", "application/json")
+      .check(status is 200))
+  .pause(EditUsrRoleMin seconds, EditUsrRoleMax seconds)
   }
 }
