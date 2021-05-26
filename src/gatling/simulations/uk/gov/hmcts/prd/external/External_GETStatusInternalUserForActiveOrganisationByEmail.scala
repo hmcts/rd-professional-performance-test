@@ -15,13 +15,12 @@ object External_GETStatusInternalUserForActiveOrganisationByEmail {
   val GetIntUsrByOrgEmailMax = config.getString("external.getIntUsrByOrgEmailMax").toInt
 
   val GETStatusInternalUserForActiveOrganisationByEmail =
-  tryMax(2) {
-    exec(http("RD22_External_GetStatusInternalUserForActiveOrganisationByEmailAddress")
-      .get("/refdata/external/v1/organisations/users/accountId?email=${Email}")
+
+  exec(http("RD22_External_GetStatusInternalUserForActiveOrganisationByEmailAddress")
+    .get("/refdata/external/v1/organisations/users/accountId?email=${Email}")
       .header("Authorization", "Bearer ${accessToken}")
       .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .header("Content-Type", "application/json")
       .check(status is 200))
-  }
-    .pause(GetIntUsrByOrgEmailMin seconds, GetIntUsrByOrgEmailMax seconds)
+  .pause(GetIntUsrByOrgEmailMin seconds, GetIntUsrByOrgEmailMax seconds)
 }
