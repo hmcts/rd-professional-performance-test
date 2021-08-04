@@ -13,9 +13,10 @@ object Internal_GETPbas {
   val GetPbasMax = config.getString("internal.getPbasMax").toInt
 
   val GETPbas = exec(http("RD11_Internal_RetrievesOrganisationsPaymentAccounts")
-    .get("/refdata/internal/v1/organisations/pbas?email=${Email}")
+    .get("/refdata/internal/v1/organisations/pbas")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")
+    .header("UserEmail", "${Email}")
     .header("Content-Type", "application/json")
     .check(status is 200))
     .pause(GetPbasMin seconds, GetPbasMax seconds)
