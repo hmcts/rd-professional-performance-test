@@ -16,7 +16,7 @@ object Internal_GETPbas {
     .get("/refdata/internal/v1/organisations/pbas")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")
-    .header("email", "${Email}")
+    .header("UserEmail", "${Email}")
     .header("Content-Type", "application/json")
     .check(status is 200))
     .pause(GetPbasMin seconds, GetPbasMax seconds)
