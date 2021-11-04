@@ -14,7 +14,7 @@ object Environment {
   val S2S_Secret = ConfigFactory.load.getString("aat_service.pass")
   val S2S_ServiceName = "rd_professional_api"
 
-  val thinkTime = 1
+  val thinkTime = 7
 
   val minThinkTime = 5
   //10
