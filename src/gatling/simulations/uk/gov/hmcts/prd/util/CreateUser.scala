@@ -17,10 +17,6 @@ object CreateUser {
   private def email(): String = rng.alphanumeric.take(15).mkString + "@prdfunctestuser.com"
   private def password(): String = rng.alphanumeric.take(20).mkString
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenExternal()
-
   val userString = "{\"email\": \"${Email}\", \"forename\": \"${FirstName}\", \"password\": \"${Password}\", \"surname\": \"${LastName}\"}"
 
   val createUser = exec(_.setAll(

@@ -14,10 +14,6 @@ object Internal_AddInternalUserToOrg {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
   val addInternalUserString = "{\n \"firstName\": \"Kapil ${InternalUser_FirstName}\",\n \"lastName\": \"Jain ${InternalUser_LastName}\",\n \"email\": \"${Email}\",\n \"roles\": [\n   \"pui-user-manager\",\n   \"pui-organisation-manager\"\n ]\n,\n        \"jurisdictions\": [\n    {\n      \"id\": \"Divorce\"\n    },\n    {\n      \"id\": \"SSCS\"\n    },\n    {\n      \"id\": \"Probate\"\n    },\n    {\n      \"id\": \"Public Law\"\n    },\n    {\n      \"id\": \"Bulk Scanning\"\n    },\n    {\n      \"id\": \"Immigration & Asylum\"\n    },\n    {\n      \"id\": \"Civil Money Claims\"\n    },\n    {\n      \"id\": \"Employment\"\n    },\n    {\n      \"id\": \"Family public law and adoption\"\n    },\n    {\n      \"id\": \"Civil enforcement and possession\"\n    }\n  ]\n}"
@@ -43,6 +39,7 @@ object Internal_AddInternalUserToOrg {
         .header("Content-Type", "application/json")
         .check(status is 201)
         .check(jsonPath("$.userIdentifier").saveAs("userId")))
-      .pause(AddIntUsrMin seconds, AddIntUsrMax seconds)
+
+      .pause(Environment.thinkTime)
   }
 }

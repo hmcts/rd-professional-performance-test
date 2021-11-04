@@ -9,17 +9,11 @@ import scala.concurrent.duration._
 object Internal_GETInternalUserForGivenOrganisations {
 
   val config: Config = ConfigFactory.load()
-
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
-  val GetIntUsrByOrgMin = config.getString("internal.getIntUsrByOrgMin").toInt
-  val GetIntUsrByOrgMax = config.getString("internal.getIntUsrByOrgMax").toInt
-
-  val GETInternalUserForGivenOrganisations = feed(OrgIdData)
+  val GETInternalUserForGivenOrganisations = 
+  
+    feed(OrgIdData)
 
     .exec(http("RD06_Internal_GetInternalUserForGivenOrganisation")
       .get("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users?showdeleted=false&rolesRequired=false")
@@ -27,5 +21,6 @@ object Internal_GETInternalUserForGivenOrganisations {
       .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .header("Content-Type", "application/json")
       .check(status is 200))
-    .pause(GetIntUsrByOrgMin seconds, GetIntUsrByOrgMax seconds)
+
+    .pause(Environment.thinkTime)
 }

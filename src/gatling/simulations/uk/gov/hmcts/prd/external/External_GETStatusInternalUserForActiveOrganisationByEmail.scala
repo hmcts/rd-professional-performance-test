@@ -11,19 +11,17 @@ object External_GETStatusInternalUserForActiveOrganisationByEmail {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenExternal()
-
   val GetIntUsrByOrgEmailMin = config.getString("external.getIntUsrByOrgEmailMin").toInt
-
   val GetIntUsrByOrgEmailMax = config.getString("external.getIntUsrByOrgEmailMax").toInt
 
-  val GETStatusInternalUserForActiveOrganisationByEmail = exec(http("RD22_External_GetStatusInternalUserForActiveOrganisationByEmailAddress")
-    .get("/refdata/external/v1/organisations/users/accountId?email=${Email}")
-    .header("Authorization", "Bearer ${accessToken}")
-    .header("ServiceAuthorization", "Bearer ${s2sToken}")
-    .header("Content-Type", "application/json")
-    .check(status is 200))
-    .pause(GetIntUsrByOrgEmailMin seconds, GetIntUsrByOrgEmailMax seconds)
+  val GETStatusInternalUserForActiveOrganisationByEmail = 
+  
+    exec(http("RD22_External_GetStatusInternalUserForActiveOrganisationByEmailAddress")
+      .get("/refdata/external/v1/organisations/users/accountId?email=${Email}")
+      .header("Authorization", "Bearer ${accessToken}")
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
+      .header("Content-Type", "application/json")
+      .check(status is 200))
+
+    .pause(Environment.thinkTime)
 }

@@ -17,35 +17,29 @@ object Internal_UpdateUserStatus {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
-
   val UpdateUserStatusString = "{ \"idamStatus\" : \"SUSPENDED\"}"
 
-  val EditUsrStatusMin = config.getString("internal.editUsrStatusMin").toInt
+  val UpdateInternalUserStatus =  
+  
+  repeat(1){
 
-  val EditUsrStatusMax = config.getString("internal.editUsrStatusMax").toInt
+    exec(_.setAll(
+      ("InternalUser_FirstName",internalUser_firstName()),
+      ("InternalUser_LastName",internalUser_lastName()),
+      ("InternalUser_Email",internalUser_Email())
+    ))
 
-  val UpdateInternalUserStatus =  repeat(1){
+    .feed(OrgIdData)
 
-      exec(_.setAll(
-          ("InternalUser_FirstName",internalUser_firstName()),
-          ("InternalUser_LastName",internalUser_lastName()),
-          ("InternalUser_Email",internalUser_Email())
-        ))
+    .exec(http("RD13_Internal_UpdateUserStatus")
+      .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users/${userId}?origin=EXUI")
+      .header("Authorization", "Bearer ${accessToken}")
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
+      .body(StringBody(UpdateUserStatusString))
+      .header("Content-Type", "application/json")
+      .check(status is 200))
 
-      .feed(OrgIdData)
-
-      .exec(http("RD13_Internal_UpdateUserStatus")
-          .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users/${userId}?origin=EXUI")
-        .header("Authorization", "Bearer ${accessToken}")
-        .header("ServiceAuthorization", "Bearer ${s2sToken}")
-        .body(StringBody(UpdateUserStatusString))
-        .header("Content-Type", "application/json")
-        .check(status is 200))
-      .pause(EditUsrStatusMin seconds, EditUsrStatusMax seconds)
+    .pause(Environment.thinkTime)
   }
 }

@@ -9,8 +9,6 @@ import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
 object Internal_CreateOrganisation {
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
   val config: Config = ConfigFactory.load()
   private val rng: Random = new Random()
   private def sRAId(): String = rng.alphanumeric.take(15).mkString
@@ -32,16 +30,18 @@ object Internal_CreateOrganisation {
   val CreateOrgMin = config.getString("internal.createOrgMin").toInt
   val CreateOrgMax = config.getString("internal.createOrgMax").toInt
 
-  val createOrganisation = exec(_.setAll(
-    ("SRAId", sRAId()),
-    ("CompanyNumber", companyNumber()),
-    ("CompanyURL", companyURL()),
-    ("FirstName",firstName()),
-    ("LastName",lastName()),
-    ("PaymentAccount1",paymentAccount1()),
-    ("PaymentAccount2",paymentAccount2()),
-    ("AddressLine1",addressLine1())
-  ))
+  val createOrganisation = 
+  
+    exec(_.setAll(
+      ("SRAId", sRAId()),
+      ("CompanyNumber", companyNumber()),
+      ("CompanyURL", companyURL()),
+      ("FirstName",firstName()),
+      ("LastName",lastName()),
+      ("PaymentAccount1",paymentAccount1()),
+      ("PaymentAccount2",paymentAccount2()),
+      ("AddressLine1",addressLine1())
+    ))
 
     .exec(http("RD01_Internal_CreateOrganization")
       .post("/refdata/internal/v1/organisations")
@@ -50,5 +50,6 @@ object Internal_CreateOrganisation {
       .header("Content-Type", "application/json")
       .check(jsonPath("$.organisationIdentifier").saveAs("NewPendingOrg_Id"))
       .check(status in (200,201)))
-    .pause(CreateOrgMin seconds, CreateOrgMax seconds)
+
+    .pause(Environment.thinkTime)
 }

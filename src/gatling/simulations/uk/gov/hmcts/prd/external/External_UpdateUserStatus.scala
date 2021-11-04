@@ -17,16 +17,11 @@ object External_UpdateUserStatus {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
   val UpdateUserStatusString = "{ \"idamStatus\" : \"SUSPENDED\"}"
 
   val EditUsrStatusMin = config.getString("internal.editUsrStatusMin").toInt
-
   val EditUsrStatusMax = config.getString("internal.editUsrStatusMax").toInt
 
   val UpdateInternalUserStatus =  repeat(1){
@@ -40,12 +35,13 @@ object External_UpdateUserStatus {
       .feed(OrgIdData)
 
       .exec(http("RD23_External_UpdateUserStatus")
-          .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
+        .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .body(StringBody(UpdateUserStatusString))
         .header("Content-Type", "application/json")
         .check(status is 200))
-      .pause(EditUsrStatusMin seconds, EditUsrStatusMax seconds)
+
+      .pause(Environment.thinkTime)
   }
 }

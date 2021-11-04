@@ -17,16 +17,11 @@ object External_EditUserRole {
 
   val config: Config = ConfigFactory.load()
 
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
-
-  val IdAMToken = PRDTokenGenerator.generateSIDAMUserTokenInternal()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
   val editInternalUserRoleString = "{\n \"rolesAdd\": [ { \"name\": \"pui-case-manager\" }, { \"name\": \"caseworker\" } ], \"rolesDelete\": [ { \"name\": \"pui-case-manager\" }, { \"name\": \"caseworker\" } ]}\n"
 
   val EditUsrRoleMin = config.getString("internal.editUsrRoleMin").toInt
-
   val EditUsrRoleMax = config.getString("internal.editUsrRoleMax").toInt
 
   val EditInternalUserRole =  repeat(1){
@@ -46,6 +41,7 @@ object External_EditUserRole {
         .body(StringBody(editInternalUserRoleString))
         .header("Content-Type", "application/json")
         .check(status is 200))
-      .pause(EditUsrRoleMin seconds, EditUsrRoleMax seconds)
+
+      .pause(Environment.thinkTime)
   }
 }

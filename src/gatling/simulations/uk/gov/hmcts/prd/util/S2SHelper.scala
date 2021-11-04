@@ -7,25 +7,22 @@ import uk.gov.hmcts.prd.util.Environment._
 
 object  S2SHelper {
 
-  /*val getOTP =
-   */
+  val getOTP =
   exec(
     session => {
-      val otp: String = String.valueOf(new GoogleAuthenticator().getTotpPassword(Env.getS2sSecret))
+      val otp: String = String.valueOf(new GoogleAuthenticator().getTotpPassword(S2S_Secret))
       session.set("OTP", otp)
-
     })
 
   val otpp="${OTP}"
 
   val S2SAuthToken =
-
     exec(http("Token_020_GetServiceToken")
       .post(S2SUrl + "/lease")
       .header("Content-Type", "application/json")
       .body(StringBody(
         s"""{
-       "microservice": "${Env.getS2sMicroservice}"
+       "microservice": "${S2S_ServiceName}"
         }"""
       )).asJson
       .check(bodyString.saveAs("s2sToken"))
@@ -35,9 +32,5 @@ object  S2SHelper {
         println("the code of id is "+session("s2sToken").as[String])
         session
       })*/
-
-
-
-
 
 }

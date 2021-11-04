@@ -8,7 +8,6 @@ import uk.gov.hmcts.prd.util._
 import scala.concurrent.duration._
 import scala.util.Random
 object External_CreateOrganisation {
-  val s2sToken = PRDTokenGenerator.generateS2SToken()
 
   private val rng: Random = new Random()
   private def sRAId(): String = rng.alphanumeric.take(15).mkString
@@ -32,7 +31,6 @@ object External_CreateOrganisation {
   //tpA${CompanyEmail}@email.co.uk
 
   val CreateOrgMin = config.getString("external.createOrgMin").toInt
-
   val CreateOrgMax = config.getString("external.createOrgMax").toInt
 
   val createOrganisation = exec(_.setAll(
@@ -53,7 +51,8 @@ object External_CreateOrganisation {
       .header("Content-Type", "application/json")
       .check(jsonPath("$.organisationIdentifier").saveAs("NewPendingOrg_Id"))
       .check(status in (200,201)))
-    .pause(CreateOrgMin seconds, CreateOrgMax seconds)
+
+    .pause(Environment.thinkTime)
 
 /*.exec {
       session =>
