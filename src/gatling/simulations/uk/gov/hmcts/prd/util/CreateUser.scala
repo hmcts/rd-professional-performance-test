@@ -33,6 +33,8 @@ object CreateUser {
       .header("Content-Type", "application/json")
       .body(StringBody(userString))
       .check(status is 201))
+      .exitHereIfFailed
+      
     .pause(thinkTime)
 
 }
