@@ -26,7 +26,7 @@ class PRDPTSimulation extends Simulation{
 
   val httpProtocol = http
     .baseUrl(BaseUrl)
-    .proxy(Proxy("proxyout.reform.hmcts.net", 8080))
+    // .proxy(Proxy("proxyout.reform.hmcts.net", 8080))
 
   val Scn = scenario("Professional Reference Data")
     .exec(
