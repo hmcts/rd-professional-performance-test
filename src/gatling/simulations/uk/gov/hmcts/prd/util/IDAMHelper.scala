@@ -24,11 +24,12 @@ object IDAMHelper {
  val getIdamTokenLatest2 =
 
     exec(http("Token_030_GetAuthToken")
-      .post(IDAMUrl  + "/o/token?grant_type=password&username=${Email}&password=${Password}&client_id=rd-professional-api&client_secret=" + IDAM_Secret + "&redirect_uri=https://rd-professional-api-" + env + ".service.core-compute-" + env + ".internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
+      .post(IDAMUrl  + "/o/token?grant_type=password&username=${Email}&password=P${Password}123&client_id=rd-professional-api&client_secret=" + IDAM_Secret + "&redirect_uri=https://rd-professional-api-" + env + ".service.core-compute-" + env + ".internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
       .header("Content-Type", "application/x-www-form-urlencoded")
       .header("Content-Length", "0")
       .check(status is 200)
       .check(jsonPath("$.access_token").saveAs("accessToken")))
+      .exitHereIfFailed
 
     .pause(Environment.thinkTime)
 

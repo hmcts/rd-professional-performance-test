@@ -20,6 +20,7 @@ class PRDPTSimulation extends Simulation{
     .baseUrl(BaseUrl)
 
   val Scn = scenario("Professional Reference Data")
+    .repeat(13)
     .exec(
       IDAMHelper.getIdamTokenLatest,
       S2SHelper.S2SAuthToken,
@@ -29,6 +30,7 @@ class PRDPTSimulation extends Simulation{
       Internal_CreateOrganisation.createOrganisation,
       Internal_UpdateOrganisation.updateOrganisation,
       Internal_GETOrganisationByID.GETOrganisationByID,
+      CreateUser.deleteUser,
       CreateUser.createUser,
       Internal_AddInternalUserToOrg.AddInternalUserToOrg,
       Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
@@ -40,6 +42,7 @@ class PRDPTSimulation extends Simulation{
       Internal_EditPbas.EditPbas,
       Internal_EditUserRole.EditInternalUserRole,
       Internal_UpdateUserStatus.UpdateInternalUserStatus,
+      CreateUser.deleteUser,
 
       CreateUser.createUser,
       External_CreateOrganisation.createOrganisation,
@@ -55,11 +58,12 @@ class PRDPTSimulation extends Simulation{
       External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
       External_EditUserRole.EditInternalUserRole,
       External_UpdateUserStatus.UpdateInternalUserStatus,
+      CreateUser.deleteUser,
     )
     .pause(IntPaceMin seconds, IntPaceMax seconds)
 
   setUp(
-    Scn.inject(rampUsers(10) during (60))
+    Scn.inject(rampUsers(27) during (300 seconds))
   )
   .protocols(httpProtocol)
 
