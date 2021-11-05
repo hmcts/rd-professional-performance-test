@@ -20,47 +20,48 @@ class PRDPTSimulation extends Simulation{
     .baseUrl(BaseUrl)
 
   val Scn = scenario("Professional Reference Data")
-    .repeat(13)
-    .exec(
-      IDAMHelper.getIdamTokenLatest,
-      S2SHelper.S2SAuthToken,
-      CreateUser.createUser,
-      Internal_CreateOrganisation.createOrganisation,
-      Internal_DeleteOrganisation.DeleteOrganisation,
-      Internal_CreateOrganisation.createOrganisation,
-      Internal_UpdateOrganisation.updateOrganisation,
-      Internal_GETOrganisationByID.GETOrganisationByID,
-      CreateUser.deleteUser,
-      CreateUser.createUser,
-      Internal_AddInternalUserToOrg.AddInternalUserToOrg,
-      Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-      Internal_GETAllOrganisation.GETAllOrganisation,
-      Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
-      Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
-      Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
-      Internal_GETPbas.GETPbas,
-      Internal_EditPbas.EditPbas,
-      Internal_EditUserRole.EditInternalUserRole,
-      Internal_UpdateUserStatus.UpdateInternalUserStatus,
-      CreateUser.deleteUser,
+    .repeat(13) {
+      exec(
+        IDAMHelper.getIdamTokenLatest,
+        S2SHelper.S2SAuthToken,
+        CreateUser.createUser,
+        Internal_CreateOrganisation.createOrganisation,
+        Internal_DeleteOrganisation.DeleteOrganisation,
+        Internal_CreateOrganisation.createOrganisation,
+        Internal_UpdateOrganisation.updateOrganisation,
+        Internal_GETOrganisationByID.GETOrganisationByID,
+        CreateUser.deleteUser,
+        CreateUser.createUser,
+        Internal_AddInternalUserToOrg.AddInternalUserToOrg,
+        Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+        Internal_GETAllOrganisation.GETAllOrganisation,
+        Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+        Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+        Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
+        Internal_GETPbas.GETPbas,
+        Internal_EditPbas.EditPbas,
+        Internal_EditUserRole.EditInternalUserRole,
+        Internal_UpdateUserStatus.UpdateInternalUserStatus,
+        CreateUser.deleteUser,
 
-      CreateUser.createUser,
-      External_CreateOrganisation.createOrganisation,
-      Internal_UpdateOrganisation.updateOrganisation,
-      IDAMHelper.getIdamTokenLatest2,
-      External_GETOrganisation.GETOrganisation,
-      CreateUser.createUser,
-      External_AddInternalUserToOrg.AddInternalUserToOrg,
-      External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-      External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
-      External_GETPbas.GETPbas,
-      External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
-      External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
-      External_EditUserRole.EditInternalUserRole,
-      External_UpdateUserStatus.UpdateInternalUserStatus,
-      CreateUser.deleteUser,
-    )
-    .pause(IntPaceMin seconds, IntPaceMax seconds)
+        CreateUser.createUser,
+        External_CreateOrganisation.createOrganisation,
+        Internal_UpdateOrganisation.updateOrganisation,
+        IDAMHelper.getIdamTokenLatest2,
+        External_GETOrganisation.GETOrganisation,
+        CreateUser.createUser,
+        External_AddInternalUserToOrg.AddInternalUserToOrg,
+        External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+        External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+        External_GETPbas.GETPbas,
+        External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+        External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
+        External_EditUserRole.EditInternalUserRole,
+        External_UpdateUserStatus.UpdateInternalUserStatus,
+        CreateUser.deleteUser,
+      )
+    }
+    // .pause(IntPaceMin seconds, IntPaceMax seconds)
 
   setUp(
     Scn.inject(rampUsers(27) during (300 seconds))
