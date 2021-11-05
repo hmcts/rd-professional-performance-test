@@ -20,7 +20,7 @@ class PRDPTSimulation extends Simulation{
     .baseUrl(BaseUrl)
 
   val Scn = scenario("Professional Reference Data")
-    .repeat(13) {
+    .repeat(10) {
       exec(
         IDAMHelper.getIdamTokenLatest,
         S2SHelper.S2SAuthToken,
@@ -64,7 +64,7 @@ class PRDPTSimulation extends Simulation{
     // .pause(IntPaceMin seconds, IntPaceMax seconds)
 
   setUp(
-    Scn.inject(rampUsers(27) during (300 seconds)) //27 during 300
+    Scn.inject(rampUsers(36) during (300 seconds)) //27 during 300
   )
   .protocols(httpProtocol)
 
