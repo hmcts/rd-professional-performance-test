@@ -15,12 +15,15 @@ object Internal_GETInternalUserForGivenOrganisations {
   
     feed(OrgIdData)
 
-    .exec(http("RD06_Internal_GetInternalUserForGivenOrganisation")
-      .get("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users?showdeleted=false&rolesRequired=false")
-      .header("Authorization", "Bearer ${accessToken}")
-      .header("ServiceAuthorization", "Bearer ${s2sToken}")
-      .header("Content-Type", "application/json")
-      .check(status is 200))
+    .repeat(1) {
 
-    .pause(Environment.thinkTime)
+      exec(http("RD06_Internal_GetInternalUserForGivenOrganisation")
+        .get("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users?showdeleted=false&rolesRequired=false")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${s2sToken}")
+        .header("Content-Type", "application/json")
+        .check(status is 200))
+
+      .pause(Environment.thinkTime)
+    }
 }

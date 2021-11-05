@@ -64,7 +64,7 @@ class PRDPTSimulation extends Simulation{
     // .pause(IntPaceMin seconds, IntPaceMax seconds)
 
   setUp(
-    Scn.inject(rampUsers(27) during (300 seconds))
+    Scn.inject(rampUsers(27) during (300 seconds)) //27 during 300
   )
   .protocols(httpProtocol)
 

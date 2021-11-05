@@ -15,13 +15,16 @@ object External_GETOrganisationsByStatusACTIVE {
   val GetActiveOrgMax = config.getString("internal.getActiveOrgMax").toInt
 
   val GETOrganisationsByStatusACTIVE = 
-  
-  exec(http("RD21_External_GetOrganizationsByStatusACTIVE")
-    .get("/refdata/external/v1/organisations/status/ACTIVE")
-    .header("Authorization", "Bearer ${accessToken}")
-    .header("ServiceAuthorization", "Bearer ${s2sToken}")
-    .header("Content-Type", "application/json")
-    .check(status is 200))
 
-  .pause(Environment.thinkTime)
+  repeat(4) {
+    
+    exec(http("RD21_External_GetOrganizationsByStatusACTIVE")
+      .get("/refdata/external/v1/organisations/status/ACTIVE")
+      .header("Authorization", "Bearer ${accessToken}")
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
+      .header("Content-Type", "application/json")
+      .check(status is 200))
+
+    .pause(Environment.thinkTime)
+  }
 }

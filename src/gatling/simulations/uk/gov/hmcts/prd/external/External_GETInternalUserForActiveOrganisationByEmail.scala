@@ -13,13 +13,16 @@ object External_GETInternalUserForActiveOrganisationByEmail {
   val GetIntUsrByOrgEmailMax = config.getString("external.getIntUsrByOrgEmailMax").toInt
 
   val GETInternalUserForActiveOrganisationByEmail = 
-  
-    exec(http("RD19_External_GetInternalUserForActiveOrganisationByEmailAddress")
-      .get("/refdata/external/v1/organisations/users?email=${Email}")
-      .header("Authorization", "Bearer ${accessToken}")
-      .header("ServiceAuthorization", "Bearer ${s2sToken}")
-      .header("Content-Type", "application/json")
-      .check(status is 200))
 
-    .pause(Environment.thinkTime)
+    repeat(1) {
+  
+      exec(http("RD19_External_GetInternalUserForActiveOrganisationByEmailAddress")
+        .get("/refdata/external/v1/organisations/users?email=${Email}")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${s2sToken}")
+        .header("Content-Type", "application/json")
+        .check(status is 200))
+
+      .pause(Environment.thinkTime)
+    }
 }

@@ -15,12 +15,15 @@ object Internal_GETOrganisationByID {
   
     feed(OrgIdData)
 
-    .exec(http("RD04_Internal_GetOrganizationsByID")
-      .get("/refdata/internal/v1/organisations?id=${NewPendingOrg_Id}")
-      .header("Authorization", "Bearer ${accessToken}")
-      .header("ServiceAuthorization", "Bearer ${s2sToken}")
-      .header("Content-Type", "application/json")
-      .check(status is 200))
+    .repeat(1) {
 
-    .pause(Environment.thinkTime)
+      exec(http("RD04_Internal_GetOrganizationsByID")
+        .get("/refdata/internal/v1/organisations?id=${NewPendingOrg_Id}")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${s2sToken}")
+        .header("Content-Type", "application/json")
+        .check(status is 200))
+
+      .pause(Environment.thinkTime)
+    }
 }

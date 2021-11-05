@@ -11,14 +11,17 @@ object Internal_GETPbas {
   val config: Config = ConfigFactory.load()
 
   val GETPbas = 
+
+    repeat(1) {
   
-    exec(http("RD11_Internal_RetrievesOrganisationsPaymentAccounts")
-      .get("/refdata/internal/v1/organisations/pbas?email=${Email}")
-      .header("Authorization", "Bearer ${accessToken}")
-      .header("ServiceAuthorization", "Bearer ${s2sToken}")
-      .header("UserEmail", "${Email}")
-      .header("Content-Type", "application/json")
-      .check(status is 200))
-      
-    .pause(Environment.thinkTime)
+      exec(http("RD11_Internal_RetrievesOrganisationsPaymentAccounts")
+        .get("/refdata/internal/v1/organisations/pbas?email=${Email}")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${s2sToken}")
+        .header("UserEmail", "${Email}")
+        .header("Content-Type", "application/json")
+        .check(status is 200))
+        
+      .pause(Environment.thinkTime)
+    }
 }
