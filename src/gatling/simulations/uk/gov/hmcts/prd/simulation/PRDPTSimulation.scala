@@ -13,14 +13,14 @@ import scala.concurrent.duration._
 class PRDPTSimulation extends Simulation{
 
   val config: Config = ConfigFactory.load()
-  val IntPaceMin = config.getString("internal.intPaceMin").toInt
-  val IntPaceMax = config.getString("internal.intPaceMax").toInt
+  // val IntPaceMin = config.getString("internal.intPaceMin").toInt
+  // val IntPaceMax = config.getString("internal.intPaceMax").toInt
   
   val httpProtocol = http
     .baseUrl(BaseUrl)
 
   val Scn = scenario("Professional Reference Data")
-    .repeat(10) {
+    .repeat(10) { //10
       exec(
         IDAMHelper.getIdamTokenLatest,
         S2SHelper.S2SAuthToken,
@@ -61,10 +61,9 @@ class PRDPTSimulation extends Simulation{
         CreateUser.deleteUser,
       )
     }
-    // .pause(IntPaceMin seconds, IntPaceMax seconds)
 
   setUp(
-    Scn.inject(rampUsers(36) during (300 seconds)) //27 during 300
+    Scn.inject(rampUsers(36) during (300 seconds)) //36 during 300
   )
   .protocols(httpProtocol)
 

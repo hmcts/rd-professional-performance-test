@@ -9,8 +9,8 @@ object External_GETOrganisation {
 
   val config: Config = ConfigFactory.load()
 
-  val GetOrgByOrgIdMin = config.getString("external.getOrgByOrgIdMin").toInt
-  val GetOrgByOrgIdMax = config.getString("external.getOrgByOrgIdMax").toInt
+  // val GetOrgByOrgIdMin = config.getString("external.getOrgByOrgIdMin").toInt
+  // val GetOrgByOrgIdMax = config.getString("external.getOrgByOrgIdMax").toInt
 
   val GETOrganisation = 
 

@@ -21,8 +21,8 @@ object External_EditUserRole {
 
   val editInternalUserRoleString = "{\n \"rolesAdd\": [ { \"name\": \"pui-case-manager\" }, { \"name\": \"caseworker\" } ], \"rolesDelete\": [ { \"name\": \"pui-case-manager\" }, { \"name\": \"caseworker\" } ]}\n"
 
-  val EditUsrRoleMin = config.getString("internal.editUsrRoleMin").toInt
-  val EditUsrRoleMax = config.getString("internal.editUsrRoleMax").toInt
+  // val EditUsrRoleMin = config.getString("internal.editUsrRoleMin").toInt
+  // val EditUsrRoleMax = config.getString("internal.editUsrRoleMax").toInt
 
   val EditInternalUserRole =  repeat(1){
 

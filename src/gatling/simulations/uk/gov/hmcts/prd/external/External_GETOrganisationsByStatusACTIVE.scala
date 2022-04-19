@@ -11,8 +11,8 @@ object External_GETOrganisationsByStatusACTIVE {
 
   val config: Config = ConfigFactory.load()
 
-  val GetActiveOrgMin = config.getString("internal.getActiveOrgMin").toInt
-  val GetActiveOrgMax = config.getString("internal.getActiveOrgMax").toInt
+  // val GetActiveOrgMin = config.getString("internal.getActiveOrgMin").toInt
+  // val GetActiveOrgMax = config.getString("internal.getActiveOrgMax").toInt
 
   val GETOrganisationsByStatusACTIVE = 
 

@@ -11,8 +11,8 @@ object External_GETStatusInternalUserForActiveOrganisationByEmail {
 
   val config: Config = ConfigFactory.load()
 
-  val GetIntUsrByOrgEmailMin = config.getString("external.getIntUsrByOrgEmailMin").toInt
-  val GetIntUsrByOrgEmailMax = config.getString("external.getIntUsrByOrgEmailMax").toInt
+  // val GetIntUsrByOrgEmailMin = config.getString("external.getIntUsrByOrgEmailMin").toInt
+  // val GetIntUsrByOrgEmailMax = config.getString("external.getIntUsrByOrgEmailMax").toInt
 
   val GETStatusInternalUserForActiveOrganisationByEmail = 
 

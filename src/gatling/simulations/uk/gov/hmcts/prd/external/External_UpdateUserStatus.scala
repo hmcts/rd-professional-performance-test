@@ -21,8 +21,8 @@ object External_UpdateUserStatus {
 
   val UpdateUserStatusString = "{ \"idamStatus\" : \"SUSPENDED\"}"
 
-  val EditUsrStatusMin = config.getString("internal.editUsrStatusMin").toInt
-  val EditUsrStatusMax = config.getString("internal.editUsrStatusMax").toInt
+  // val EditUsrStatusMin = config.getString("internal.editUsrStatusMin").toInt
+  // val EditUsrStatusMax = config.getString("internal.editUsrStatusMax").toInt
 
   val UpdateInternalUserStatus =  repeat(1){
 

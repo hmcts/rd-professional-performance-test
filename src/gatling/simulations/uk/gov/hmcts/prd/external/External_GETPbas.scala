@@ -9,8 +9,8 @@ object External_GETPbas {
 
   val config: Config = ConfigFactory.load()
 
-  val GetPbasMin = config.getString("external.getPbasMin").toInt
-  val GetPbasMax = config.getString("external.getPbasMax").toInt
+  // val GetPbasMin = config.getString("external.getPbasMin").toInt
+  // val GetPbasMax = config.getString("external.getPbasMax").toInt
 
   val GETPbas = 
 

@@ -11,10 +11,9 @@ object Environment {
   val S2SUrl = "http://rpe-service-auth-provider-" + env + ".service.core-compute-" + env + ".internal/testing-support"
   val BaseUrl = "http://rd-professional-api-" + env + ".service.core-compute-" + env + ".internal"
   val IDAM_Secret = ConfigFactory.load.getString("auth.clientSecret")
-  val S2S_Secret = ConfigFactory.load.getString("aat_service.pass")
   val S2S_ServiceName = "rd_professional_api"
 
-  val thinkTime = 7
+  val thinkTime = 7 //7
 
   val minThinkTime = 5
   //10
