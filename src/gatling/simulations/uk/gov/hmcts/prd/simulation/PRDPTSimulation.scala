@@ -25,8 +25,8 @@ class PRDPTSimulation extends Simulation{
         IDAMHelper.getIdamTokenLatest,
         S2SHelper.S2SAuthToken,
         CreateUser.createUser,
-        Internal_CreateOrganisation.createOrganisation,
-        Internal_DeleteOrganisation.DeleteOrganisation,
+        // Internal_CreateOrganisation.createOrganisation,
+        // Internal_DeleteOrganisation.DeleteOrganisation,
         Internal_CreateOrganisation.createOrganisation,
         Internal_UpdateOrganisation.updateOrganisation,
         Internal_GETOrganisationByID.GETOrganisationByID,
@@ -40,6 +40,8 @@ class PRDPTSimulation extends Simulation{
         Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
         Internal_GETPbas.GETPbas,
         Internal_EditPbas.EditPbas,
+        Internal_GetOrganisation.GETOrg,
+        Internal_UpdatePBAStatus.Update,
         Internal_EditUserRole.EditInternalUserRole,
         Internal_UpdateUserStatus.UpdateInternalUserStatus,
         CreateUser.deleteUser,
@@ -54,6 +56,7 @@ class PRDPTSimulation extends Simulation{
         External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
         External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
         External_GETPbas.GETPbas,
+        External_DeletePBA.DeletePBA,
         External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
         External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
         External_EditUserRole.EditInternalUserRole,
@@ -66,5 +69,13 @@ class PRDPTSimulation extends Simulation{
     Scn.inject(rampUsers(36) during (300 seconds)) //36 during 300
   )
   .protocols(httpProtocol)
+
+  //Smoke test
+  // setUp(
+  //   Scn.inject(rampUsers(1) during (10 seconds)) //36 during 300
+  // )
+  // .protocols(httpProtocol)
+  // .disablePauses
+  // .maxDuration(10 minutes)
 
 }

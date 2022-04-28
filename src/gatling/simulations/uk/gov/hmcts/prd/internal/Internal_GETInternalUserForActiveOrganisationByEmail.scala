@@ -12,7 +12,7 @@ object Internal_GETInternalUserForActiveOrganisationByEmail {
 
   val GETInternalUserForActiveOrganisationByEmail = 
   
-    exec(http("RD08_Internal_GetInternalUserForActiveOrganisationByEmailAddress")
+    exec(http("RD09_Internal_GetInternalUserForActiveOrganisationByEmailAddress")
       .get("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users?email=${Email}")
       .header("Authorization", "Bearer ${accessToken}")
       .header("ServiceAuthorization", "Bearer ${s2sToken}")

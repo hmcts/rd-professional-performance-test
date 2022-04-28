@@ -26,7 +26,7 @@ object Internal_EditPbas {
 
   val EditPbas = 
   
-    exec(http("RD12_Internal_EditPBA")
+    exec(http("RD14_Internal_EditPBA")
       .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/pbas")
       .header("Authorization", "Bearer ${accessToken}")
       .header("ServiceAuthorization", "Bearer ${s2sToken}")

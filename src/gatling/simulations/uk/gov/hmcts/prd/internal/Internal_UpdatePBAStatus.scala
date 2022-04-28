@@ -6,18 +6,18 @@ import uk.gov.hmcts.prd.util._
 import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
 
-object Internal_GETAllOrganisation {
+object Internal_UpdatePBAStatus {
 
   val config: Config = ConfigFactory.load()
 
-  val GETAllOrganisation = 
+  val Update = 
   
-    exec(http("RD08_Internal_GetAllOrganizations")
-      .get("/refdata/internal/v1/organisations")
+    exec(http("RD16_Internal_UpdatePBAStatus")
+      .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/pba/status")
       .header("Authorization", "Bearer ${accessToken}")
       .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .header("Content-Type", "application/json")
-      .check(status is 200))
-    
+      .body(ElFileBody("bodies/internal/UpdatePBAStatus.json")))
+      
     .pause(Environment.thinkTime)
 }

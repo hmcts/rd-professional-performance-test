@@ -12,7 +12,7 @@ object Internal_GETOrganisationsByStatusACTIVE {
 
   val GETOrganisationsByStatusACTIVE = 
   
-    exec(http("RD09_Internal_GetOrganizationsByStatusACTIVE")
+    exec(http("RD10_Internal_GetOrganizationsByStatusACTIVE")
       .get("/refdata/internal/v1/organisations?status=ACTIVE")
       .header("Authorization", "Bearer ${accessToken}")
       .header("ServiceAuthorization", "Bearer ${s2sToken}")

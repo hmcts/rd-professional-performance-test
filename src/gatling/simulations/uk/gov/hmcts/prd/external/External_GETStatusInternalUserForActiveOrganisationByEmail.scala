@@ -18,7 +18,7 @@ object External_GETStatusInternalUserForActiveOrganisationByEmail {
 
     repeat(1) {
     
-      exec(http("RD22_External_GetStatusInternalUserForActiveOrganisationByEmailAddress")
+      exec(http("RD27_External_GetStatusInternalUserForActiveOrganisationByEmailAddress")
         .get("/refdata/external/v1/organisations/users/accountId?email=${Email}")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")

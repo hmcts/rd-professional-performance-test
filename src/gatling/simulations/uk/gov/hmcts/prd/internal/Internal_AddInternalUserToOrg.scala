@@ -30,7 +30,7 @@ object Internal_AddInternalUserToOrg {
 
       .feed(OrgIdData)
 
-      .exec(http("RD05_Internal_AddInternalUserToOrganisation")
+      .exec(http("RD06_Internal_AddInternalUserToOrganisation")
         .post("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users/")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")

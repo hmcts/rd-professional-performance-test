@@ -16,7 +16,7 @@ object External_GETInternalUserForActiveOrganisationByEmail {
 
     repeat(1) {
   
-      exec(http("RD19_External_GetInternalUserForActiveOrganisationByEmailAddress")
+      exec(http("RD23_External_GetInternalUserForActiveOrganisationByEmailAddress")
         .get("/refdata/external/v1/organisations/users?email=${Email}")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")

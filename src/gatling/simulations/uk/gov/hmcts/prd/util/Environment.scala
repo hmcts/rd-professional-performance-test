@@ -13,7 +13,7 @@ object Environment {
   val IDAM_Secret = ConfigFactory.load.getString("auth.clientSecret")
   val S2S_ServiceName = "rd_professional_api"
 
-  val thinkTime = 7 //7
+  val thinkTime = 5 //7
 
   val minThinkTime = 5
   //10

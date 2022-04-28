@@ -6,24 +6,22 @@ import uk.gov.hmcts.prd.util._
 import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
 
-object Internal_GETOrganisationByID {
+object Internal_GetOrganisation {
 
   val config: Config = ConfigFactory.load()
-  val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
-  val GETOrganisationByID = 
-  
-    feed(OrgIdData)
+  val GETOrg = 
 
-    .repeat(1) {
+    repeat(10) {
 
-      exec(http("RD05_Internal_GetOrganizationsByID")
+      exec(http("RD15_Internal_RetrievesOrganisationsPaymentAccounts")
         .get("/refdata/internal/v1/organisations?id=${NewPendingOrg_Id}")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .header("Content-Type", "application/json")
-        .check(status is 200))
-
-      .pause(Environment.thinkTime)
+        .check(jsonPath("$.paymentAccount[0]").saveAs("PBANumber1"))
+        .check(jsonPath("$.paymentAccount[1]").saveAs("PBANumber2")))
+        
+      .pause(2)
     }
 }

@@ -16,13 +16,14 @@ object External_GETPbas {
 
     repeat(1) {
     
-      exec(http("RD20_External_RetrievesOrganisationsPaymentAccounts")
+      exec(http("RD24_External_RetrievesOrganisationsPaymentAccounts")
         .get("/refdata/external/v1/organisations/pbas?email=${Email}")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .header("UserEmail", "${Email}")
         .header("Content-Type", "application/json")
-        .check(status is 200))
+        .check(jsonPath("$.organisationEntityResponse.paymentAccount[1]").saveAs("PBANumber2"))
+        .check(jsonPath("$.organisationEntityResponse.paymentAccount[2]").saveAs("PBANumber3")))
 
       .pause(Environment.thinkTime)
     }

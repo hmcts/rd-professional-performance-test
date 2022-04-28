@@ -32,7 +32,7 @@ object Internal_UpdateUserStatus {
 
     .feed(OrgIdData)
 
-    .exec(http("RD13_Internal_UpdateUserStatus")
+    .exec(http("RD18_Internal_UpdateUserStatus")
       .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users/${userId}?origin=EXUI")
       .header("Authorization", "Bearer ${accessToken}")
       .header("ServiceAuthorization", "Bearer ${s2sToken}")

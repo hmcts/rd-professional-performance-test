@@ -1,23 +1,22 @@
 package uk.gov.hmcts.prd.internal
 
+import com.typesafe.config.{Config, ConfigFactory}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
-import com.typesafe.config.{Config, ConfigFactory}
-import scala.concurrent.duration._
 
-object Internal_GETAllOrganisation {
+object External_DeletePBA {
 
   val config: Config = ConfigFactory.load()
 
-  val GETAllOrganisation = 
+  val DeletePBA = 
   
-    exec(http("RD08_Internal_GetAllOrganizations")
-      .get("/refdata/internal/v1/organisations")
+    exec(http("RD25_External_DeletePBA")
+      .delete("/refdata/external/v1/organisations/pba")
       .header("Authorization", "Bearer ${accessToken}")
       .header("ServiceAuthorization", "Bearer ${s2sToken}")
       .header("Content-Type", "application/json")
-      .check(status is 200))
-    
+      .body(ElFileBody("bodies/external/DeletePBA.json")))
+
     .pause(Environment.thinkTime)
 }

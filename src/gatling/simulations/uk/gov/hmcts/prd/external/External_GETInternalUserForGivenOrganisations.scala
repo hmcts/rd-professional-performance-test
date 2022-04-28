@@ -14,7 +14,7 @@ object External_GETInternalUserForGivenOrganisations {
 
   val GETInternalUserForGivenOrganisations = 
   
-  exec(http("RD18_External_GetInternalUserForGivenOrganisation")
+  exec(http("RD22_External_GetInternalUserForGivenOrganisation")
     .get("/refdata/external/v1/organisations/users?showdeleted=True")
     .header("Authorization", "Bearer ${accessToken}")
     .header("ServiceAuthorization", "Bearer ${s2sToken}")

@@ -17,7 +17,7 @@ object Internal_GETInternalUserForGivenOrganisations {
 
     .repeat(1) {
 
-      exec(http("RD06_Internal_GetInternalUserForGivenOrganisation")
+      exec(http("RD07_Internal_GetInternalUserForGivenOrganisation")
         .get("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users?showdeleted=false&rolesRequired=false")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
