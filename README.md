@@ -1,4 +1,4 @@
-###Gatling nightly performance tests for Professional Reference Data
+Gatling nightly performance tests for Professional Reference Data
 
 To run locally:
 - Performance test against the perftest environment: `./gradlew gatlingRun`
