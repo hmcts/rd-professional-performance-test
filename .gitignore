@@ -9,3 +9,4 @@ build/**
 *.log
 *.zip
 bin/*
+src/gatling/resources/application.conf
