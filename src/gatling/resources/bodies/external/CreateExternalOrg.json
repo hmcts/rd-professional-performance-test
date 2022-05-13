@@ -1,0 +1,66 @@
+{
+  "name": "Kapil${FirstName} Jain${LastName}",
+  "sraId": "TRA${SRAId}",
+  "sraRegulated": true,
+  "companyNumber": "${CompanyNumber}",
+  "companyUrl": "www.tr${CompanyURL}.com",
+  "superUser": {
+     "firstName": "${FirstName}",
+     "lastName": "${LastName}",
+     "email": "${Email}",
+     "jurisdictions": [
+        {
+           "id": "DIVORCE"
+        },
+        {
+           "id": "SSCS"
+        },
+        {
+           "id": "PROBATE"
+        },
+        {
+           "id": "PUBLICLAW"
+        },
+        {
+           "id": "BULK SCANNING"
+        },
+        {
+           "id": "IA"
+        },
+        {
+           "id": "CMC"
+        },
+        {
+           "id": "EMPLOYMENT"
+        },
+        {
+           "id": "Family public law and adoption"
+        },
+        {
+           "id": "Civil enforcement and possession"
+        }
+     ]
+  },
+  "paymentAccount": [
+     "PBA${PaymentAccount1}",
+     "PBA${PaymentAccount2}",
+     "PBA${PaymentAccount3}"
+  ],
+  "contactInformation": [
+     {
+        "addressLine1": "${AddressLine1} high road",
+        "addressLine2": "${FirstName} ${LastName}",
+        "addressLine3": "Maharaj road",
+        "townCity": "West Kirby",
+        "county": "Wirral",
+        "country": "UK",
+        "postCode": "TEST1",
+        "dxAddress": [
+           {
+              "dxNumber": "DX 1121111990",
+              "dxExchange": "112111192099908492"
+           }
+        ]
+     }
+  ]
+}

@@ -1,23 +1,35 @@
 package uk.gov.hmcts.prd.internal
+
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
 import com.typesafe.config.{Config, ConfigFactory}
 import scala.concurrent.duration._
+
 object Internal_GETPbas {
 
   val config: Config = ConfigFactory.load()
 
-  val GetPbasMin = config.getString("internal.getPbasMin").toInt
+  val GETPbas = 
 
-  val GetPbasMax = config.getString("internal.getPbasMax").toInt
+    repeat(1) {
+  
+      exec(http("RD12_Internal_RetrievesOrganisationsPaymentAccounts")
+        .get("/refdata/internal/v1/organisations/pbas?email=${Email}")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${s2sToken}")
+        .header("UserEmail", "${Email}")
+        .header("Content-Type", "application/json"))
+        
+      .pause(Environment.thinkTime)
 
-  val GETPbas = exec(http("RD11_Internal_RetrievesOrganisationsPaymentAccounts")
-    .get("/refdata/internal/v1/organisations/pbas")
-    .header("Authorization", "Bearer ${accessToken}")
-    .header("ServiceAuthorization", "Bearer ${s2sToken}")
-    .header("UserEmail", "${Email}")
-    .header("Content-Type", "application/json")
-    .check(status is 200))
-    .pause(GetPbasMin seconds, GetPbasMax seconds)
+      .exec(http("RD13_Internal_RetrievesOrganisationsPBAStatus")
+        .get("/refdata/internal/v1/organisations/pba/accepted")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${s2sToken}")
+        .header("UserEmail", "${Email}")
+        .header("Content-Type", "application/json"))
+        
+      .pause(Environment.thinkTime)
+    }
 }

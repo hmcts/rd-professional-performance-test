@@ -7,14 +7,14 @@ import uk.gov.hmcts.prd.util.Environment._
 
 object  S2SHelper {
 
-  val getOTP =
-  exec(
-    session => {
-      val otp: String = String.valueOf(new GoogleAuthenticator().getTotpPassword(S2S_Secret))
-      session.set("OTP", otp)
-    })
+  // val getOTP =
+  // exec(
+  //   session => {
+  //     val otp: String = String.valueOf(new GoogleAuthenticator().getTotpPassword(S2S_Secret))
+  //     session.set("OTP", otp)
+  //   })
 
-  val otpp="${OTP}"
+  // val otpp="${OTP}"
 
   val S2SAuthToken =
     exec(http("Token_020_GetServiceToken")

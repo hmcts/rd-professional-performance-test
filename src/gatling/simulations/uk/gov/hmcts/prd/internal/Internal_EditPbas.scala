@@ -17,21 +17,22 @@ object Internal_EditPbas {
 
   val editPbasString = "{ \"paymentAccounts\": [ \"PBA${PaymentAccount1}\",\"PBA${PaymentAccount2}\" ]}"
 
-  val createAccounts = exec(_.setAll(
-    ("PaymentAccount1",paymentAccount1()),
-    ("PaymentAccount2",paymentAccount2())
-  ))
+  val createAccounts = 
+  
+    exec(_.setAll(
+      ("PaymentAccount1",paymentAccount1()),
+      ("PaymentAccount2",paymentAccount2())
+    ))
 
-  val EditPbasMin = config.getString("internal.editPbasMin").toInt
+  val EditPbas = 
+  
+    exec(http("RD14_Internal_EditPBA")
+      .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/pbas")
+      .header("Authorization", "Bearer ${accessToken}")
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
+      .header("Content-Type", "application/json")
+      .body(StringBody(editPbasString))
+      .check(status is 200))
 
-  val EditPbasMax = config.getString("internal.editPbasMax").toInt
-
-  val EditPbas = exec(http("RD12_Internal_EditPBA")
-    .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/pbas")
-    .header("Authorization", "Bearer ${accessToken}")
-    .header("ServiceAuthorization", "Bearer ${s2sToken}")
-    .header("Content-Type", "application/json")
-    .body(StringBody(editPbasString))
-    .check(status is 200))
-    .pause(EditPbasMin seconds, EditPbasMax seconds)
+    .pause(Environment.thinkTime)
 }

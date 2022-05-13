@@ -1,0 +1,14 @@
+{
+  "pbaNumbers": [
+     {
+        "pbaNumber": "${PBANumber1}",
+        "status": "accepted",
+        "statusMessage": "PBA Accepted"
+     },
+     {
+        "pbaNumber": "${PBANumber2}",
+        "status": "rejected",
+        "statusMessage": "PBA Rejected"
+     }
+  ]
+}

@@ -4,23 +4,27 @@ import com.typesafe.config.{Config, ConfigFactory}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util._
+
 import scala.concurrent.duration._
 
 object External_GETStatusInternalUserForActiveOrganisationByEmail {
 
   val config: Config = ConfigFactory.load()
 
-  val GetIntUsrByOrgEmailMin = config.getString("external.getIntUsrByOrgEmailMin").toInt
+  // val GetIntUsrByOrgEmailMin = config.getString("external.getIntUsrByOrgEmailMin").toInt
+  // val GetIntUsrByOrgEmailMax = config.getString("external.getIntUsrByOrgEmailMax").toInt
 
-  val GetIntUsrByOrgEmailMax = config.getString("external.getIntUsrByOrgEmailMax").toInt
+  val GETStatusInternalUserForActiveOrganisationByEmail = 
 
-  val GETStatusInternalUserForActiveOrganisationByEmail =
+    repeat(1) {
+    
+      exec(http("RD27_External_GetStatusInternalUserForActiveOrganisationByEmailAddress")
+        .get("/refdata/external/v1/organisations/users/accountId?email=${Email}")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${s2sToken}")
+        .header("Content-Type", "application/json")
+        .check(status is 200))
 
-  exec(http("RD22_External_GetStatusInternalUserForActiveOrganisationByEmailAddress")
-    .get("/refdata/external/v1/organisations/users/accountId?email=${Email}")
-      .header("Authorization", "Bearer ${accessToken}")
-      .header("ServiceAuthorization", "Bearer ${s2sToken}")
-      .header("Content-Type", "application/json")
-      .check(status is 200))
-  .pause(GetIntUsrByOrgEmailMin seconds, GetIntUsrByOrgEmailMax seconds)
+      .pause(Environment.thinkTime)
+    }
 }

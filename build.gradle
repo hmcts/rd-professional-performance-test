@@ -1,23 +1,42 @@
 plugins {
-    id "org.owasp.dependencycheck" version "6.0.2"
-    id 'scala'
     id 'com.github.lkishalmi.gatling' version '3.0.2'
-    //id 'java-gradle-plugin'
-    id 'groovy'
-    id 'com.gradle.plugin-publish' version '0.9.8'
-    id 'maven-publish'
+    id "org.owasp.dependencycheck" version "5.2.1"
 }
 
+apply plugin: 'com.github.lkishalmi.gatling'
 apply plugin: 'scala'
-group 'uk.gov.hmcts.reform'
-version = '1.0'
 
-sourceCompatibility = "11"
-targetCompatibility = "11"
+group 'KapilJain'
+version '1.0-SNAPSHOT'
+
+/*sourceCompatibility = "11"
+targetCompatibility = "11"*/
 
 repositories {
+    mavenCentral()
     jcenter()
+
 }
+
+
+ext {
+    gatlingVersion = '3.1.1'
+    scalaVersion = '2.12.8'
+}
+
+dependencies {
+    testCompile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
+    compileOnly group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
+    testCompile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
+    gatlingCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
+    gatlingCompile 'com.warrenstrange:googleauth:1.1.5'
+    gatlingCompile group: 'uk.gov.service.notify', name: 'notifications-java-client', version: '3.14.1-RELEASE'
+    gatlingRuntime group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
+}
+
+
+
+
 
 jar {
     manifest {
@@ -30,29 +49,11 @@ jar {
     exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
 }
 
-ext {
-    gatlingVersion = '3.3.1'
-    scalaVersion = '2.13.3'
-}
-
-dependencies {
-    compile group:"org.yaml", name: "snakeyaml", version:"1.26"
-    testCompile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
-    testCompile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
-    testCompile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
-    gatlingCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.1'
-    gatlingCompile 'com.warrenstrange:googleauth:1.5.0'
-    gatlingRuntime group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
-}
-
-/*dependencyCheck {
-    suppressionFile = 'config/owasp/suppressions.xml'
-}*/
-
 gatling {
-    toolVersion = '3.2.0'
+    toolVersion = '3.1.1'
     scalaVersion = '2.12.8'
     simulations = [
             'uk.gov.hmcts.prd.simulation.PRDPTSimulation'
     ]
 }
+

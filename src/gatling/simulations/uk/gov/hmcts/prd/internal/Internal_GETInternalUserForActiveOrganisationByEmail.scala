@@ -8,17 +8,16 @@ import scala.concurrent.duration._
 object Internal_GETInternalUserForActiveOrganisationByEmail {
 
   val config: Config = ConfigFactory.load()
-
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
-  val GetIntUsrByEmailMin = config.getString("internal.getIntUsrByEmailMin").toInt
-  val GetIntUsrByEmailMax = config.getString("internal.getIntUsrByEmailMax").toInt
+  val GETInternalUserForActiveOrganisationByEmail = 
+  
+    exec(http("RD09_Internal_GetInternalUserForActiveOrganisationByEmailAddress")
+      .get("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users?email=${Email}")
+      .header("Authorization", "Bearer ${accessToken}")
+      .header("ServiceAuthorization", "Bearer ${s2sToken}")
+      .header("Content-Type", "application/json")
+      .check(status is 200))
 
-  val GETInternalUserForActiveOrganisationByEmail = exec(http("RD08_Internal_GetInternalUserForActiveOrganisationByEmailAddress")
-    .get("/refdata/internal/v1/organisations/${NewPendingOrg_Id}/users?email=${Email}")
-    .header("Authorization", "Bearer ${accessToken}")
-    .header("ServiceAuthorization", "Bearer ${s2sToken}")
-    .header("Content-Type", "application/json")
-    .check(status is 200))
-    .pause(GetIntUsrByEmailMin seconds, GetIntUsrByEmailMax seconds)
+    .pause(Environment.thinkTime)
 }
