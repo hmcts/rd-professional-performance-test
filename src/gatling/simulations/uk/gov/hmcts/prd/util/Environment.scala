@@ -4,12 +4,10 @@ import com.typesafe.config.ConfigFactory
 
 object Environment {
 
-  val environment: String = System.getProperty("env")
-  val env = "perftest"
-  val idamURL = "https://idam-web-public." + env + ".platform.hmcts.net"
-  val IDAMUrl = "https://idam-api." + env + ".platform.hmcts.net"
-  val S2SUrl = "http://rpe-service-auth-provider-" + env + ".service.core-compute-" + env + ".internal/testing-support"
-  val BaseUrl = "http://rd-professional-api-" + env + ".service.core-compute-" + env + ".internal"
+  val idamURL = "https://idam-web-public.${env}.platform.hmcts.net"
+  val IDAMUrl = "https://idam-api.${env}.platform.hmcts.net"
+  val S2SUrl = "http://rpe-service-auth-provider-${env}.service.core-compute-${env}.internal/testing-support"
+  val BaseUrl = "http://rd-professional-api-${env}.service.core-compute-${env}.internal"
   val IDAM_Secret = ConfigFactory.load.getString("auth.clientSecret")
   val S2S_ServiceName = "rd_professional_api"
 

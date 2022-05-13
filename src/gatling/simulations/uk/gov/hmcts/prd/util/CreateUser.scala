@@ -26,7 +26,7 @@ object CreateUser {
   ))
 
     .exec(http("IDAM_CreateUser")
-      .post("https://idam-api." + env + ".platform.hmcts.net/testing-support/accounts")
+      .post("https://idam-api.${env}.platform.hmcts.net/testing-support/accounts")
       .header("Content-Type", "application/json")
       .body(StringBody(userString))
       .check(status is 201))
@@ -42,7 +42,7 @@ object CreateUser {
   val deleteUser = 
 
     exec(http("IDAM_DeleteUser")
-      .delete("https://idam-api." + env + ".platform.hmcts.net/testing-support/accounts/${Email}")
+      .delete("https://idam-api.${env}.platform.hmcts.net/testing-support/accounts/${Email}")
       .header("Content-Type", "application/json")
       .check(status is 204))    
 
