@@ -110,6 +110,7 @@ class PRDPTSimulation extends Simulation{
           External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
           External_GETPbas.GETPbas,
           External_DeletePBA.DeletePBA,
+          External_GETOrganisation.GETOrganisation,
           External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
           External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
           External_EditUserRole.EditInternalUserRole,
@@ -169,7 +170,7 @@ class PRDPTSimulation extends Simulation{
   }
 
 	setUp(
-		PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+		// PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		
 	).protocols(httpProtocol)

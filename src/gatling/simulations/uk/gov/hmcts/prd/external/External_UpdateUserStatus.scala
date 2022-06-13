@@ -20,6 +20,7 @@ object External_UpdateUserStatus {
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
 
   val UpdateUserStatusString = "{ \"idamStatus\" : \"SUSPENDED\"}"
+  val UpdateUserStatusString2 = "{ \"idamStatus\" : \"ACTIVE\"}"
 
   // val EditUsrStatusMin = config.getString("internal.editUsrStatusMin").toInt
   // val EditUsrStatusMax = config.getString("internal.editUsrStatusMax").toInt
@@ -35,6 +36,14 @@ object External_UpdateUserStatus {
       .feed(OrgIdData)
 
       .exec(http("RD29_External_UpdateUserStatus")
+        .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${s2sToken}")
+        .body(StringBody(UpdateUserStatusString2))
+        .header("Content-Type", "application/json")
+        .check(status is 200))
+
+      .exec(http("RD30_External_UpdateUserStatus")
         .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
