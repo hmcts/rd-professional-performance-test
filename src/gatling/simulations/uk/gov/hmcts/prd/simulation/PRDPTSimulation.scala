@@ -36,7 +36,7 @@ class PRDPTSimulation extends Simulation{
 	/* PERFORMANCE TEST CONFIGURATION */
 	val prdInternalTargetPerHour:Double = 360
 	val prdExternalTargetPerHour:Double = 360
-  val ldTargetPerHour:Double = 1000
+  val ldTargetPerHour:Double = 200
 
 	val rampUpDurationMins = 5
 	val rampDownDurationMins = 5

@@ -14,17 +14,20 @@ object LRD_ApiController {
 
   val GetBuildingLocations = 
 
-    feed(regions)
+    repeat(10) {
 
-    .exec(http("LD01_GetBuildingLocations")
-      .get(Environment.lrdUrl + "/refdata/location/building-locations")
-      .header("Authorization", "Bearer ${accessToken}")
-      .header("ServiceAuthorization", "Bearer ${rd_location_ref_apiBearerToken}")
-      .header("accept", "application/json")
-      .formParam("region_id", "${region}")
-      )
+      feed(regions)
 
-    .pause(Environment.thinkTime)
+      .exec(http("LD01_GetBuildingLocations")
+        .get(Environment.lrdUrl + "/refdata/location/building-locations")
+        .header("Authorization", "Bearer ${accessToken}")
+        .header("ServiceAuthorization", "Bearer ${rd_location_ref_apiBearerToken}")
+        .header("accept", "application/json")
+        .formParam("region_id", "${region}")
+        )
+
+      .pause(Environment.thinkTime)
+    }
 
   val GetOrgServices = 
 
