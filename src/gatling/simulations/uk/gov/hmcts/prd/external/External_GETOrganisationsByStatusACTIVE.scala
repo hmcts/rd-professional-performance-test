@@ -16,7 +16,7 @@ object External_GETOrganisationsByStatusACTIVE {
 
   val GETOrganisationsByStatusACTIVE = 
 
-  repeat(4) {
+  repeat(7) {
     
     exec(http("RD26_External_GetOrganizationsByStatusACTIVE")
       .get("/refdata/external/v1/organisations/status/ACTIVE")

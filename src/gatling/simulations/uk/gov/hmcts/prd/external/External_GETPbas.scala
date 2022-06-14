@@ -14,7 +14,7 @@ object External_GETPbas {
 
   val GETPbas = 
 
-    repeat(1) {
+    repeat(2) {
     
       exec(http("RD24_External_RetrievesOrganisationsPaymentAccounts")
         .get("/refdata/external/v1/organisations/pbas?email=${Email}")
