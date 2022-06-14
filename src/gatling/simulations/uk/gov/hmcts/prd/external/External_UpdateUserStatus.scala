@@ -46,6 +46,8 @@ object External_UpdateUserStatus {
           .check(status is 200))
       }
 
+      .pause(Environment.thinkTime)
+
       .exec(http("RD30_External_UpdateUserStatus")
         .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")

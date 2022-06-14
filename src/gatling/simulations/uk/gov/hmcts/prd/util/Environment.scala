@@ -8,6 +8,7 @@ object Environment {
   val IDAMUrl = "https://idam-api.${env}.platform.hmcts.net"
   val S2SUrl = "http://rpe-service-auth-provider-${env}.service.core-compute-${env}.internal/testing-support"
   val BaseUrl = "http://rd-professional-api-${env}.service.core-compute-${env}.internal"
+  val lrdUrl = "http://rd-location-ref-api-${env}.service.core-compute-${env}.internal"
   val IDAM_Secret = ConfigFactory.load.getString("auth.clientSecret")
   val S2S_ServiceName = "rd_professional_api"
 

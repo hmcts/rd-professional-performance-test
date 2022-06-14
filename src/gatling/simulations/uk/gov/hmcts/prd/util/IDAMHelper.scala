@@ -34,4 +34,16 @@ object IDAMHelper {
 
     .pause(Environment.thinkTime)
 
+  val getIdamTokenLatest3 =
+
+    exec(http("Token_030_GetAuthToken")
+      .post(IDAMUrl  + "/o/token?grant_type=password&username=prd-admin@gmail.com&password=Password12&client_id=rd_location_ref_api&client_secret=" + IDAM_Secret + "&redirect_uri=" + Environment.lrdUrl + "/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
+      .header("Content-Type", "application/x-www-form-urlencoded")
+      .header("Content-Length", "0")
+      .check(status is 200)
+      .check(jsonPath("$.access_token").saveAs("accessToken")))
+      .exitHereIfFailed
+
+    .pause(Environment.thinkTime)
+
 }

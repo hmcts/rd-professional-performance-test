@@ -5,6 +5,7 @@ import io.gatling.core.Predef.{exec, _}
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.external._
 import uk.gov.hmcts.prd.internal._
+import uk.gov.hmcts.prd.location._
 import uk.gov.hmcts.prd.util.{CreateUser, IDAMHelper, S2SHelper, Environment}
 import io.gatling.core.controller.inject.open.OpenInjectionStep
 import io.gatling.commons.stats.assertion.Assertion
@@ -35,6 +36,7 @@ class PRDPTSimulation extends Simulation{
 	/* PERFORMANCE TEST CONFIGURATION */
 	val prdInternalTargetPerHour:Double = 360
 	val prdExternalTargetPerHour:Double = 360
+  val ldTargetPerHour:Double = 1000
 
 	val rampUpDurationMins = 5
 	val rampDownDurationMins = 5
@@ -119,6 +121,20 @@ class PRDPTSimulation extends Simulation{
       )
 		}
 
+  val LDScenario = scenario("Location Ref Data Scenario")
+    .exitBlockOnFail {
+      exec(_.set("env", s"${env}"))
+        .exec(
+          IDAMHelper.getIdamTokenLatest,
+          S2SHelper.s2s("rd_location_ref_api"),
+          LRD_ApiController.GetBuildingLocations,
+          LRD_ApiController.GetOrgServices,
+          LRD_ApiController.GetRegions,
+          LRD_VenueController.GetCourtVenues,
+          LRD_VenueController.CourtVenueSearch
+        )
+    }
+
 	/*===============================================================================================
 	* Simulation Configuration
 	 ===============================================================================================*/
@@ -172,6 +188,7 @@ class PRDPTSimulation extends Simulation{
 	setUp(
 		PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		
 	).protocols(httpProtocol)
      .assertions(assertions(testType))
