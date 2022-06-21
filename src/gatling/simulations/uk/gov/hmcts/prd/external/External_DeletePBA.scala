@@ -11,7 +11,7 @@ object External_DeletePBA {
 
   val DeletePBA = 
   
-    exec(http("RD25_External_DeletePBA")
+    exec(http("RD26_External_DeletePBA")
       .delete("/refdata/external/v1/organisations/pba")
       .header("Authorization", "Bearer ${accessToken}")
       .header("ServiceAuthorization", "Bearer ${s2sToken}")

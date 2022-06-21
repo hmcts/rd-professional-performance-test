@@ -18,7 +18,7 @@ object External_GETOrganisationsByStatusACTIVE {
 
   repeat(7) {
     
-    exec(http("RD26_External_GetOrganizationsByStatusACTIVE")
+    exec(http("RD27_External_GetOrganizationsByStatusACTIVE")
       .get("/refdata/external/v1/organisations/status/ACTIVE")
       .header("Authorization", "Bearer ${accessToken}")
       .header("ServiceAuthorization", "Bearer ${s2sToken}")

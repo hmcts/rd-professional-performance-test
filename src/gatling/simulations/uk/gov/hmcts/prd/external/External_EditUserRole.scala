@@ -34,8 +34,8 @@ object External_EditUserRole {
 
       .feed(OrgIdData)
 
-      .exec(http("RD28_External_EditUserRole")
-          .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
+      .exec(http("RD29_External_EditUserRole")
+        .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
         .body(StringBody(editInternalUserRoleString))

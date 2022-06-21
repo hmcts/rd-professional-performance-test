@@ -111,6 +111,7 @@ class PRDPTSimulation extends Simulation{
           External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
           External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
           External_GETPbas.GETPbas,
+          External_AddMultiplePBAs.AddMultiplePbas,
           External_DeletePBA.DeletePBA,
           External_GETOrganisation.GETOrganisation,
           External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,

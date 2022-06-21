@@ -30,7 +30,7 @@ object LRD_VenueController {
 
     feed(searches)
 
-    .exec(http("LD04_SearchCourtVenues")
+    .exec(http("LD05_SearchCourtVenues")
       .get(Environment.lrdUrl + "/refdata/location/court-venues/venue-search?search-string=${query}")
       .header("Authorization", "Bearer ${accessToken}")
       .header("ServiceAuthorization", "Bearer ${rd_location_ref_apiBearerToken}")

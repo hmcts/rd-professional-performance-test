@@ -37,7 +37,7 @@ object External_UpdateUserStatus {
 
       .repeat(2){
 
-        exec(http("RD29_External_UpdateUserStatus")
+        exec(http("RD30_External_UpdateUserStatus")
           .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
           .header("Authorization", "Bearer ${accessToken}")
           .header("ServiceAuthorization", "Bearer ${s2sToken}")
@@ -48,7 +48,7 @@ object External_UpdateUserStatus {
 
       .pause(Environment.thinkTime)
 
-      .exec(http("RD30_External_UpdateUserStatus")
+      .exec(http("RD31_External_UpdateUserStatus")
         .put("/refdata/external/v1/organisations/users/${userId}?origin=EXUI")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
