@@ -174,7 +174,7 @@ class PRDPTSimulation extends Simulation{
         else{
           Seq(global.successfulRequests.percent.gte(95),
             details("RD18_Internal_UpdateUserStatus").successfulRequests.count.is(1),
-            details("RD30_External_UpdateUserStatus").successfulRequests.count.is(1)
+            details("RD30_External_UpdateUserStatus").successfulRequests.count.is(2)
           )
         }
       case "pipeline" =>
