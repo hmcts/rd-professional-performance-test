@@ -168,13 +168,13 @@ class PRDPTSimulation extends Simulation{
         if (debugMode == "off") {
           Seq(global.successfulRequests.percent.gte(95),
             details("RD18_Internal_UpdateUserStatus").successfulRequests.count.gte((prdInternalTargetPerHour * 0.9).ceil.toInt),
-            details("RD29_External_UpdateUserStatus").successfulRequests.count.gte((prdExternalTargetPerHour * 0.9).ceil.toInt)
+            details("RD30_External_UpdateUserStatus").successfulRequests.count.gte((prdExternalTargetPerHour * 0.9).ceil.toInt)
           )
         }
         else{
           Seq(global.successfulRequests.percent.gte(95),
             details("RD18_Internal_UpdateUserStatus").successfulRequests.count.is(1),
-            details("RD29_External_UpdateUserStatus").successfulRequests.count.is(1)
+            details("RD30_External_UpdateUserStatus").successfulRequests.count.is(1)
           )
         }
       case "pipeline" =>
