@@ -6,6 +6,12 @@
   "roles": [
     {
       "code": "prd-admin"
+    },
+    {
+      "code": "pui-user-manager"
+    },
+    {
+      "code": "pui-finance-manager"
     }
   ]
 }

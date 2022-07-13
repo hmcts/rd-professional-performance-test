@@ -12,19 +12,18 @@ object External_AddMultiplePBAs {
 
   val config: Config = ConfigFactory.load()
   private val rng: Random = new Random()
-  private def paymentAccount1(): String = rng.alphanumeric.take(7).mkString
-  private def paymentAccount2(): String = rng.alphanumeric.take(7).mkString
-  private def paymentAccount3(): String = rng.alphanumeric.take(7).mkString
+  private def newpaymentAccount1(): String = rng.alphanumeric.take(7).mkString
+  private def newpaymentAccount2(): String = rng.alphanumeric.take(7).mkString
+  private def newpaymentAccount3(): String = rng.alphanumeric.take(7).mkString
 
-  val editPbasString = "{ \"paymentAccounts\": [ \"PBA${PaymentAccount1}\",\"PBA${PaymentAccount2}\",\"PBA${PaymentAccount3}\" ]}"
+  val editPbasString = "{ \"paymentAccounts\": [ \"PBA${PaymentAccount1}\",\"PBA${PaymentAccount2}\" ]}"
 
   val createAccounts = 
   
     exec(_.setAll(
-      ("PaymentAccount1",paymentAccount1()),
-      ("PaymentAccount2",paymentAccount2()),
-      ("PaymentAccount3",paymentAccount2())
-    ))
+      ("PaymentAccount1",newpaymentAccount1()),
+      ("PaymentAccount2",newpaymentAccount2())
+      ))
 
   val AddMultiplePbas = 
   

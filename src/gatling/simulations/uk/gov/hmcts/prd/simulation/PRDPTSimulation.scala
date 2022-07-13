@@ -77,7 +77,6 @@ class PRDPTSimulation extends Simulation{
           Internal_CreateOrganisation.createOrganisation,
           Internal_UpdateOrganisation.updateOrganisation,
           Internal_GETOrganisationByID.GETOrganisationByID,
-          // CreateUser.deleteUser,
           CreateUser.createUser,
           Internal_AddInternalUserToOrg.AddInternalUserToOrg,
           Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
@@ -188,9 +187,9 @@ class PRDPTSimulation extends Simulation{
   }
 
 	setUp(
-		// PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+		PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
-    // LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		
 	).protocols(httpProtocol)
      .assertions(assertions(testType))
