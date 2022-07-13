@@ -15,10 +15,10 @@ object Internal_GETPbas {
     repeat(1) {
   
       exec(http("RD12_Internal_RetrievesOrganisationsPaymentAccounts")
-        .get("/refdata/internal/v1/organisations/pbas?email=${Email}")
+        .get("/refdata/internal/v1/organisations/pbas?email=${adminEmail}") //Email
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
-        .header("UserEmail", "${Email}")
+        .header("UserEmail", "${adminEmail}") //Email
         .header("Content-Type", "application/json"))
         
       .pause(Environment.thinkTime)
@@ -27,7 +27,7 @@ object Internal_GETPbas {
         .get("/refdata/internal/v1/organisations/pba/accepted")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
-        .header("UserEmail", "${Email}")
+        .header("UserEmail", "${adminEmail}") //Email
         .header("Content-Type", "application/json"))
         
       .pause(Environment.thinkTime)

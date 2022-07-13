@@ -18,6 +18,7 @@ object Internal_EditUserRole {
   val config: Config = ConfigFactory.load()
 
   val OrgIdData = csv("prdIntOrgIDs.csv").circular
+  
   val editInternalUserRoleString = "{\n \"rolesAdd\": [ { \"name\": \"pui-case-manager\" }, { \"name\": \"caseworker\" } ], \"rolesDelete\": [ { \"name\": \"pui-case-manager\" }, { \"name\": \"caseworker\" } ]}\n"
 
   val EditInternalUserRole =  repeat(1){

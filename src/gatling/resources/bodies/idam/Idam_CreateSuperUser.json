@@ -1,0 +1,17 @@
+{
+  "email": "SuperUser${Email}",
+  "forename": "${FirstName}",
+  "surname": "${LastName}s",
+  "password": "${Password}",
+  "roles": [
+    {
+      "code": "prd-admin"
+    },
+    {
+      "code": "pui-user-manager"
+    },
+    {
+      "code": "pui-finance-manager"
+    }
+  ]
+}
