@@ -14,15 +14,14 @@ object CreateUser {
   private def firstName(): String = rng.alphanumeric.take(20).mkString
   private def lastName(): String = rng.alphanumeric.take(20).mkString
   private def email(): String = rng.alphanumeric.take(15).mkString + "@prdperftestuser.com"
-  private def password(): String = rng.alphanumeric.take(20).mkString
+  // private def password(): String = rng.alphanumeric.take(20).mkString
 
   val createAdminUser = 
   
     exec(_.setAll(
       ("FirstName",firstName()),
       ("LastName",lastName()),
-      ("Email", email()),
-      ("Password",password()),
+      ("Email", email())
     ))
 
     .exec(http("IDAM_CreateSuperUser")
@@ -45,8 +44,7 @@ object CreateUser {
     exec(_.setAll(
       ("FirstName",firstName()),
       ("LastName",lastName()),
-      ("Email", email()),
-      ("UserPassword",password()),
+      ("Email", email())
     ))
 
     .exec(http("IDAM_CreateUser")

@@ -2,7 +2,7 @@
   "email": "SuperUser${Email}",
   "forename": "${FirstName}",
   "surname": "${LastName}s",
-  "password": "${Password}",
+  "password": "Password12",
   "roles": [
     {
       "code": "prd-admin"

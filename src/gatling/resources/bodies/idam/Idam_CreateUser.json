@@ -2,5 +2,5 @@
   "email": "RDUser${Email}",
   "forename": "${FirstName}",
   "surname": "${LastName}",
-  "password": "${UserPassword}"
+  "password": "Password12"
 }
