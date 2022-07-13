@@ -13,8 +13,6 @@ object External_CreateOrganisation {
   private def sRAId(): String = rng.alphanumeric.take(15).mkString
   private def companyNumber(): String = rng.alphanumeric.take(8).mkString
   private def companyURL(): String = rng.alphanumeric.take(15).mkString
-  private def firstName(): String = rng.alphanumeric.take(20).mkString
-  private def lastName(): String = rng.alphanumeric.take(20).mkString
   private def paymentAccount1(): String = rng.alphanumeric.take(7).mkString
   private def paymentAccount2(): String = rng.alphanumeric.take(7).mkString
   private def paymentAccount3(): String = rng.alphanumeric.take(7).mkString
@@ -26,8 +24,6 @@ object External_CreateOrganisation {
     ("SRAId", sRAId()),
     ("CompanyNumber", companyNumber()),
     ("CompanyURL", companyURL()),
-    ("FirstName",firstName()),
-    ("LastName",lastName()),
     ("PaymentAccount1",paymentAccount1()),
     ("PaymentAccount2",paymentAccount2()),
     ("PaymentAccount3",paymentAccount3()),

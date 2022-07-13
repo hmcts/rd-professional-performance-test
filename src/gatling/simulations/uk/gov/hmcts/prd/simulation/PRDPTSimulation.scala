@@ -34,13 +34,13 @@ class PRDPTSimulation extends Simulation{
 	/* ******************************** */
 
 	/* PERFORMANCE TEST CONFIGURATION */
-	val prdInternalTargetPerHour:Double = 360
-	val prdExternalTargetPerHour:Double = 360
-  val ldTargetPerHour:Double = 200
+	val prdInternalTargetPerHour:Double = 360 //360
+	val prdExternalTargetPerHour:Double = 60 //360
+  val ldTargetPerHour:Double = 200 //200
 
-	val rampUpDurationMins = 5
-	val rampDownDurationMins = 5
-	val testDurationMins = 60
+	val rampUpDurationMins = 1 //5
+	val rampDownDurationMins = 1 //5
+	val testDurationMins = 1 //60
 
 	val numberOfPipelineUsers = 5
 	val pipelinePausesMillis:Long = 3000 //3 seconds
@@ -71,13 +71,12 @@ class PRDPTSimulation extends Simulation{
 		.exitBlockOnFail {
       exec(_.set("env", s"${env}"))
         .exec(
-          IDAMHelper.getIdamTokenLatest,
+          CreateUser.createAdminUser,
+          IDAMHelper.getAdminIdamToken,
           S2SHelper.S2SAuthToken,
-          CreateUser.createUser,
           Internal_CreateOrganisation.createOrganisation,
           Internal_UpdateOrganisation.updateOrganisation,
           Internal_GETOrganisationByID.GETOrganisationByID,
-          CreateUser.deleteUser,
           CreateUser.createUser,
           Internal_AddInternalUserToOrg.AddInternalUserToOrg,
           Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
@@ -91,7 +90,8 @@ class PRDPTSimulation extends Simulation{
           Internal_UpdatePBAStatus.Update,
           Internal_EditUserRole.EditInternalUserRole,
           Internal_UpdateUserStatus.UpdateInternalUserStatus,
-          CreateUser.deleteUser
+          CreateUser.deleteAdminUser,
+          CreateUser.deleteNewUser
         )
     }
 
@@ -99,26 +99,26 @@ class PRDPTSimulation extends Simulation{
     .exitBlockOnFail {
       exec(_.set("env", s"${env}"))
         .exec(
-          IDAMHelper.getIdamTokenLatest,
+          CreateUser.createAdminUser,
+          IDAMHelper.getAdminIdamToken,
           S2SHelper.S2SAuthToken,
-          CreateUser.createUser,
           External_CreateOrganisation.createOrganisation,
           Internal_UpdateOrganisation.updateOrganisation,
-          IDAMHelper.getIdamTokenLatest2,
           External_GETOrganisation.GETOrganisation,
           CreateUser.createUser,
           External_AddInternalUserToOrg.AddInternalUserToOrg,
-          External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-          External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
           External_GETPbas.GETPbas,
           External_AddMultiplePBAs.AddMultiplePbas,
           External_DeletePBA.DeletePBA,
+          External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+          External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
           External_GETOrganisation.GETOrganisation,
           External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
           External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
           External_EditUserRole.EditInternalUserRole,
           External_UpdateUserStatus.UpdateInternalUserStatus,
-          CreateUser.deleteUser
+          CreateUser.deleteAdminUser,
+          CreateUser.deleteNewUser
       )
 		}
 

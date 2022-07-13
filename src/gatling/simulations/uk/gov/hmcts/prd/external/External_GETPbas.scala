@@ -18,10 +18,10 @@ object External_GETPbas {
     repeat(2) {
     
       exec(http("RD24_External_RetrievesOrganisationsPaymentAccounts")
-        .get("/refdata/external/v1/organisations/pbas?email=${Email}")
+        .get("/refdata/external/v1/organisations/pbas?email=${adminEmail}")
         .header("Authorization", "Bearer ${accessToken}")
         .header("ServiceAuthorization", "Bearer ${s2sToken}")
-        .header("UserEmail", "${Email}")
+        .header("UserEmail", "${adminEmail}")
         .header("Content-Type", "application/json")
         .check(jsonPath("$.organisationEntityResponse.paymentAccount[1]").saveAs("PBANumber2"))
         .check(jsonPath("$.organisationEntityResponse.paymentAccount[2]").saveAs("PBANumber3")))

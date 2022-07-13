@@ -26,8 +26,6 @@ object Internal_CreateOrganisation {
       ("SRAId", sRAId()),
       ("CompanyNumber", companyNumber()),
       ("CompanyURL", companyURL()),
-      ("FirstName",firstName()),
-      ("LastName",lastName()),
       ("PaymentAccount1",paymentAccount1()),
       ("PaymentAccount2",paymentAccount2()),
       ("AddressLine1",addressLine1())
