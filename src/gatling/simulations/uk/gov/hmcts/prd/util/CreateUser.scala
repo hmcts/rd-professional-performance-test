@@ -60,10 +60,10 @@ object CreateUser {
       )
       .exitHereIfFailed
 
-      .exec( session => {
-        println("the email is "+session("userEmail").as[String])
-        session
-      })
+      // .exec( session => {
+      //   println("the email is "+session("userEmail").as[String])
+      //   session
+      // })
       
     .pause(7)
 
