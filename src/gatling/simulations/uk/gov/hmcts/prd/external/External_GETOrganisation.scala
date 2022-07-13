@@ -10,12 +10,9 @@ object External_GETOrganisation {
 
   val config: Config = ConfigFactory.load()
 
-  // val GetOrgByOrgIdMin = config.getString("external.getOrgByOrgIdMin").toInt
-  // val GetOrgByOrgIdMax = config.getString("external.getOrgByOrgIdMax").toInt
-
   val GETOrganisation = 
 
-    repeat(50){ 
+    repeat(1){ //50
     
       exec(http("RD20_External_GetOrganizations")
         .get("/refdata/external/v1/organisations")

@@ -9,9 +9,6 @@ object External_GETInternalUserForGivenOrganisations {
 
   val config: Config = ConfigFactory.load()
 
-  // val GetIntUsrByOrgIdMin = config.getString("external.getIntUsrByOrgIdMin").toInt
-  // val GetIntUsrByOrgIdMax = config.getString("external.getIntUsrByOrgIdMax").toInt
-
   val GETInternalUserForGivenOrganisations = 
   
   exec(http("RD22_External_GetInternalUserForGivenOrganisation")

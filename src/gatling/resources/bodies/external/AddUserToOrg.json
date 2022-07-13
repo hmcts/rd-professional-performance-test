@@ -1,0 +1,42 @@
+{
+  "firstName": "${userFirstname}",
+  "lastName": "${userLastname}",
+  "email": "${userEmail}",
+  "roles": [
+    "pui-user-manager",
+    "pui-organisation-manager"
+  ]
+ ,
+         "jurisdictions": [
+     {
+       "id": "Divorce"
+     },
+     {
+       "id": "SSCS"
+     },
+     {
+       "id": "Probate"
+     },
+     {
+       "id": "Public Law"
+     },
+     {
+       "id": "Bulk Scanning"
+     },
+     {
+       "id": "Immigration & Asylum"
+     },
+     {
+       "id": "Civil Money Claims"
+     },
+     {
+       "id": "Employment"
+     },
+     {
+       "id": "Family public law and adoption"
+     },
+     {
+       "id": "Civil enforcement and possession"
+     }
+   ]
+ }

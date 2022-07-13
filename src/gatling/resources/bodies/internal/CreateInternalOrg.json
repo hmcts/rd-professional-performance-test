@@ -1,5 +1,5 @@
 {
-  "name": "Kapil${FirstName} Jain${LastName}",
+  "name": "${FirstName} ${LastName}",
   "sraId": "TRA${SRAId}",
   "sraRegulated": true,
   "companyNumber": "${CompanyNumber}",
@@ -7,7 +7,7 @@
   "superUser": {
      "firstName": "${FirstName}",
      "lastName": "${LastName}",
-     "email": "${Email}",
+     "email": "${adminEmail}",
      "jurisdictions": [
         {
            "id": "Divorce"

@@ -1,0 +1,11 @@
+{
+  "email": "SuperUser${Email}",
+  "forename": "${FirstName}",
+  "surname": "${LastName}s",
+  "password": "${Password}",
+  "roles": [
+    {
+      "code": "prd-admin"
+    }
+  ]
+}

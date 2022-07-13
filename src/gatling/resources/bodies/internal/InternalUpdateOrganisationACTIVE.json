@@ -1,5 +1,5 @@
 {
-  "name": "Kapil${FirstName} Jain${LastName}",
+  "name": "${FirstName} ${LastName}",
   "status": "ACTIVE",
   "sraId": "TRA${SRAId}",
   "sraRegulated": true,
@@ -8,7 +8,7 @@
   "superUser": {
      "firstName": "${FirstName}",
      "lastName": "${LastName}",
-     "email": "${Email}",
+     "email": "${adminEmail}",
      "jurisdictions": [
         {
            "id": "Divorce"
@@ -54,7 +54,7 @@
         "townCity": "West Kirby",
         "county": "Wirral",
         "country": "UK",
-        "postCode": "TEST1",
+        "postCode": "KT25BU",
         "dxAddress": [
            {
               "dxNumber": "DX 1121111990",
