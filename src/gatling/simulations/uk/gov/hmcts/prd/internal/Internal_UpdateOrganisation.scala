@@ -44,6 +44,8 @@ object Internal_UpdateOrganisation {
       .body(ElFileBody("bodies/internal/InternalUpdateOrganisationPENDING.json"))
       .header("Content-Type", "application/json"))
 
+    .pause(Environment.thinkTime)
+
     .exec(http("RD04_Internal_ActivateOrganization")
       .put("/refdata/internal/v1/organisations/${NewPendingOrg_Id}")
       .header("Authorization", "Bearer ${accessToken}")
