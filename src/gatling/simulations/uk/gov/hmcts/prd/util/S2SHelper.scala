@@ -1,6 +1,6 @@
 package uk.gov.hmcts.prd.util
 
-import com.warrenstrange.googleauth.GoogleAuthenticator
+//import com.warrenstrange.googleauth.GoogleAuthenticator
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.prd.util.Environment._

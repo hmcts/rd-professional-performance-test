@@ -90,6 +90,7 @@ class PRDPTSimulation extends Simulation{
           Internal_UpdatePBAStatus.Update,
           Internal_EditUserRole.EditInternalUserRole,
           Internal_UpdateUserStatus.UpdateInternalUserStatus,
+          Internal_GETCaseFlags.GetCaseFlags,
           CreateUser.deleteAdminUser,
           CreateUser.deleteNewUser
         )
@@ -172,10 +173,7 @@ class PRDPTSimulation extends Simulation{
           )
         }
         else{
-          Seq(global.successfulRequests.percent.gte(95),
-            details("RD18_Internal_UpdateUserStatus").successfulRequests.count.is(1),
-            details("RD30_External_UpdateUserStatus").successfulRequests.count.is(2)
-          )
+          Seq(global.successfulRequests.percent.is(100))
         }
       case "pipeline" =>
         Seq(global.successfulRequests.percent.gte(95),
@@ -189,7 +187,7 @@ class PRDPTSimulation extends Simulation{
 	setUp(
 		PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
-    LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption)
 		
 	).protocols(httpProtocol)
      .assertions(assertions(testType))

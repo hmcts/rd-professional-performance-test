@@ -1,53 +1,40 @@
 plugins {
+    id 'org.owasp.dependencycheck' version '6.0.1'
+    id 'scala'
     id 'com.github.lkishalmi.gatling' version '3.0.2'
-    id "org.owasp.dependencycheck" version "5.2.1"
 }
 
-apply plugin: 'com.github.lkishalmi.gatling'
-apply plugin: 'scala'
+group 'uk.gov.hmcts.reform'
+version = '1.0'
 
-group 'KapilJain'
-version '1.0-SNAPSHOT'
+sourceCompatibility = "11"
+targetCompatibility = "11"
 
-/*sourceCompatibility = "11"
-targetCompatibility = "11"*/
+tasks.withType(JavaExec) {
+    jvmArgs = ['-Xms1024m', '-Xmx2048m']
+    /* Use the following args to build a report when a test was terminated
+    args = [
+        "--reports-only", "fact-20201109092032896",
+        '--results-folder', file('build/reports/gatling').absolutePath,
+        ]
+    */
+}
 
 repositories {
     mavenCentral()
-    jcenter()
-
 }
 
 ext {
-    gatlingVersion = '3.1.1'
-    scalaVersion = '2.12.8'
-}
-
-dependencies {
-    testCompile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
-    compileOnly group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
-    testCompile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
-    gatlingCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
-    gatlingCompile 'com.warrenstrange:googleauth:1.1.5'
-    gatlingCompile group: 'uk.gov.service.notify', name: 'notifications-java-client', version: '3.14.1-RELEASE'
-    gatlingRuntime group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
-}
-
-jar {
-    manifest {
-        attributes 'Main-Class': 'io.gatling.app.Gatling'
-    }
-    from {
-        configurations.testCompile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    from sourceSets.test.output
-    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+    gatlingVersion = '3.3.1'
+    scalaVersion = '2.12.12'
 }
 
 gatling {
-    toolVersion = '3.1.1'
-    scalaVersion = '2.12.8'
+    toolVersion '3.3.1'
+    scalaVersion '2.12.12'
     simulations = [
             'uk.gov.hmcts.prd.simulation.PRDPTSimulation'
     ]
 }
+
+ext ['netty.version'] = '4.0.51.Final'
