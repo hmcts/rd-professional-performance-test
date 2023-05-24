@@ -1,7 +1,7 @@
 {
-  "firstName": "${userFirstname}",
-  "lastName": "${userLastname}",
-  "email": "${userEmail}",
+  "firstName": "#{userFirstname}",
+  "lastName": "#{userLastname}",
+  "email": "#{userEmail}",
   "roles": [
     "pui-user-manager",
     "pui-organisation-manager"

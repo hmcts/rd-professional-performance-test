@@ -1,53 +1,50 @@
 plugins {
-    id 'com.github.lkishalmi.gatling' version '3.0.2'
-    id 'org.owasp.dependencycheck' version '8.0.1'
+  id 'org.owasp.dependencycheck' version '8.2.1'
+  id 'scala'
+  id 'java-library'
+  id 'io.gatling.gradle' version '3.9.3.1'
 }
-
-apply plugin: 'com.github.lkishalmi.gatling'
-apply plugin: 'scala'
-
-group 'KapilJain'
-version '1.0-SNAPSHOT'
-
-/*sourceCompatibility = "11"
-targetCompatibility = "11"*/
-
+ 
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
+}
+ 
+tasks.withType(JavaExec) {
+  // Configure the size of the JVM if necessary
+  jvmArgs = ['-Xms1024m', '-Xmx2048m']
+  /* Use the following args to build a report when a test was terminated
+  args = [
+      "--reports-only", "simulation-20201109092032896",
+      '--results-folder', file('build/reports/gatling').absolutePath,
+      ]
+  */
+}
+ 
+tasks.withType(Copy).all{
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+ 
 repositories {
-    mavenCentral()
-    jcenter()
-
+  mavenCentral()
 }
-
-ext {
-    gatlingVersion = '3.1.1'
-    scalaVersion = '2.12.8'
-}
-
-dependencies {
-    testCompile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
-    compileOnly group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
-    testCompile group: 'io.gatling', name: 'gatling-app', version: gatlingVersion
-    gatlingCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
-    gatlingCompile 'com.warrenstrange:googleauth:1.1.5'
-    gatlingCompile group: 'uk.gov.service.notify', name: 'notifications-java-client', version: '3.14.1-RELEASE'
-    gatlingRuntime group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
-}
-
-jar {
-    manifest {
-        attributes 'Main-Class': 'io.gatling.app.Gatling'
-    }
-    from {
-        configurations.testCompile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    from sourceSets.test.output
-    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
-}
-
+ 
 gatling {
-    toolVersion = '3.1.1'
-    scalaVersion = '2.12.8'
-    simulations = [
-            'uk.gov.hmcts.prd.simulation.PRDPTSimulation'
-    ]
+  gatlingVersion '3.9.3'
+  scalaVersion '2.13.10'
+  simulations = {
+    include "simulations/PRDPTSimulation.scala"
+  }
+}
+ 
+sourceSets {
+  gatling {
+    scala {
+      srcDir 'src/gatling/simulations'
+    }
+    resources {
+      srcDir 'src/gatling/resources'
+    }
+  }
 }

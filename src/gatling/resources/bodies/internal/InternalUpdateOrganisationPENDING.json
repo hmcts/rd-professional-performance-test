@@ -1,12 +1,12 @@
 {
-  "name": "${FirstName} ${LastName}",
+  "name": "RDPerf${FirstName} ${LastName}",
   "status": "PENDING",
   "sraId": "TRA${SRAId}",
   "sraRegulated": true,
   "companyNumber": "${CompanyNumber}",
   "companyUrl": "www.tr${CompanyURL}.com",
   "superUser": {
-     "firstName": "${FirstName}",
+     "firstName": "RDPerf${FirstName}",
      "lastName": "${LastName}",
      "email": "${adminEmail}",
      "jurisdictions": [
@@ -49,7 +49,7 @@
   "contactInformation": [
      {
         "addressLine1": "${AddressLine1} high road",
-        "addressLine2": "${FirstName} ${LastName}",
+        "addressLine2": "RDPerf${FirstName} ${LastName}",
         "addressLine3": "Maharaj road",
         "townCity": "West Kirby",
         "county": "Wirral",
