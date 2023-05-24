@@ -1,13 +1,13 @@
 {
-  "name": "RDPerf${FirstName} ${LastName}",
-  "sraId": "TRA${SRAId}",
+  "name": "RDPerf#{FirstName} #{LastName}",
+  "sraId": "TRA#{SRAId}",
   "sraRegulated": true,
-  "companyNumber": "${CompanyNumber}",
-  "companyUrl": "www.tr${CompanyURL}.com",
+  "companyNumber": "#{CompanyNumber}",
+  "companyUrl": "www.tr#{CompanyURL}.com",
   "superUser": {
-     "firstName": "RDPerf${FirstName}",
-     "lastName": "${LastName}",
-     "email": "${adminEmail}",
+     "firstName": "RDPerf#{FirstName}",
+     "lastName": "#{LastName}",
+     "email": "#{adminEmail}",
      "jurisdictions": [
         {
            "id": "Divorce"
@@ -42,13 +42,13 @@
      ]
   },
   "paymentAccount": [
-     "PBA${PaymentAccount1}",
-     "PBA${PaymentAccount2}"
+     "PBA#{PaymentAccount1}",
+     "PBA#{PaymentAccount2}"
   ],
   "contactInformation": [
      {
-        "addressLine1": "${AddressLine1} high road",
-        "addressLine2": "RDPerf${FirstName} ${LastName}",
+        "addressLine1": "#{AddressLine1} high road",
+        "addressLine2": "RDPerf#{FirstName} #{LastName}",
         "addressLine3": "Maharaj road",
         "townCity": "West Kirby",
         "county": "Wirral",
