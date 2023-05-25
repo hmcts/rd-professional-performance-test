@@ -6,6 +6,7 @@ import io.gatling.http.Predef._
 import scenarios.external._
 import scenarios.internal._
 import scenarios.location._
+import scenarios.caseworker._
 import utils._
 import io.gatling.core.controller.inject.open.OpenInjectionStep
 import io.gatling.commons.stats.assertion.Assertion
@@ -37,6 +38,7 @@ class PRDPTSimulation extends Simulation{
 	val prdInternalTargetPerHour:Double = 360 //360
 	val prdExternalTargetPerHour:Double = 360 //360
   val ldTargetPerHour:Double = 200 //200
+  val crdTargetPerHour:Double = 20 //20
 
 	val rampUpDurationMins = 5 //5
 	val rampDownDurationMins = 5 //5
@@ -136,6 +138,16 @@ class PRDPTSimulation extends Simulation{
         )
     }
 
+  val CRDScenario = scenario("CRDScenario")
+    .exitBlockOnFail {
+      exec(_.set("env", s"${env}"))
+        .exec(
+          IDAMHelper.getCrdIdamToken,
+          S2SHelper.s2s("rd_location_ref_api"),
+          PostScenario.PostScenario
+        )
+    }
+
 	/*===============================================================================================
 	* Simulation Configuration
 	 ===============================================================================================*/
@@ -190,6 +202,7 @@ class PRDPTSimulation extends Simulation{
 		PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
     LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    CRDScenario.inject(simulationProfile(testType, crdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption)
 		
 	).protocols(httpProtocol)
      .assertions(assertions(testType))

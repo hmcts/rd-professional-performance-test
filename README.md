@@ -1,6 +1,6 @@
 # rd-performance
 
-Gatling performance tests for Professional Reference Data
+Gatling performance tests for Caseworker, Location and Professional Reference Data
 
 To run locally:
 - Performance test against the perftest environment: `./gradlew gatlingRun`
