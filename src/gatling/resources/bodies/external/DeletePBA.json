@@ -1,5 +1,5 @@
 {
   "paymentAccounts": [
-    "${PBANumber2}","${PBANumber3}"
+    "#{PBANumber2}","#{PBANumber3}"
   ]
 }   

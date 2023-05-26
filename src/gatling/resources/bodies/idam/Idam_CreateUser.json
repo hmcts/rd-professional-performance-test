@@ -1,6 +1,6 @@
 {
-  "email": "RDUser${Email}",
-  "forename": "${FirstName}",
-  "surname": "${LastName}",
+  "email": "RDUser#{Email}",
+  "forename": "#{FirstName}",
+  "surname": "#{LastName}",
   "password": "Password12"
 }

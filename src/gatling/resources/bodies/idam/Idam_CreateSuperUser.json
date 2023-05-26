@@ -1,7 +1,7 @@
 {
-  "email": "SuperUser${Email}",
-  "forename": "${FirstName}",
-  "surname": "${LastName}s",
+  "email": "SuperUser#{Email}",
+  "forename": "#{FirstName}",
+  "surname": "#{LastName}s",
   "password": "Password12",
   "roles": [
     {
