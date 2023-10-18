@@ -34,7 +34,7 @@ object IDAMHelper {
   val getCrdIdamToken = 
 
     exec(http("Token_010_GetAuthToken")
-      .post(IDAMUrl + "/o/token?grant_type=password&username=CWR-func-test-user-test500@justice.gov.uk&password=Testing1234&client_id=rd-caseworker-ref-api&client_secret=" + IDAM_Secret + "&redirect_uri=https://rd-caseworker-api-#{env}.service.core-compute-#{env}.internal/oauth2redirect&scope=openid%20profile%20roles%20manage-user%20create-user%20search-user")
+      .post(IDAMUrl + "/o/token?grant_type=password&username=CWR-func-test-user-test500@justice.gov.uk&password=Testing1234&client_id=rd-caseworker-ref-api&client_secret=" + IDAM_Secret + "&redirect_uri=https://rd-caseworker-ref-api-#{env}.service.core-compute-#{env}.internal/oauth2redirect&scope=openid%20profile%20roles%20manage-user%20create-user%20search-user")
       .header("Content-Type", "application/x-www-form-urlencoded")
       .header("Content-Length", "0")
       .check(jsonPath("$.access_token").saveAs("accessToken")))
