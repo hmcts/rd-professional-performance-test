@@ -92,6 +92,7 @@ class PRDPTSimulation extends Simulation{
           Internal_UpdatePBAStatus.Update,
           Internal_EditUserRole.EditInternalUserRole,
           Internal_UpdateUserStatus.UpdateInternalUserStatus,
+          Internal_GETCaseFlags.GetCaseFlags,
           CreateUser.deleteAdminUser,
           CreateUser.deleteNewUser
         )
@@ -143,7 +144,7 @@ class PRDPTSimulation extends Simulation{
       exec(_.set("env", s"${env}"))
         .exec(
           IDAMHelper.getCrdIdamToken,
-          S2SHelper.s2s("rd_location_ref_api"),
+          S2SHelper.s2s("rd_caseworker_ref_api"),
           PostScenario.PostScenario
         )
     }
