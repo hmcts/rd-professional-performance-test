@@ -72,81 +72,81 @@ class PRDPTSimulation extends Simulation{
 	val PRDInternalScenario = scenario("PRD Internal Scenario")
 		.exitBlockOnFail {
       exec(_.set("env", s"${env}"))
-        .exec(
-          CreateUser.createAdminUser,
-          IDAMHelper.getAdminIdamToken,
-          S2SHelper.S2SAuthToken,
-          Internal_CreateOrganisation.createOrganisation,
-          Internal_UpdateOrganisation.updateOrganisation,
-          Internal_GETOrganisationByID.GETOrganisationByID,
-          CreateUser.createUser,
-          Internal_AddInternalUserToOrg.AddInternalUserToOrg,
-          Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-          Internal_GETAllOrganisation.GETAllOrganisation,
-          Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
-          Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
-          Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
-          Internal_GETPbas.GETPbas,
-          Internal_EditPbas.EditPbas,
-          Internal_GetOrganisation.GETOrg,
-          Internal_UpdatePBAStatus.Update,
-          Internal_EditUserRole.EditInternalUserRole,
-          Internal_UpdateUserStatus.UpdateInternalUserStatus,
-          Internal_GETCaseFlags.GetCaseFlags,
-          CreateUser.deleteAdminUser,
-          CreateUser.deleteNewUser
-        )
+      .exec(
+        CreateUser.createAdminUser,
+        IDAMHelper.getAdminIdamToken,
+        S2SHelper.S2SAuthToken,
+        Internal_CreateOrganisation.createOrganisation,
+        Internal_UpdateOrganisation.updateOrganisation,
+        Internal_GETOrganisationByID.GETOrganisationByID,
+        CreateUser.createUser,
+        Internal_AddInternalUserToOrg.AddInternalUserToOrg,
+        Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+        Internal_GETAllOrganisation.GETAllOrganisation,
+        Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+        Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+        Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
+        Internal_GETPbas.GETPbas,
+        Internal_EditPbas.EditPbas,
+        Internal_GetOrganisation.GETOrg,
+        Internal_UpdatePBAStatus.Update,
+        Internal_EditUserRole.EditInternalUserRole,
+        Internal_UpdateUserStatus.UpdateInternalUserStatus,
+        Internal_GETCaseFlags.GetCaseFlags,
+        CreateUser.deleteAdminUser,
+        CreateUser.deleteNewUser
+      )
     }
 
   val PRDExternalScenario = scenario("PRD External Scenario")
     .exitBlockOnFail {
       exec(_.set("env", s"${env}"))
-        .exec(
-          CreateUser.createAdminUser,
-          IDAMHelper.getAdminIdamToken,
-          S2SHelper.S2SAuthToken,
-          External_CreateOrganisation.createOrganisation,
-          Internal_UpdateOrganisation.updateOrganisation,
-          External_GETOrganisation.GETOrganisation,
-          CreateUser.createUser,
-          External_AddInternalUserToOrg.AddInternalUserToOrg,
-          External_GETPbas.GETPbas,
-          External_AddMultiplePBAs.AddMultiplePbas,
-          External_DeletePBA.DeletePBA,
-          External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
-          External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
-          External_GETOrganisation.GETOrganisation,
-          External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
-          External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
-          External_EditUserRole.EditInternalUserRole,
-          External_UpdateUserStatus.UpdateInternalUserStatus,
-          CreateUser.deleteAdminUser,
-          CreateUser.deleteNewUser
+      .exec(
+        CreateUser.createAdminUser,
+        IDAMHelper.getAdminIdamToken,
+        S2SHelper.S2SAuthToken,
+        External_CreateOrganisation.createOrganisation,
+        Internal_UpdateOrganisation.updateOrganisation,
+        External_GETOrganisation.GETOrganisation,
+        CreateUser.createUser,
+        External_AddInternalUserToOrg.AddInternalUserToOrg,
+        External_GETPbas.GETPbas,
+        External_AddMultiplePBAs.AddMultiplePbas,
+        External_DeletePBA.DeletePBA,
+        External_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+        External_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+        External_GETOrganisation.GETOrganisation,
+        External_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+        External_GETStatusInternalUserForActiveOrganisationByEmail.GETStatusInternalUserForActiveOrganisationByEmail,
+        External_EditUserRole.EditInternalUserRole,
+        External_UpdateUserStatus.UpdateInternalUserStatus,
+        CreateUser.deleteAdminUser,
+        CreateUser.deleteNewUser
       )
 		}
 
   val LDScenario = scenario("Location Ref Data Scenario")
     .exitBlockOnFail {
       exec(_.set("env", s"${env}"))
-        .exec(
-          IDAMHelper.getIdamTokenLatest,
-          S2SHelper.s2s("rd_location_ref_api"),
-          LRD_ApiController.GetBuildingLocations,
-          LRD_ApiController.GetOrgServices,
-          LRD_ApiController.GetRegions,
-          LRD_VenueController.GetCourtVenues,
-          LRD_VenueController.CourtVenueSearch
-        )
+      .exec(
+        IDAMHelper.getIdamTokenLatest,
+        S2SHelper.s2s("rd_location_ref_api"),
+        LRD_ApiController.GetBuildingLocations,
+        LRD_ApiController.GetOrgServices,
+        LRD_ApiController.GetRegions,
+        LRD_VenueController.GetCourtVenues,
+        LRD_VenueController.CourtVenueSearch
+      )
     }
 
   val CRDScenario = scenario("CRDScenario")
     .exitBlockOnFail {
       exec(_.set("env", s"${env}"))
-        .exec(
-          IDAMHelper.getCrdIdamToken,
-          S2SHelper.s2s("rd_caseworker_ref_api"),
-          PostScenario.PostScenario
-        )
+      .exec(
+        IDAMHelper.getCrdIdamToken,
+        S2SHelper.s2s("rd_caseworker_ref_api"),
+        PostScenario.PostScenario
+      )
     }
 
 	/*===============================================================================================
@@ -207,4 +207,5 @@ class PRDPTSimulation extends Simulation{
 		
 	).protocols(httpProtocol)
      .assertions(assertions(testType))
+     .maxDuration(85.minutes)
 }
