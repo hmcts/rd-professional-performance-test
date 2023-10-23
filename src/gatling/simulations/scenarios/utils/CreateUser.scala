@@ -13,7 +13,7 @@ object CreateUser {
   private val rng: Random = new Random()
   private def firstName(): String = rng.alphanumeric.take(20).mkString
   private def lastName(): String = rng.alphanumeric.take(20).mkString
-  private def email(): String = rng.alphanumeric.take(15).mkString + "@prdperftestuser.com"
+  private def email(): String = rng.alphanumeric.take(25).mkString + "@prdperftestuser.com"
   // private def password(): String = rng.alphanumeric.take(20).mkString
 
   val createAdminUser = 
