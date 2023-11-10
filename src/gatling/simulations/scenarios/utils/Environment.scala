@@ -11,6 +11,7 @@ object Environment {
   val lrdUrl = "http://rd-location-ref-api-#{env}.service.core-compute-#{env}.internal"
   val caseworkerUrl = "http://rd-caseworker-ref-api-#{env}.service.core-compute-#{env}.internal"
   val commonDataUrl = "http://rd-commondata-api-#{env}.service.core-compute-#{env}.internal"
+  val judicialUrl = "http://rd-judicial-api-#{env}.service.core-compute-#{env}.internal"
   val IDAM_Secret = ConfigFactory.load.getString("auth.clientSecret")
   val IDAM_CRDSecret = ConfigFactory.load.getString("auth.crdSecret")
   val S2S_ServiceName = "rd_professional_api"

@@ -7,6 +7,7 @@ import scenarios.external._
 import scenarios.internal._
 import scenarios.location._
 import scenarios.caseworker._
+import scenarios.judicial._
 import utils._
 import io.gatling.core.controller.inject.open.OpenInjectionStep
 import io.gatling.commons.stats.assertion.Assertion
@@ -38,6 +39,7 @@ class PRDPTSimulation extends Simulation{
 	val prdInternalTargetPerHour:Double = 360 //360
 	val prdExternalTargetPerHour:Double = 360 //360
   val ldTargetPerHour:Double = 200 //200
+  val jrdTargetPerHour:Double = 841
   val crdTargetPerHour:Double = 20 //20
 
 	val rampUpDurationMins = 5 //5
@@ -46,6 +48,8 @@ class PRDPTSimulation extends Simulation{
 
 	val numberOfPipelineUsers = 5
 	val pipelinePausesMillis:Long = 3000 //3 seconds
+
+  val feedServices = csv("Services.csv").random
 
 	//Determine the pause pattern to use:
 	//Performance test = use the pauses defined in the scripts
@@ -139,6 +143,19 @@ class PRDPTSimulation extends Simulation{
       )
     }
 
+  val JRDScenario = scenario("Judicial Ref Data Scenario")
+    .exitBlockOnFail {
+      exec(_.set("env", s"${env}"))
+      .feed(feedServices)
+      .exec(
+        IDAMHelper.getJrdIdamToken,
+        S2SHelper.s2s("rd_judicial_api"),
+        Judicial_Users.JudicialPostUsers)
+      .repeat(2) { 
+        exec(Judicial_Users.JudicialPostUsersSearch)
+      }
+    } 
+
   val CRDScenario = scenario("CRDScenario")
     .exitBlockOnFail {
       exec(_.set("env", s"${env}"))
@@ -203,7 +220,8 @@ class PRDPTSimulation extends Simulation{
 		PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
     LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
-    CRDScenario.inject(simulationProfile(testType, crdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption)
+    JRDScenario.inject(simulationProfile(testType, jrdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    // CRDScenario.inject(simulationProfile(testType, crdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption)
 		
 	).protocols(httpProtocol)
      .assertions(assertions(testType))
