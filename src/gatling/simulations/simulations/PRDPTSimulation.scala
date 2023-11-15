@@ -49,7 +49,7 @@ class PRDPTSimulation extends Simulation{
 	val numberOfPipelineUsers = 5
 	val pipelinePausesMillis:Long = 3000 //3 seconds
 
-  val feedServices = csv("Services.csv").random
+  val feedServices = csv("JudicialServices.csv").random
 
 	//Determine the pause pattern to use:
 	//Performance test = use the pauses defined in the scripts

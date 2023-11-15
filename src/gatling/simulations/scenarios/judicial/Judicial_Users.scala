@@ -11,12 +11,14 @@ object Judicial_Users {
 
   val JudicialPostUsers = 
 
-    exec(http("RD_Judicial_Users")
-      .post(Environment.judicialUrl + "/refdata/judicial/users/")
-      .header("Authorization", "Bearer #{accessToken}")
-      .header("ServiceAuthorization", "Bearer #{rd_judicial_apiBearerToken}")
-      .header("Content-Type", "application/vnd.jrd.v2+json")
-      .body(ElFileBody("bodies/judicial/PostUsers.json")))
+    group("RD_Judicial_Users") {
+      exec(http("RD_Judicial_Users_#{service}")
+        .post(Environment.judicialUrl + "/refdata/judicial/users/")
+        .header("Authorization", "Bearer #{accessToken}")
+        .header("ServiceAuthorization", "Bearer #{rd_judicial_apiBearerToken}")
+        .header("Content-Type", "application/vnd.jrd.v2+json")
+        .body(ElFileBody("bodies/judicial/PostUsers.json")))
+    }
 
     .pause(Environment.thinkTime)
 
