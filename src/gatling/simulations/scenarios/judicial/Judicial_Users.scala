@@ -17,7 +17,7 @@ object Judicial_Users {
         .header("Authorization", "Bearer #{accessToken}")
         .header("ServiceAuthorization", "Bearer #{rd_judicial_apiBearerToken}")
         .header("Content-Type", "application/json")
-        // .header("Accept", "application/vnd.jrd.api+json;Version=2.0")
+        .header("Accept", "application/vnd.jrd.api+json;Version=2.0")
         .body(ElFileBody("bodies/judicial/PostUsers.json")))
     }
 
@@ -30,7 +30,7 @@ object Judicial_Users {
       .header("Authorization", "Bearer #{accessToken}")
       .header("ServiceAuthorization", "Bearer #{rd_judicial_apiBearerToken}")
       .header("Content-Type", "application/json")
-      // .header("Accept", "application/vnd.jrd.api+json;Version=2.0")
+      .header("Accept", "application/vnd.jrd.api+json;Version=2.0")
       .body(ElFileBody("bodies/judicial/PostUsersSearch.json")))
 
     .pause(Environment.thinkTime)
