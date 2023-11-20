@@ -16,7 +16,8 @@ object Judicial_Users {
         .post(Environment.judicialUrl + "/refdata/judicial/users/")
         .header("Authorization", "Bearer #{accessToken}")
         .header("ServiceAuthorization", "Bearer #{rd_judicial_apiBearerToken}")
-        .header("Content-Type", "application/vnd.jrd.v2+json")
+        .header("Content-Type", "application/json")
+        // .header("Accept", "application/vnd.jrd.api+json;Version=2.0")
         .body(ElFileBody("bodies/judicial/PostUsers.json")))
     }
 
@@ -28,7 +29,8 @@ object Judicial_Users {
       .post(Environment.judicialUrl + "/refdata/judicial/users/search")
       .header("Authorization", "Bearer #{accessToken}")
       .header("ServiceAuthorization", "Bearer #{rd_judicial_apiBearerToken}")
-      .header("Content-Type", "application/vnd.jrd.v2+json")
+      .header("Content-Type", "application/json")
+      // .header("Accept", "application/vnd.jrd.api+json;Version=2.0")
       .body(ElFileBody("bodies/judicial/PostUsersSearch.json")))
 
     .pause(Environment.thinkTime)
