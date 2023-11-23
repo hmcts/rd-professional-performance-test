@@ -17,7 +17,7 @@ object Judicial_Users {
       .header("ServiceAuthorization", "Bearer #{rd_judicial_apiBearerToken}")
       .header("Content-Type", "application/json")
       .header("Accept", "application/vnd.jrd.api+json;Version=2.0")
-      .header("page_size", "20")
+      .header("page_size", "10")
       .body(ElFileBody("bodies/judicial/PostUsers.json")))
 
     .pause(Environment.thinkTime)
