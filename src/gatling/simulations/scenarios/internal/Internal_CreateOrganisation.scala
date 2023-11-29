@@ -39,4 +39,25 @@ object Internal_CreateOrganisation {
       .check(status in (200,201)))
 
     .pause(Environment.thinkTime)
+
+  val createOtherOrganisation = 
+
+    exec(_.setAll(
+      ("SRAId", sRAId()),
+      ("CompanyNumber", companyNumber()),
+      ("CompanyURL", companyURL()),
+      ("PaymentAccount1",paymentAccount1()),
+      ("PaymentAccount2",paymentAccount2()),
+      ("AddressLine1",addressLine1())
+    ))
+
+    .exec(http("RD01_Internal_CreateOtherOrganization")
+      .post("/refdata/internal/v1/organisations")
+      .header("ServiceAuthorization", "Bearer #{s2sToken}")
+      .body(ElFileBody("bodies/internal/CreateOtherInternalOrg.json"))
+      .header("Content-Type", "application/json")
+      .check(jsonPath("$.organisationIdentifier").saveAs("NewPendingOrg_Id"))
+      .check(status in (200,201)))
+
+    .pause(Environment.thinkTime)
 }

@@ -37,6 +37,7 @@ class PRDPTSimulation extends Simulation{
 
 	/* PERFORMANCE TEST CONFIGURATION */
 	val prdInternalTargetPerHour:Double = 100 //360
+  val prdOtherInternalTargetPerHour:Double = 20
 	val prdExternalTargetPerHour:Double = 100 //360
   val ldTargetPerHour:Double = 200 //200
   val jrdTargetPerHour:Double = 841
@@ -101,6 +102,36 @@ class PRDPTSimulation extends Simulation{
         CreateUser.deleteNewUser
       )
     }
+
+  val PRDInternalOtherScenario = scenario("PRD Internal Other Scenario")
+		.exitBlockOnFail {
+      exec(_.set("env", s"${env}"))
+      .exec(
+        CreateUser.createAdminUser,
+        IDAMHelper.getAdminIdamToken,
+        S2SHelper.S2SAuthToken,
+        Internal_CreateOrganisation.createOtherOrganisation,
+        Internal_UpdateOrganisation.updateOtherOrganization,
+        Internal_GETOrganisationByID.GETOrganisationByID,
+        CreateUser.createUser,
+        Internal_AddInternalUserToOrg.AddInternalUserToOrg,
+        Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
+        Internal_GETAllOrganisation.GETAllOrganisation,
+        Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+        Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
+        Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
+        Internal_GETPbas.GETPbas,
+        Internal_EditPbas.EditPbas,
+        Internal_GetOrganisation.GETOrg,
+        Internal_UpdatePBAStatus.Update,
+        Internal_EditUserRole.EditInternalUserRole,
+        Internal_UpdateUserStatus.UpdateInternalUserStatus,
+        Internal_GETCaseFlags.GetCaseFlags,
+        CreateUser.deleteAdminUser,
+        CreateUser.deleteNewUser
+      )
+    }
+    
 
   val PRDExternalScenario = scenario("PRD External Scenario")
     .exitBlockOnFail {
@@ -218,9 +249,11 @@ class PRDPTSimulation extends Simulation{
 
 	setUp(
 		PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    PRDInternalOtherScenario.inject(simulationProfile(testType, prdOtherInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
     LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
     JRDScenario.inject(simulationProfile(testType, jrdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+
     // CRDScenario.inject(simulationProfile(testType, crdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption)
 		
 	).protocols(httpProtocol)

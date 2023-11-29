@@ -53,4 +53,28 @@ object Internal_UpdateOrganisation {
       .header("Content-Type", "application/json"))
 
     .pause(Environment.thinkTime)
+
+  val updateOtherOrganization = 
+
+    exec(_.setAll(
+      ("SRAId", sRAId()),
+      ("CompanyNumber", companyNumber()),
+      ("CompanyURL", companyURL()),
+      ("PaymentAccount1",paymentAccount1()),
+      ("PaymentAccount2",paymentAccount2()),
+      ("AddressLine1",addressLine1())
+    ))
+
+    .feed(OrgIdData)
+
+    .exec(http("RD04_Internal_ActivateOtherOrganization")
+      .put("/refdata/internal/v1/organisations/#{NewPendingOrg_Id}")
+      .header("Authorization", "Bearer #{accessToken}")
+      .header("ServiceAuthorization", "Bearer #{s2sToken}")
+      .body(ElFileBody("bodies/internal/InternalUpdateOrganisationACTIVE.json"))
+      .header("Content-Type", "application/json"))
+
+    .pause(Environment.thinkTime)
+
+
 }
