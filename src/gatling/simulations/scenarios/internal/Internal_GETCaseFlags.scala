@@ -13,7 +13,7 @@ object Internal_GETCaseFlags {
 
   val GetCaseFlags = {
 
-    repeat(15) {
+    repeat(2) {
 
       feed(flagServices)
 
