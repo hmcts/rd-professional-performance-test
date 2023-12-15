@@ -13,29 +13,32 @@ object Internal_GETCaseFlags {
 
   val GetCaseFlags = 
 
-    feed(flagServices)
+    repeat(2) {
 
-    //XUI (the only current consumer of case/party flags) always calls this location API first to retrieve the service code for the case type
-    .exec(S2SHelper.s2s("rd_location_ref_api"))
+      feed(flagServices)
 
-    .exec(http("RD32_Internal_GetServiceCode")
-      .get(Environment.lrdUrl + "/refdata/location/orgServices?ccdCaseType=#{ccdCaseType}")
-      .header("Authorization", "Bearer #{accessToken}")
-      .header("ServiceAuthorization", "#{rd_location_ref_apiBearerToken}")
-      .header("Content-Type", "application/json")
-      .check(jsonPath("$[0].service_code").saveAs("serviceCode")))
+      //XUI (the only current consumer of case/party flags) always calls this location API first to retrieve the service code for the case type
+      .exec(S2SHelper.s2s("rd_location_ref_api"))
 
-    .feed(flagType)
+      .exec(http("RD32_Internal_GetServiceCode")
+        .get(Environment.lrdUrl + "/refdata/location/orgServices?ccdCaseType=#{ccdCaseType}")
+        .header("Authorization", "Bearer #{accessToken}")
+        .header("ServiceAuthorization", "#{rd_location_ref_apiBearerToken}")
+        .header("Content-Type", "application/json")
+        .check(jsonPath("$[0].service_code").saveAs("serviceCode")))
 
-    .exec(S2SHelper.s2s("rd_commondata_api"))
+      .feed(flagType)
 
-    .exec(http("RD33_Internal_GetFlags#{flagType}#{ccdCaseType}")
-      .get(Environment.commonDataUrl + "/refdata/commondata/caseflags/service-id=#{serviceCode}?flag-type=#{flagType}")
-      .header("Authorization", "Bearer #{accessToken}")
-      .header("ServiceAuthorization", "#{rd_commondata_apiBearerToken}")
-      .header("Content-Type", "application/json")
-      .check(substring("flags")))
+      .exec(S2SHelper.s2s("rd_commondata_api"))
 
-    .pause(Environment.thinkTime)
+      .exec(http("RD33_Internal_GetFlags#{flagType}#{ccdCaseType}")
+        .get(Environment.commonDataUrl + "/refdata/commondata/caseflags/service-id=#{serviceCode}?flag-type=#{flagType}")
+        .header("Authorization", "Bearer #{accessToken}")
+        .header("ServiceAuthorization", "#{rd_commondata_apiBearerToken}")
+        .header("Content-Type", "application/json")
+        .check(substring("flags")))
+
+      .pause(Environment.thinkTime)
+    }
 
 }
