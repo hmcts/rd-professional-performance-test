@@ -42,10 +42,11 @@ class PRDPTSimulation extends Simulation{
   val ldTargetPerHour:Double = 200 //200
   val jrdTargetPerHour:Double = 841
   val crdTargetPerHour:Double = 20 //20
+  val GetOrgByIdamIdTargetPerHour:Double = 32000
 
-	val rampUpDurationMins = 5 //5
-	val rampDownDurationMins = 5 //5
-	val testDurationMins = 60 //60
+	val rampUpDurationMins = 1 //5
+	val rampDownDurationMins = 1 //5
+	val testDurationMins = 30 //60
 
 	val numberOfPipelineUsers = 5
 	val pipelinePausesMillis:Long = 3000 //3 seconds
@@ -160,6 +161,16 @@ class PRDPTSimulation extends Simulation{
       )
 		}
 
+  val GetOrgByIdamIdScenario = scenario("PRD Get Org Details by IDAM Id")
+    .exitBlockOnFail {
+      exec(_.set("env", s"${env}"))
+        .exec(
+          IDAMHelper.getProbateTokenLatest,
+          S2SHelper.s2s("rd_professional_api"),
+          Internal_GETOrgDetailsByUserId.GETOrgDetailsByUserId
+        )
+    }
+
   val LDScenario = scenario("Location Ref Data Scenario")
     .exitBlockOnFail {
       exec(_.set("env", s"${env}"))
@@ -228,14 +239,12 @@ class PRDPTSimulation extends Simulation{
       case "perftest" =>
         if (debugMode == "off") {
           Seq(global.successfulRequests.percent.gte(95),
-            details("RD18_Internal_UpdateUserStatus").successfulRequests.count.gte((prdInternalTargetPerHour * 0.9).ceil.toInt),
-            details("RD30_External_UpdateUserStatus").successfulRequests.count.gte((prdExternalTargetPerHour * 0.9).ceil.toInt)
+            details("RD34_Internal_GETOrgDetailsByUserId").successfulRequests.count.gte(GetOrgByIdamIdTargetPerHour.toInt)
           )
         }
         else{
           Seq(global.successfulRequests.percent.gte(95),
-            details("RD18_Internal_UpdateUserStatus").successfulRequests.count.is(1),
-            details("RD30_External_UpdateUserStatus").successfulRequests.count.is(2)
+            details("RD34_Internal_GETOrgDetailsByUserId").successfulRequests.count.is(1)
           )
         }
       case "pipeline" =>
@@ -248,11 +257,12 @@ class PRDPTSimulation extends Simulation{
   }
 
 	setUp(
-		PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
-    PRDInternalOtherScenario.inject(simulationProfile(testType, prdOtherInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
-		PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
-    LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
-    JRDScenario.inject(simulationProfile(testType, jrdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    GetOrgByIdamIdScenario.inject(simulationProfile(testType, GetOrgByIdamIdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption)
+		//PRDInternalScenario.inject(simulationProfile(testType, prdInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    //PRDInternalOtherScenario.inject(simulationProfile(testType, prdOtherInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+		//PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    //LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    //JRDScenario.inject(simulationProfile(testType, jrdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 
     // CRDScenario.inject(simulationProfile(testType, crdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption)
 		
