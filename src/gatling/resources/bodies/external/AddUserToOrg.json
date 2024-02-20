@@ -7,7 +7,7 @@
     "pui-organisation-manager"
   ]
  ,
-         "jurisdictions": [
+  "jurisdictions": [
      {
        "id": "Divorce"
      },

@@ -167,11 +167,16 @@ class PRDPTSimulation extends Simulation{
         IDAMHelper.getIdamTokenLatest,
         S2SHelper.s2s("rd_location_ref_api"),
         LRD_ApiController.GetBuildingLocations,
-        LRD_ApiController.GetOrgServices,
-        LRD_ApiController.GetRegions,
-        LRD_VenueController.GetCourtVenues,
-        LRD_VenueController.CourtVenueSearch
-      )
+        LRD_ApiController.GetRegions
+        )
+      .exec(LRD_VenueController.CourtVenueSearch)
+      .repeat(5) {
+        exec(LRD_ApiController.GetOrgServices)
+      }
+      .repeat(11) {
+        exec(LRD_VenueController.GetCourtVenues)
+        .exec(LRD_VenueController.CourtVenueServiceSearch)
+      }
     }
 
   val JRDScenario = scenario("Judicial Ref Data Scenario")
@@ -186,16 +191,6 @@ class PRDPTSimulation extends Simulation{
         exec(Judicial_Users.JudicialPostUsersSearch)
       }
     } 
-
-  val CRDScenario = scenario("CRDScenario")
-    .exitBlockOnFail {
-      exec(_.set("env", s"${env}"))
-      .exec(
-        IDAMHelper.getCrdIdamToken,
-        S2SHelper.s2s("rd_caseworker_ref_api"),
-        PostScenario.PostScenario
-      )
-    }
 
 	/*===============================================================================================
 	* Simulation Configuration
@@ -252,11 +247,9 @@ class PRDPTSimulation extends Simulation{
     PRDInternalOtherScenario.inject(simulationProfile(testType, prdOtherInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
     LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
-    JRDScenario.inject(simulationProfile(testType, jrdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
-
-    // CRDScenario.inject(simulationProfile(testType, crdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption)
-		
-	).protocols(httpProtocol)
-     .assertions(assertions(testType))
-     .maxDuration(85.minutes)
+    JRDScenario.inject(simulationProfile(testType, jrdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),		
+	)
+  .protocols(httpProtocol)
+  .assertions(assertions(testType))
+  .maxDuration(85.minutes)
 }

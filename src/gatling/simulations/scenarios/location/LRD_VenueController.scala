@@ -11,6 +11,7 @@ object LRD_VenueController {
   val config: Config = ConfigFactory.load()
   val regions = csv("Regions.csv").random
   val searches = csv("Searches.csv").random
+  val services = csv("ServiceCodes.csv").random
 
   val GetCourtVenues = 
 
@@ -36,5 +37,20 @@ object LRD_VenueController {
       .header("ServiceAuthorization", "Bearer #{rd_location_ref_apiBearerToken}")
       .header("accept", "application/json")
       )
+
+    .pause(Environment.thinkTime)
+
+  val CourtVenueServiceSearch = 
+
+    feed(services)
+
+    .exec(http("LD06_SearchCourtServices")
+      .get(Environment.lrdUrl + "/refdata/location/court-venues/services?service_code=#{query}")
+      .header("Authorization", "Bearer #{accessToken}")
+      .header("ServiceAuthorization", "Bearer #{rd_location_ref_apiBearerToken}")
+      .header("accept", "application/json")
+      )
+
+    .pause(Environment.thinkTime)
 
 }
