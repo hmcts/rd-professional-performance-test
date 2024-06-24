@@ -12,7 +12,8 @@ object Internal_GetOrganisation {
 
   val GETOrg = 
 
-    repeat(10) {
+    repeat(17) {
+
       exec(http("RD15_Internal_RetrievesOrganisationsPaymentAccounts")
         .get("/refdata/internal/v1/organisations?id=#{NewPendingOrg_Id}")
         .header("Authorization", "Bearer #{accessToken}")
