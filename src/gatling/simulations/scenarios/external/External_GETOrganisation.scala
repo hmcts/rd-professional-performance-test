@@ -12,7 +12,7 @@ object External_GETOrganisation {
 
   val GETOrganisation = 
 
-    repeat(50){ //50
+    repeat(100){ //100
     
       exec(http("RD20_External_GetOrganizations")
         .get("/refdata/external/v1/organisations")
@@ -21,6 +21,6 @@ object External_GETOrganisation {
         .header("Content-Type", "application/json")
         .check(status is 200))
 
-      .pause(2)
+      .pause(Environment.thinkTime)
     }
 }
