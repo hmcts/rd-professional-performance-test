@@ -89,15 +89,16 @@ class PRDPTSimulation extends Simulation{
         Internal_GETInternalUserForGivenOrganisations.GETInternalUserForGivenOrganisations,
         Internal_GETAllOrganisation.GETAllOrganisation,
         Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserForActiveOrganisationByEmail,
+        Internal_GETInternalUserForActiveOrganisationByEmail.GETInternalUserDetailsForActiveOrganisationByEmail,
         Internal_GETOrganisationsByStatusACTIVE.GETOrganisationsByStatusACTIVE,
         Internal_GETOrganisationsByStatusPENDING.GETOrganisationsByStatusPENDING,
-        Internal_GETPbas.GETPbas,
-        Internal_EditPbas.EditPbas,
         Internal_GetOrganisation.GETOrg,
         Internal_UpdatePBAStatus.Update,
         Internal_EditUserRole.EditInternalUserRole,
         Internal_UpdateUserStatus.UpdateInternalUserStatus,
         Internal_GETCaseFlags.GetCaseFlags,
+        Internal_GETPbas.GETPbas,
+        Internal_EditPbas.EditPbas,
         CreateUser.deleteAdminUser,
         CreateUser.deleteNewUser
       )

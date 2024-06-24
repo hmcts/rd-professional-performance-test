@@ -29,7 +29,8 @@ object CreateUser {
       .header("Content-Type", "application/json")
       .body(ElFileBody("bodies/idam/Idam_CreateSuperUser.json"))
       .check(status is 201)
-      .check(jsonPath("$.email").saveAs("adminEmail")))
+      .check(jsonPath("$.email").saveAs("adminEmail"))
+      .check(jsonPath("$.id").saveAs("superUserId")))
       .exitHereIfFailed
 
       // .exec( session => {
@@ -53,6 +54,7 @@ object CreateUser {
       .body(ElFileBody("bodies/idam/Idam_CreateUser.json"))
       .check(status is 201)
       .check(jsonPath("$.email").saveAs("userEmail"))
+      .check(jsonPath("$.id").saveAs("userId"))
       .check(jsonPath("$.forename").saveAs("userFirstname"))
       .check(jsonPath("$.surname").saveAs("userLastname"))
       )

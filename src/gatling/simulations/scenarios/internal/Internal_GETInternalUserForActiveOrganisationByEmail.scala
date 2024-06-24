@@ -22,4 +22,27 @@ object Internal_GETInternalUserForActiveOrganisationByEmail {
       .check(status is 200))
 
     .pause(Environment.thinkTime)
+
+  val GETInternalUserDetailsForActiveOrganisationByEmail = 
+
+    repeat(10) {
+
+      exec(http("RD10_Internal_GetInternalSuperUserOrgDetails")
+        .get("/refdata/internal/v1/organisations/orgDetails/#{superUserId}")
+        .header("Authorization", "Bearer #{accessToken}")
+        .header("ServiceAuthorization", "Bearer #{s2sToken}")
+        .header("Content-Type", "application/json")
+        .check(status is 200))
+
+      .pause(Environment.thinkTime)
+    
+      .exec(http("RD11_Internal_GetInternalUserOrgDetails")
+        .get("/refdata/internal/v1/organisations/orgDetails/#{userId}")
+        .header("Authorization", "Bearer #{accessToken}")
+        .header("ServiceAuthorization", "Bearer #{s2sToken}")
+        .header("Content-Type", "application/json")
+        .check(status is 200))
+
+      .pause(Environment.thinkTime)
+    }
 }
