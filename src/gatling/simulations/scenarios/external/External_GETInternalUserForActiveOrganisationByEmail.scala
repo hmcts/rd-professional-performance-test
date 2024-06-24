@@ -15,7 +15,7 @@ object External_GETInternalUserForActiveOrganisationByEmail {
 
   val GETInternalUserForActiveOrganisationByEmail = 
 
-    repeat(1) {
+    repeat(10) {
   
       exec(http("RD23_External_GetInternalUserForActiveOrganisationByEmailAddress")
         .get("/refdata/external/v1/organisations/users?email=#{Email}")
