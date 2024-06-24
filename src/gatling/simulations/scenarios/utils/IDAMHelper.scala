@@ -12,7 +12,7 @@ object IDAMHelper {
 
   val getIdamTokenLatest =
     
-    exec(http("Token_010_GetAuthToken")
+    exec(http("GetIdamToken")
       .post(IDAMUrl  + "/o/token?grant_type=password&username=prd-admin@gmail.com&password=Password12&client_id=rd-professional-api&client_secret=" + IDAM_Secret + "&redirect_uri=https://rd-professional-api-#{env}.service.core-compute-#{env}.internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
       .header("Content-Type", "application/x-www-form-urlencoded")
       .header("Content-Length", "0")
@@ -23,7 +23,7 @@ object IDAMHelper {
 
   val getAdminIdamToken = 
 
-    exec(http("Token_010_GetAuthToken")
+    exec(http("GetIdamToken")
       .post(IDAMUrl  + "/o/token?grant_type=password&username=#{adminEmail}&password=Password12&client_id=rd-professional-api&client_secret=" + IDAM_Secret + "&redirect_uri=https://rd-professional-api-#{env}.service.core-compute-#{env}.internal/oauth2redirect&scope=openid%20profile%20roles%20openid%20roles%20profile%20create-user%20manage-user")
       .header("Content-Type", "application/x-www-form-urlencoded")
       .header("Content-Length", "0")
@@ -33,7 +33,7 @@ object IDAMHelper {
 
   val getCrdIdamToken = 
 
-    exec(http("Token_010_GetAuthToken")
+    exec(http("GetIdamToken")
       .post(IDAMUrl + "/o/token?grant_type=password&username=CWR-func-test-user-test500@justice.gov.uk&password=Testing1234&client_id=rd-caseworker-ref-api&client_secret=" + IDAM_Secret + "&redirect_uri=https://rd-caseworker-ref-api-#{env}.service.core-compute-#{env}.internal/oauth2redirect&scope=openid%20profile%20roles%20manage-user%20create-user%20search-user")
       .header("Content-Type", "application/x-www-form-urlencoded")
       .header("Content-Length", "0")
@@ -43,7 +43,7 @@ object IDAMHelper {
 
   val getJrdIdamToken = 
 
-    exec(http("Token_010_GetAuthToken")
+    exec(http("GetIdamToken")
       .post(IDAMUrl + "/o/token?grant_type=password&username=JudicialPerftest001@justice.gov.uk&password=Password12&client_id=rd-caseworker-ref-api&client_secret=" + IDAM_Secret + "&redirect_uri=https://rd-judicial-api-#{env}.service.core-compute-#{env}.internal/oauth2redirect&scope=openid%20profile%20roles%20manage-user%20create-user%20search-user")
       .header("Content-Type", "application/x-www-form-urlencoded")
       .header("Content-Length", "0")
