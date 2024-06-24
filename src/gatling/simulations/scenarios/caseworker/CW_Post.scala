@@ -6,7 +6,7 @@ import utils._
 
 object CW_Post {
 
-  val services = csv("Services.csv").random
+  val services = csv("StaffServices.csv").random
 
   val PostScenario = 
   
@@ -46,7 +46,7 @@ object CW_Post {
 
       feed(services)
 
-      .exec(http(requestName="CRD_040_FetchStaffUsersByService")
+      .exec(http(requestName="CRD_040_FetchStaffUsersByService#{service}")
         .get(Environment.caseworkerUrl + "/refdata/internal/staff/usersByServiceName?ccd_service_names=#{service}&page_size=12000")
         .header("Authorization", "Bearer #{accessToken}")
         .header("serviceAuthorization", "Bearer #{rd_caseworker_ref_apiBearerToken}")
