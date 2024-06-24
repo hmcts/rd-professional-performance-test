@@ -4,7 +4,9 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import utils._
 
-object PostScenario {
+object CW_Post {
+
+  val services = csv("Services.csv").random
 
   val PostScenario = 
   
@@ -26,7 +28,9 @@ object PostScenario {
 
     .pause(Environment.thinkTime)
 
-    .exec(http(requestName="CRD_030_FetchUsers")
+  val FetchUsersById =
+
+    exec(http(requestName="CRD_030_FetchUsers")
       .post(Environment.caseworkerUrl + "/refdata/case-worker/users/fetchUsersById")
       .header("Authorization", "Bearer #{accessToken}")
       .header("serviceAuthorization", "Bearer #{rd_caseworker_ref_apiBearerToken}")
@@ -36,4 +40,20 @@ object PostScenario {
 
     .pause(Environment.thinkTime)
 
+  val FetchStaffUsersByService = 
+
+    repeat(5) {
+
+      feed(services)
+
+      .exec(http(requestName="CRD_040_FetchStaffUsersByService")
+        .get(Environment.caseworkerUrl + "/refdata/internal/staff/usersByServiceName?ccd_service_names=#{service}&page_size=12000")
+        .header("Authorization", "Bearer #{accessToken}")
+        .header("serviceAuthorization", "Bearer #{rd_caseworker_ref_apiBearerToken}")
+        .header("Content-Type", "application/json")
+        .body(ElFileBody("bodies/crd/user_ids.json"))
+        .check(status.is(200)))
+
+      .pause(Environment.thinkTime)
+    }
 }

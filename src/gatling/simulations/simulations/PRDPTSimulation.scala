@@ -41,7 +41,7 @@ class PRDPTSimulation extends Simulation{
 	val prdExternalTargetPerHour:Double = 150 //150
   val ldTargetPerHour:Double = 200 //200
   val jrdTargetPerHour:Double = 841
-  val crdTargetPerHour:Double = 20 //20
+  val crdTargetPerHour:Double = 250 //250
 
 	val rampUpDurationMins = 5 //5
 	val rampDownDurationMins = 5 //5
@@ -133,7 +133,6 @@ class PRDPTSimulation extends Simulation{
       )
     }
     
-
   val PRDExternalScenario = scenario("PRD External Scenario")
     .exitBlockOnFail {
       exec(_.set("env", s"${env}"))
@@ -193,6 +192,17 @@ class PRDPTSimulation extends Simulation{
       }
     } 
 
+   val CWScenario = scenario("Caseworker Ref Data Scenario")
+    .exitBlockOnFail {
+      exec(_.set("env", s"${env}"))
+      .exec(
+        IDAMHelper.getCrdIdamToken,
+        S2SHelper.s2s("rd_caseworker_ref_api"),
+        CW_Post.FetchUsersById,
+        CW_Post.FetchStaffUsersByService
+      )
+    }
+
 	/*===============================================================================================
 	* Simulation Configuration
 	 ===============================================================================================*/
@@ -248,7 +258,8 @@ class PRDPTSimulation extends Simulation{
     PRDInternalOtherScenario.inject(simulationProfile(testType, prdOtherInternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
 		PRDExternalScenario.inject(simulationProfile(testType, prdExternalTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
     LDScenario.inject(simulationProfile(testType, ldTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
-    JRDScenario.inject(simulationProfile(testType, jrdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),		
+    JRDScenario.inject(simulationProfile(testType, jrdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption),
+    CWScenario.inject(simulationProfile(testType, crdTargetPerHour, numberOfPipelineUsers)).pauses(pauseOption)
 	)
   .protocols(httpProtocol)
   .assertions(assertions(testType))
