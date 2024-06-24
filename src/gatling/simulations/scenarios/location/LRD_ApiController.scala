@@ -31,7 +31,7 @@ object LRD_ApiController {
 
   val GetOrgServices = 
 
-    repeat(15) {
+    repeat(7) {
 
       feed(services)
 

@@ -42,15 +42,18 @@ object LRD_VenueController {
 
   val CourtVenueServiceSearch = 
 
-    feed(services)
+    repeat(2) {
 
-    .exec(http("LD06_SearchCourtServices")
-      .get(Environment.lrdUrl + "/refdata/location/court-venues/services?service_code=#{query}")
-      .header("Authorization", "Bearer #{accessToken}")
-      .header("ServiceAuthorization", "Bearer #{rd_location_ref_apiBearerToken}")
-      .header("accept", "application/json")
-      )
+      feed(services)
 
-    .pause(Environment.thinkTime)
+      .exec(http("LD06_SearchCourtServices")
+        .get(Environment.lrdUrl + "/refdata/location/court-venues/services?service_code=#{query}")
+        .header("Authorization", "Bearer #{accessToken}")
+        .header("ServiceAuthorization", "Bearer #{rd_location_ref_apiBearerToken}")
+        .header("accept", "application/json")
+        )
+
+      .pause(Environment.thinkTime)
+    }
 
 }
