@@ -51,7 +51,6 @@ object CW_Post {
         .header("Authorization", "Bearer #{accessToken}")
         .header("serviceAuthorization", "Bearer #{rd_caseworker_ref_apiBearerToken}")
         .header("Content-Type", "application/json")
-        .body(ElFileBody("bodies/crd/user_ids.json"))
         .check(status.is(200)))
 
       .pause(Environment.thinkTime)
