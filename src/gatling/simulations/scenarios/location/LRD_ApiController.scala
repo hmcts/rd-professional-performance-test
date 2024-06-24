@@ -31,18 +31,21 @@ object LRD_ApiController {
 
   val GetOrgServices = 
 
-    feed(services)
+    repeat(15) {
 
-    .exec(http("LD02_GetOrgServices")
-      .get(Environment.lrdUrl + "/refdata/location/orgServices")
-      .header("Authorization", "Bearer #{accessToken}")
-      .header("ServiceAuthorization", "Bearer #{rd_location_ref_apiBearerToken}")
-      .header("accept", "application/json")
-      .formParam("ccdServiceNames", "#{service}")
-      .formParam("ccdCaseType", "#{caseType}")
-      )
+      feed(services)
 
-  .pause(Environment.thinkTime)
+      .exec(http("LD02_GetOrgServices")
+        .get(Environment.lrdUrl + "/refdata/location/orgServices")
+        .header("Authorization", "Bearer #{accessToken}")
+        .header("ServiceAuthorization", "Bearer #{rd_location_ref_apiBearerToken}")
+        .header("accept", "application/json")
+        .formParam("ccdServiceNames", "#{service}")
+        .formParam("ccdCaseType", "#{caseType}")
+        )
+
+      .pause(Environment.thinkTime)
+    }
 
   val GetRegions =
 
