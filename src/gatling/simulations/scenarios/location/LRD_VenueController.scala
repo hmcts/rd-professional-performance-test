@@ -15,17 +15,20 @@ object LRD_VenueController {
 
   val GetCourtVenues = 
 
-    feed(regions)
+    repeat(2) {
 
-    .exec(http("LD04_GetCourtVenues")
-      .get(Environment.lrdUrl + "/refdata/location/court-venues")
-      .header("Authorization", "Bearer #{accessToken}")
-      .header("ServiceAuthorization", "Bearer #{rd_location_ref_apiBearerToken}")
-      .header("accept", "application/json")
-      .formParam("region_id", "#{region}")
-      )
+      feed(regions)
 
-    .pause(Environment.thinkTime)
+      .exec(http("LD04_GetCourtVenues")
+        .get(Environment.lrdUrl + "/refdata/location/court-venues")
+        .header("Authorization", "Bearer #{accessToken}")
+        .header("ServiceAuthorization", "Bearer #{rd_location_ref_apiBearerToken}")
+        .header("accept", "application/json")
+        .formParam("region_id", "#{region}")
+        )
+
+      .pause(Environment.thinkTime)
+    }
 
   val CourtVenueSearch = 
 
